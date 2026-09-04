@@ -1,0 +1,49 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  https://docs.vulncheck.com/changelog, https://status.vulncheck.com/,
+  https://docs.vulncheck.com/api, openapi/vulncheck-api-openapi.json
+versioning:
+  scheme: uri-path
+  current: v3
+  spec_version: '3.0'
+  base: https://api.vulncheck.com/v3
+  note: >-
+    The major version is carried in the path. A v4 advisory surface exists and ships in the MCP
+    server as the v4_* tool family; the 2026-09-02 release notes state "v4 advisory support is
+    now complete". No public REST base URL or OpenAPI for v4 is published, and v3 remains the
+    documented API. Callers therefore cannot yet plan a v3-to-v4 migration from published
+    material.
+status_page:
+  url: https://status.vulncheck.com/
+  status: 200
+  verified: '2026-09-04'
+deprecation:
+  policy_published: false
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: 0
+  note: >-
+    No deprecation or sunset policy is published, and the OpenAPI marks no operation
+    `deprecated: true`. Nothing in the 521-operation contract, the docs or the changelog states
+    a notice period or an end-of-life process for an index or an endpoint. Given that the
+    product is 490+ named indices which the changelog shows being added continuously, the
+    absence of a stated retirement policy is a real gap for anyone building on a specific index.
+sla:
+  published: false
+  note: >-
+    The 2026-07-22 release notes reference "Production API Service Level Objectives (SLOs)"
+    being refined internally, but no SLO or SLA figure is published to customers.
+  evidence: https://docs.vulncheck.com/changelog/2026-07-22
+support:
+  contact: https://www.vulncheck.com/contact
+  email: support@vulncheck.com
+  source: openapi info.contact
+release_cadence:
+  observed: >-
+    Dated release notes roughly every 3-6 weeks through 2026 (2026-01-21, 2026-02-04,
+    2026-02-25, 2026-03-18, 2026-03-20, 2026-04-07, 2026-07-22, 2026-08-12, 2026-09-02).
+    Earlier years were denser — the changelog runs unbroken from 2023-02-28.
+  cross_ref: changelog/vulncheck-changelog.yml

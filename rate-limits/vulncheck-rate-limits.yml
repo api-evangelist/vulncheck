@@ -1,0 +1,40 @@
+generated: '2026-09-04'
+method: searched
+source: https://docs.vulncheck.com/community/rate-limits
+docs: https://docs.vulncheck.com/community/rate-limits
+limit_count: 1
+rate_limits:
+- scope: per-account
+  tier: Community
+  limit: 1000
+  window: 1 minute
+  unit: requests
+  applies_to: all API endpoints
+  burst: null
+  source: https://docs.vulncheck.com/community/rate-limits
+exhaustion:
+  status: 429
+  reason: Too Many Requests
+  body: '{"error":true,"errors":["Rate limit exceeded. Please try again later."]}'
+response_headers:
+  ratelimit_headers: none
+  retry_after: false
+  method: probed
+  probe:
+  - url: https://api.vulncheck.com/v3/index/a10
+    status: 401
+    headers_seen: [content-type, content-length, date, server, traceparent, x-envoy-upstream-service-time, vary, x-cache, via, x-amz-cf-pop, x-amz-cf-id]
+  - url: https://api.vulncheck.com/v3/openapi
+    status: 200
+    headers_seen: [content-type, content-length, date, server, traceparent, x-envoy-upstream-service-time, vary, x-cache, via, x-amz-cf-pop, x-amz-cf-id]
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header appears on either a 200 or a 401 from
+    the live API. An agent therefore has no runtime budget signal and must discover the ceiling
+    by hitting it. This is the single clearest runtime-semantics gap on this API. The CLI does
+    surface the condition as a distinct exit code (5, rate_limited) and error code, which is
+    the only structured rate-limit signal VulnCheck ships.
+paid_tiers:
+  documented: false
+  note: >-
+    The rate-limits page states that paid plans offer "increased rate limits" but publishes no
+    number for any paid tier. Only the Community figure is quantified.

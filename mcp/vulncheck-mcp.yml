@@ -1,0 +1,124 @@
+generated: '2026-09-04'
+method: searched
+source: https://github.com/vulncheck-oss/mcp (README + docs/tools.md), linked from https://docs.vulncheck.com/tools
+name: VulnCheck MCP Server
+status: published
+official: true
+repository: https://github.com/vulncheck-oss/mcp
+tools_reference: https://github.com/vulncheck-oss/mcp/blob/main/docs/tools.md
+version: 1.2.3
+deployment:
+  mode: local-stdio
+  install: docker run -i ghcr.io/vulncheck-oss/mcp
+  package: https://github.com/vulncheck-oss/mcp/releases/latest
+  auth: api-key
+  verified: probed
+  note: >-
+    There is NO hosted/remote MCP endpoint. mcp.vulncheck.com does not resolve; POST
+    tools/list to https://api.vulncheck.com/mcp returns 404 and to
+    https://api.vulncheck.com/v3/mcp returns 401 from the ordinary v3 auth layer, not an MCP
+    handshake. The server is distributed only as GoReleaser release archives (darwin
+    arm64/amd64, linux amd64, windows amd64) and the ghcr.io/vulncheck-oss/mcp container
+    image, both of which a human installs and runs locally before any agent sees it.
+    Authentication is a VulnCheck API token created at
+    https://console.vulncheck.com/settings/tokens.
+clients_documented:
+- Claude Code
+- Claude Desktop
+- Cursor
+- VS Code
+- Windsurf
+- Cline
+- Gemini CLI
+- Codex CLI
+response_handling:
+  note: >-
+    Documented behaviour worth recording because it is unusual and affects how an agent should
+    read results. Every record-returning tool holds its response inside a byte budget
+    (30,000 bytes default, VULNCHECK_MCP_MAX_RESPONSE_BYTES overrides). Over budget, arrays
+    are shortened at every depth and records may be dropped; a `response_size` object then
+    travels alongside `data` reporting `note`, `capped` (each shortened array by JSON Pointer
+    with its TRUE length), `array_limit`, `rows_returned`, `removed_ids`, `rows_removed`,
+    `arrays_shortened` and `outline`. Dropped records are NOT on the next page — the cursor
+    advances past the whole page — so they must be fetched by id from `removed_ids`.
+  max_response_bytes_default: 30000
+  env: VULNCHECK_MCP_MAX_RESPONSE_BYTES
+tools:
+- name: list_indices
+  category: indices
+  description: List VulnCheck index names. Names only unless `search` narrows the set; descriptions on request via include_description.
+- name: describe_index
+  category: indices
+  description: Report which filters an index accepts, how large it is, and which tool to query it with.
+- name: search_index
+  category: indices
+  description: Query a VulnCheck index by name. Identifier, threat-intel and date-range filters, sorting, cursor pagination (limit default 1, max 200).
+- name: search_target_intel
+  category: products
+  description: Find internet-facing hosts confirmed running vulnerable software, mapped to CVEs by version-level fingerprinting.
+- name: search_ip_intel
+  category: products
+  description: Find attacker and target IP infrastructure over a rolling window — C2 servers, honeypots, hosts targeted by initial-access exploits — with geolocation and ASN enrichment.
+- name: search_canaries
+  category: products
+  description: Find exploitation attempts observed against VulnCheck's globally deployed vulnerable canary hosts.
+- name: search_curated_exploits
+  category: products
+  description: Search curated exploit intelligence by exploit maturity and validation level; filter by either KEV catalogue, CVE, or change-date range.
+- name: list_backups
+  category: backups
+  description: List all VulnCheck index backups.
+- name: get_backup
+  category: backups
+  description: Return all backup links for a given index.
+- name: search_docs
+  category: documentation
+  description: Search the VulnCheck documentation, returning ranked pages with titles, descriptions and URLs.
+- name: get_doc
+  category: documentation
+  description: Fetch the raw markdown content of a VulnCheck documentation page.
+- name: search_cve
+  category: cve
+  description: Search all VulnCheck indices for a CVE ID; aggregates advisories, exploits, threat intel and vulnerability databases.
+- name: get_cpe_cves
+  category: cpe-purl
+  description: Return all CVE IDs associated with a CPE 2.3 string, optionally restricted to confirmed-vulnerable. Wildcards supported.
+- name: search_cpe
+  category: cpe-purl
+  description: Search for CPEs by vendor, product, version, part and return matching CPEs with associated CVEs.
+- name: search_purls
+  category: cpe-purl
+  description: Return vulnerability findings for one or more Package URLs.
+- name: identify_component
+  category: cpe-purl
+  description: Convert a vendor, product and optional version into best-match CPE and PURL identifiers with confidence levels.
+- name: list_recent_advisories
+  category: advisories
+  description: Summarise which advisories were published or updated over a time window; compact digest, defaults to last 24 hours.
+- name: v4_list_advisories
+  category: advisories
+  description: List all available VulnCheck v4 advisory feeds.
+- name: v4_search_advisory
+  category: advisories
+  description: Search VulnCheck v4 advisory feeds by advisory name, CVE, vendor, product, version, CPE, PURL and more.
+- name: v4_list_advisory_backups
+  category: advisories
+  description: List all VulnCheck v4 advisory backup feeds and their availability.
+- name: v4_get_advisory_backup
+  category: advisories
+  description: Return pre-signed download URLs for a VulnCheck v4 advisory feed backup.
+- name: list_c2_hostnames
+  category: threat-intel
+  description: Retrieve the list of VulnCheck C2 hostnames for protective DNS services and denylists.
+- name: list_c2_tags
+  category: threat-intel
+  description: Retrieve the list of VulnCheck C2 IP addresses for block lists and firewall rules.
+- name: get_rules
+  category: threat-intel
+  description: 'Retrieve initial-access detection rules by type: suricata, snort. Optional cve filter.'
+tool_count: 24
+schema_note: >-
+  Tool names, categories and descriptions are taken verbatim from the provider's published
+  docs/tools.md. Per-tool inputSchema was NOT captured: the server is stdio-only, so there is
+  no anonymous endpoint to run tools/list against, and the input arguments are enumerated by
+  the MCP client at runtime rather than in the published docs.

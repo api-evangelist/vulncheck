@@ -1,18 +1,65 @@
 aid: vulncheck
 name: VulnCheck
-description: 'VulnCheck is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'VulnCheck is an exploit and vulnerability intelligence company that supplies
+  machine-readable data on known exploited vulnerabilities, exploit maturity, threat-actor
+  activity, initial-access exploitation, IP and target intelligence, CPE/PURL identity and
+  vendor advisories. Its Exploit & Vulnerability Intelligence platform enriches CVE records
+  ahead of NIST NVD, publishes the VulnCheck KEV catalog, and exposes everything through a
+  521-operation REST API at api.vulncheck.com/v3 covering 490+ named indices, alongside a
+  Go SDK, Python SDK, a scripting/agent-oriented CLI, an MCP server and a published Claude
+  Code agent skill. A free Community tier provides VulnCheck KEV and NVD++ data.'
+image: https://www.vulncheck.com/logo.png
 url: https://raw.githubusercontent.com/api-evangelist/vulncheck/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-09-04'
 modified: '2026-09-04'
 tags:
 - Company
-apis: []
+- Security
+- Vulnerability Intelligence
+- Exploit Intelligence
+- Threat Intelligence
+- Cybersecurity
+- CVE
+- Vulnerability Management
+- Data
+apis:
+- aid: vulncheck-api
+  name: VulnCheck API
+  description: 'Version 3 of the VulnCheck API. A read-only REST API exposing VulnCheck''s
+    exploit and vulnerability intelligence: 490+ named indices browsable at /index/{name},
+    CVE and CPE search, PURL vulnerability lookup, initial-access detection rules (Suricata
+    and Snort), VulnCheck C2 hostname and tag feeds, entitlements, and pre-signed offline
+    backup downloads. Bearer token authentication; all 521 operations are GET.'
+  humanURL: https://docs.vulncheck.com/api
+  baseURL: https://api.vulncheck.com/v3
+  image: https://www.vulncheck.com/logo.png
+  tags:
+  - Vulnerability Intelligence
+  - Exploit Intelligence
+  - CVE
+  - Security
+  properties:
+  - type: OpenAPI
+    url: openapi/vulncheck-api-openapi.json
+  - type: Documentation
+    url: https://docs.vulncheck.com/api
+  - type: Authentication
+    url: authentication/vulncheck-authentication.yml
+  - type: RateLimits
+    url: rate-limits/vulncheck-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/vulncheck-problem-types.yml
+  - type: Conventions
+    url: conventions/vulncheck-conventions.yml
+  - type: DataModel
+    url: data-model/vulncheck-data-model.yml
+  - type: Overlay
+    url: overlays/vulncheck-api-overlay.yaml
+  - type: ToolCrosswalk
+    url: mcp/vulncheck-tool-crosswalk.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +67,65 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://www.vulncheck.com/
+- type: DeveloperPortal
+  url: https://docs.vulncheck.com/
+- type: Documentation
+  url: https://docs.vulncheck.com/
+- type: APIReference
+  url: https://docs.vulncheck.com/api
+- type: GettingStarted
+  url: https://docs.vulncheck.com/getting-started
+- type: SignUp
+  url: https://console.vulncheck.com/register
+- type: Login
+  url: https://console.vulncheck.com/login
+- type: Support
+  url: https://www.vulncheck.com/contact
+- type: Blog
+  url: https://www.vulncheck.com/blog
+- type: GitHubOrganization
+  url: https://github.com/vulncheck-oss
+- type: TermsOfService
+  url: https://www.vulncheck.com/terms
+- type: PrivacyPolicy
+  url: https://www.vulncheck.com/privacy
+- type: StatusPage
+  url: https://status.vulncheck.com/
+- type: ChangeLog
+  url: https://docs.vulncheck.com/changelog
+- type: Security
+  url: https://www.vulncheck.com/vulnerability-disclosure-policy
+- type: SecurityTxt
+  url: well-known/vulncheck-security.txt
+- type: WellKnown
+  url: well-known/vulncheck-well-known.yml
+- type: VulnerabilityDisclosure
+  url: security/vulncheck-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/vulncheck-domain-security.yml
+- type: Packages
+  url: packages/vulncheck-packages.yml
+- type: SDKs
+  url: packages/vulncheck-packages.yml
+- type: CLI
+  url: cli/vulncheck-cli.yml
+- type: MCPServer
+  url: mcp/vulncheck-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/vulncheck-llms.txt
+- type: Lifecycle
+  url: lifecycle/vulncheck-lifecycle.yml
+- type: Conformance
+  url: conformance/vulncheck-conformance.yml
+- type: Plans
+  url: plans/vulncheck-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/vulncheck-rate-limits.yml
+x-enrichment:
+  date: '2026-09-04'
+  status: enriched
+  artifacts_added: 26
+  pass: local-v3

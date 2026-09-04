@@ -1,0 +1,479 @@
+# VulnCheck Docs
+
+> Documentation for the VulnCheck API and more
+
+## En
+
+- [Overview](https://docs.vulncheck.com/raw/getting-started.md): An introduction to our Exploit Intelligence Platform
+- [Register for Access](https://docs.vulncheck.com/raw/getting-started/register.md): It's easy to register for an account on the VulnCheck platform.
+- [API Tokens](https://docs.vulncheck.com/raw/getting-started/api-tokens.md): All VulnCheck platform API calls require a valid API token issued by VulnCheck.
+- [SSH Keys](https://docs.vulncheck.com/raw/getting-started/ssh-keys.md): Upload your SSH public key to the VulnCheck platform to clone git repositories from git.vulncheck.com.
+- [Offline Backups](https://docs.vulncheck.com/raw/getting-started/offline-backups.md): The VulnCheck platform provides licensed customers offline backups of hundreds of available data sets.
+- [Products Overview](https://docs.vulncheck.com/raw/products.md): Learn about our products
+- [Introduction](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence.md): The VulnCheck Exploit & Vulnerability Intelligence product helps organizations enrich their existing vulnerability reporting and solve the vulnerability prioritization challenge.
+- [Exploit Intelligence](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/exploit-intelligence.md): Leverage best-in-class exploit intelligence from VulnCheck to understand the state of vulnerability exploitation for a given vulnerability.
+- [Vulnerability Intelligence](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/vulnerability-intelligence.md): Leverage the vulnerability intelligence features within VulnCheck Exploit & Vulnerability Intelligence to get the industry's fastest and most comprehensive vulnerability intelligence available and solve the vulnerability prioritization challenge today.
+- [Vulnerability Enrichment](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/vulnerability-enrichment.md): VulnCheck generates unique vulnerability enrichment that is then incorporated into VulnCheck's Exploit and Vulnerability Intelligence services.
+- [Threat Actor Intelligence](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/threat-actors.md): Leverage best-in-class exploit intelligence from VulnCheck to track and understand threat actors.
+- [CPE Generation](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/cpe.md): VulnCheck generates fast and accurate CPE to help fill the gap left by NIST NVD
+- [Early Access to CVEs](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/early-access.md): VulnCheck Exploit & Vulnerability Intelligence includes early access to CVEs not yet published in the NIST National Vulnerability Database (NVD).
+- [NVD Migration](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/nvd-migration.md): VulnCheck makes it easy to migrate from the NIST NVD to VulnCheck Exploit & Vulnerability Intelligence.
+- [Package Manager Support](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/package-manager-support.md): VulnCheck Exploit & Vulnerability Intelligence supports a wide range of both Open Source Software library package managers and Operating System package managers.
+- [Package URL Detections](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/package-url-detections.md): VulnCheck Exploit & Vulnerability Intelligence supports detecting a wide range of concerns for both Open Source Software library packages and Operating System packages.
+- [End-of-Life Software](https://docs.vulncheck.com/raw/products/exploit-and-vulnerability-intelligence/end-of-life.md): Leverage VulnCheck Exploit & Vulnerability Intelligence's End-of-Life software tracking to know if a host can no longer be patched.
+- [Initial Access Intelligence](https://docs.vulncheck.com/raw/products/initial-access-intelligence.md): Leverage Initial Access Intelligence detection artifacts to detect & respond to remote code execution (RCE) vulnerabilities.
+- [Coverage Strategy](https://docs.vulncheck.com/raw/products/initial-access-intelligence/coverage-strategy.md): The VulnCheck Initial Access Intelligence product covers a limited subset of known vulnerabilities, those vulnerabilities likely to become widely exploited in the future.
+- [Detection Artifacts](https://docs.vulncheck.com/raw/products/initial-access-intelligence/detection-artifacts.md): The VulnCheck Initial Access Intelligence product includes detection artifacts in a wide range of formats, to enable defenders to quickly detect & respond to emerging threats.
+- [Example Initial Access Artifacts](https://docs.vulncheck.com/raw/products/initial-access-intelligence/example-artifacts.md): VulnCheck Initial Access Intelligence example record for PaperCut (CVE-2023-27350)
+- [Fetch Detection Artifacts](https://docs.vulncheck.com/raw/products/initial-access-intelligence/fetch-artifacts.md): To download the latest available detection artifacts, VulnCheck Initial Access Intelligence detection artifacts are available via git, backup file, and API.
+- [Compile Exploit Code](https://docs.vulncheck.com/raw/products/initial-access-intelligence/compile-exploits.md): Use Docker to compile and run the VulnCheck provided go-exploit scanner
+- [Request Coverage](https://docs.vulncheck.com/raw/products/initial-access-intelligence/request-coverage.md): To request coverage of a specific Initial Access Vulnerability, simply contact VulnCheck support.
+- [Canary Intelligence](https://docs.vulncheck.com/raw/products/canary-intelligence.md): VulnCheck Canary Intelligence provides exploitation data from globally deployed vulnerable hosts revealing the first signs of vulnerability exploitation and tracking which CVEs are being targeted in the wild, and by whom.
+- [Example Canary Records](https://docs.vulncheck.com/raw/products/canary-intelligence/example-records.md): How to query VulnCheck Canary Intelligence for a CVE and what the vulncheck-canaries response looks like.
+- [Query Parameters](https://docs.vulncheck.com/raw/products/canary-intelligence/query-parameters.md): API query parameters supported by VulnCheck Canary Intelligence for filtering the vulncheck-canaries index.
+- [Enrichment Data](https://docs.vulncheck.com/raw/products/canary-intelligence/enrichment-data.md): Payload fingerprinting, C2 infrastructure, and source IP enrichment fields available on vulncheck-canaries records.
+- [Offline Backups](https://docs.vulncheck.com/raw/products/canary-intelligence/offline-backups.md): Rolling offline backups of VulnCheck Canary Intelligence data for 3, 10, 30, and 90 day windows.
+- [Target Intelligence](https://docs.vulncheck.com/raw/products/target-intelligence.md): You give us a CVE. We tell you every vulnerable host on the internet right now.
+- [V3 API Overview](https://docs.vulncheck.com/raw/api/v3.md): All available v3 API resources
+- [/v3/index](https://docs.vulncheck.com/raw/api/v3/indices.md): Return a list of indexes with endpoint links that your account is licensed for.
+- [/v3/index/{index}](https://docs.vulncheck.com/raw/api/v3/indice.md): Retrieve a paginated list of all documents from the index of your choice. By default, a maximum of 100 documents are shown per page.
+- [/v3/backup/{index}](https://docs.vulncheck.com/raw/api/v3/backup.md): Request a link to the backup of an index
+- [/v3/backup](https://docs.vulncheck.com/raw/api/v3/backups.md): Return a list of backup with their endpoint links.
+- [/v3/purl](https://docs.vulncheck.com/raw/api/v3/purl.md): Request vulnerabilities related to a PURL
+- [/v3/purls](https://docs.vulncheck.com/raw/api/v3/purls.md): Request vulnerabilities related to a list of PURLs
+- [/v3/cpe](https://docs.vulncheck.com/raw/api/v3/cpe.md): Request vulnerabilities related to a CPE
+- [/v3/rules/initial-access/{rules}](https://docs.vulncheck.com/raw/api/v3/rules.md): Request Initial Access Intelligence Suricata or Snort rules
+- [/v3/tags/{filter}](https://docs.vulncheck.com/raw/api/v3/tags.md): Return a list of newline-separated (or JSON) IP addresses based on a IP tag
+- [/v3/pdns/{filter}](https://docs.vulncheck.com/raw/api/v3/pdns.md): Return a list of newline-separated (or JSON) hostnames based on a hostname list for Protective DNS
+- [/v3/openapi](https://docs.vulncheck.com/raw/api/v3/openapi.md): Return the OpenAPI specification for the API
+- [/v3/search/cpe](https://docs.vulncheck.com/raw/api/v3/search_cpe.md): Request vulnerabilities related to specific CPE attributes
+- [/v3/identify](https://docs.vulncheck.com/raw/api/v3/identify.md): Request identifiers related to a (vendor, product, version) query
+- [(POST) /v3/index/{index}](https://docs.vulncheck.com/raw/api/v3/indice_post.md): POST endpoint to retrieve a paginated list of all documents from the index of your choice. The Body accepts the same query parameters as the GET endpoint, but allows for a cve payload to allowed searching for up to 1000 CVE IDs in a single request.
+- [/v3/search/cve](https://docs.vulncheck.com/raw/api/v3/search_cve.md): Search every accessible index for records referencing a CVE
+- [V4 API Overview](https://docs.vulncheck.com/raw/api/v4.md): All available v4 API resources
+- [/v4/advisory](https://docs.vulncheck.com/raw/api/v4/advisory.md): Query the VulnCheck v4 advisory index across all feeds.
+- [/v4/advisory/list](https://docs.vulncheck.com/raw/api/v4/advisory-list.md): Return a list of available advisory feed names.
+- [/v4/backup](https://docs.vulncheck.com/raw/api/v4/backup.md): List available backup feeds
+- [/v4/backup/{feed}](https://docs.vulncheck.com/raw/api/v4/backup-feed.md): Download a pre-signed backup URL for a feed
+- [/v4/openapi](https://docs.vulncheck.com/raw/api/v4/openapi.md): OpenAPI specification for the V4 API
+- [Introduction to Indices](https://docs.vulncheck.com/raw/indices.md): An autonomous system aggregating OSINT, exploit intelligence, and vulnerability data into API indices for threat analysis.
+- [VulnCheck Intelligence](https://docs.vulncheck.com/raw/indices/vulncheck-intelligence.md): Unique vulnerability and exploit intelligence generated by VulnCheck's autonomous system, providing cutting-edge insights and analysis.
+- [Product Security Advisories](https://docs.vulncheck.com/raw/indices/product-security-advisories.md): Comprehensive collection of security advisories from various product vendors, offering critical information on vulnerabilities and patches.
+- [OT Security Advisories](https://docs.vulncheck.com/raw/indices/ot-security-advisories.md): Specialized advisories focusing on Operational Technology (OT) systems, crucial for industrial and infrastructure security.
+- [IoMT Security Advisories](https://docs.vulncheck.com/raw/indices/iomt-security-advisories.md): Targeted advisories for Internet of Medical Things (IoMT) devices, addressing specific vulnerabilities in healthcare technology.
+- [Security Research Advisories](https://docs.vulncheck.com/raw/indices/security-research-advisories.md): Curated advisories from security researchers and organizations, providing in-depth analysis and discoveries in cybersecurity.
+- [Government Security Advisories](https://docs.vulncheck.com/raw/indices/government-security-advisories.md): Official security advisories from government entities, offering authoritative information on national and international cybersecurity concerns.
+- [Open Source Security Advisories](https://docs.vulncheck.com/raw/indices/open-source-security-advisories.md): Comprehensive collection of advisories for open-source software, crucial for maintaining security in widely-used open technologies.
+- [Open Source Package Managers](https://docs.vulncheck.com/raw/indices/open-source-package-managers.md): Integration with various open-source package managers to track and report vulnerabilities in software dependencies.
+- [Vulnerability Databases](https://docs.vulncheck.com/raw/indices/vulnerability-databases.md): A collection of Vulnerability Databases from across the world.
+- [Vulnerability Intelligence](https://docs.vulncheck.com/raw/indices/vulnerability-intelligence.md): Comprehensive vulnerability data aggregated from multiple sources, enriched with VulnCheck's analysis and metadata.
+- [End of Life](https://docs.vulncheck.com/raw/indices/end-of-life.md): End-of-life (EOL) and support information for various products, providing critical insights into software lifecycles and security implications.
+- [Tools Overview](https://docs.vulncheck.com/raw/tools.md): Continuously expanding with new tools, enhancements, and real-time updates to improve open-source security intelligence.
+- [Go Exploit](https://docs.vulncheck.com/raw/tools/go-exploit.md): Go Exploit facilitates faster, more portable, and feature-rich exploit development.
+- [Go SDK](https://docs.vulncheck.com/raw/tools/go-sdk.md): Bring VulnCheck to your Go Applications
+- [Python SDK](https://docs.vulncheck.com/raw/tools/python-sdk.md): Bring VulnCheck to your Python Applications
+- [VulnCheck Insights](https://docs.vulncheck.com/raw/tools/insights.md): A Chrome Browser Plug-in for Easy Access to VulnCheck Intelligence
+- [The VulnCheck CLI](https://docs.vulncheck.com/raw/tools/cli.md): Take VulnCheck anywhere with the VulnCheck CLI
+- [VulnCheck Offline](https://docs.vulncheck.com/raw/tools/cli/offline.md): Run VulnCheck CLI commands blazing fast without internet.
+- [CLI Commands](https://docs.vulncheck.com/raw/tools/cli/examples.md): A list of example commands that can be used with VulnCheck CLI.
+- [CLI JQ Commands](https://docs.vulncheck.com/raw/tools/cli/examples-jq.md): A list of example JQ commands that can be used with VulnCheck CLI.
+- [VulnCheck Integrations](https://docs.vulncheck.com/raw/integrations.md): VulnCheck includes integrations with many popular cybersecurity products & tools.
+- [Checkpoint Quantum Security Gateway](https://docs.vulncheck.com/raw/integrations/checkpoint.md): VulnCheck IP Intelligence improves Checkpoint Quantum Security Gateway deployments by providing real-time IP Address data via our Tags API.
+- [Cisco ASA](https://docs.vulncheck.com/raw/integrations/cisco.md): VulnCheck IP Intelligence improves Cisco ASA deployments by providing real-time IP Address data via our Tags API.
+- [Fortinet FortiGate](https://docs.vulncheck.com/raw/integrations/fortinet.md): VulnCheck IP Intelligence improves Fortinet FortiGate deployments by providing real-time IP Address data via our Tags API.
+- [Palo Alto Networks NGFW](https://docs.vulncheck.com/raw/integrations/panw.md): VulnCheck IP Intelligence improves Palo Alto Networks NGFW deployments by providing real-time IP Address data via our Tags API.
+- [Microsoft Power BI](https://docs.vulncheck.com/raw/integrations/powerbi.md): Microsoft Power BI can leverage VulnCheck KEV API as an intelligence source for Known Exploited Vulnerabilities. Include timely evidence of CVE exploitation such as software vendor, products, reference articles and VulnCheck XDB links in your PowerBI applications.
+- [IDSTower](https://docs.vulncheck.com/raw/integrations/idstower.md): IDSTower can use the VulnCheck Initial Access Intelligence API as a source of Suricata rules.
+- [Tines](https://docs.vulncheck.com/raw/integrations/tines.md): Monitor emerging threats and build automations into your vulnerability management workflow using VulnCheck and Tines.
+- [Jupyter Notebook](https://docs.vulncheck.com/raw/integrations/jupyter.md): Explore and visualize VulnCheck data in your Jupyter Notebooks using the Python SDK.
+- [Cyware Threat Intelligence Exchange](https://docs.vulncheck.com/raw/integrations/ctix.md): Explore and visualize VulnCheck data in CTIX by Cyware.
+- [Filigran OpenCTI](https://docs.vulncheck.com/raw/integrations/opencti.md): Explore and visualize VulnCheck data in OpenCTI by Filigran.
+- [ServiceNow](https://docs.vulncheck.com/raw/integrations/servicenow.md): Vulncheck for Vulnerability Response
+- [Splunk](https://docs.vulncheck.com/raw/integrations/splunk.md): VulnCheck Exploit Intelligence App For Splunk
+- [Alerts (Email / Slack)](https://docs.vulncheck.com/raw/alerts.md): VulnCheck users can easily set up VulnCheck KEV (Known Exploited Vulnerabilities) alerts through Email and Slack.
+- [VulnCheck Community](https://docs.vulncheck.com/raw/community.md): Access the premier source for open Vulnerability and Exploit Intelligence
+- [Introduction](https://docs.vulncheck.com/raw/community/vulncheck-kev.md): VulnCheck KEV makes it easy to see which vulnerabilities have been exploited in the wild.
+- [Coverage Criteria](https://docs.vulncheck.com/raw/community/vulncheck-kev/coverage-criteria.md): Only vulnerabilities reported to have been exploited in the wild are included in VulnCheck KEV.
+- [API / Schema](https://docs.vulncheck.com/raw/community/vulncheck-kev/schema.md): Integrate with VulnCheck KEV using an open API / JSON schema that is easy to follow.
+- [Attribution Notice](https://docs.vulncheck.com/raw/community/vulncheck-kev/attribution.md): Leveraging VulnCheck KEV and the data in it, in your own production, solution, or service, is easy to do at no additional cost, but requires prominent attribution to VulnCheck.
+- [FAQ](https://docs.vulncheck.com/raw/community/vulncheck-kev/faq.md): Frequently Asked Questions about working with and integrating with VulnCheck KEV.
+- [Introduction](https://docs.vulncheck.com/raw/community/nist-nvd.md): VulnCheck makes it easy to migrate from the NIST NVD to NVD++ from VulnCheck.
+- [NIST NVD 1.0](https://docs.vulncheck.com/raw/community/nist-nvd/nvd-1-retired.md): VulnCheck makes it easy to migrate from the NIST NVD 1.0 to NVD++ from VulnCheck.
+- [NIST NVD 2.0](https://docs.vulncheck.com/raw/community/nist-nvd/nvd-2.md): VulnCheck makes it easy to migrate from the NIST NVD 2.0 to NVD++ from VulnCheck.
+- [MITRE CVE List](https://docs.vulncheck.com/raw/community/nist-nvd/mitre-cve.md): VulnCheck makes it easy to access MITRE CVE List V5 data.
+- [VulnCheck Community CPE Schema](https://docs.vulncheck.com/raw/community/nist-nvd/schema.md): Integrate with NVD 1.0 and NVD 2.0 using long established schemas with additional VulnCheck fields
+- [Attribution Notice](https://docs.vulncheck.com/raw/community/nist-nvd/attribution.md): Leveraging VulnCheck NVD++ and the data in it, in your own production, solution, or service, is easy to do at no additional cost, but requires prominent public attribution to VulnCheck.
+- [FAQ](https://docs.vulncheck.com/raw/community/nist-nvd/faq.md): Frequently Asked Questions about NVD++ from VulnCheck.
+- [Introduction](https://docs.vulncheck.com/raw/community/report-a-vulnerability.md): VulnCheck Report A Vulnerability makes it easy to Report a vulnerability to VulnCheck to be responsibly disclosed
+- [Open Source](https://docs.vulncheck.com/raw/community/featured-projects.md): Open Source Projects that have incorporated VulnCheck KEV or NVD++
+- [Commercial](https://docs.vulncheck.com/raw/community/featured-projects/commerical-products.md): Commercial Products that have incorporated VulnCheck KEV or NVD++
+- [API Rate Limits](https://docs.vulncheck.com/raw/community/rate-limits.md): Understanding VulnCheck API rate limits for community users
+- [Getting Started with CVE Prioritization Using VulnCheck Community Data](https://docs.vulncheck.com/raw/community/how-to-guides.md): Use VulnCheck Community data to prioritize CVEs with a starter Python script.
+- [Exploit Intelligence 101](https://docs.vulncheck.com/raw/kb.md): A description of industry terms and VulnCheck's definitions, as used in Exploit & Vulnerability Intelligence and Initial Access Intelligence products.
+
+## Jp
+
+- [イントロダクション](https://docs.vulncheck.com/raw/jp/getting-started.md): VulnCheck エクスプロイトインテリジェンスプラットフォームの紹介。
+- [アクセス登録](https://docs.vulncheck.com/raw/jp/getting-started/register.md): VulnCheck プラットフォームでのアカウント登録は簡単です。
+- [APIトークン](https://docs.vulncheck.com/raw/jp/getting-started/api-tokens.md): VulnCheckプラットフォームのすべてのAPIコールには、VulnCheckが発行する有効なAPIトークンが必要です。
+- [SSHキー](https://docs.vulncheck.com/raw/jp/getting-started/ssh-keys.md): SSH公開キーをVulnCheckプラットフォームにアップロードして、git.vulncheck.comからGitリポジトリをクローンします。
+- [オフラインバックアップ](https://docs.vulncheck.com/raw/jp/getting-started/offline-backups.md): VulnCheckプラットフォームは、ライセンスを持つ顧客に対して、数百のデータセットのオフラインバックアップを提供しています。
+- [製品概要](https://docs.vulncheck.com/raw/jp/products.md): 当社の製品について
+- [イントロダクション](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence.md): VulnCheck エクスプロイト＆脆弱性インテリジェンス製品は、組織が既存の脆弱性レポートを強化し、脆弱性の優先順位付けの課題を解決するのに役立ちます。
+- [エクスプロイトインテリジェンス](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/exploit-intelligence.md): LVulnCheckの最先端のエクスプロイトインテリジェンスを活用して、特定の脆弱性に対する悪用の状況を把握します。
+- [脆弱性インテリジェンス](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/vulnerability-intelligence.md): VulnCheck エクスプロイト＆脆弱性インテリジェンス内の脆弱性インテリジェンス機能を活用して、業界で最速かつ最も包括的な脆弱性インテリジェンスを手に入れ、今日脆弱性の優先順位付けの課題を解決しましょう。
+- [脆弱性強化](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/vulnerability-enrichment.md): VulnCheckは、独自の脆弱性強化データを生成し、それをVulnCheckのExploitおよびVulnerability Intelligenceサービスに組み込んでいます。
+- [脅威アクターインテリジェンス](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/threat-actors.md): VulnCheckの最高クラスのエクスプロイトインテリジェンスを活用して、脅威アクターを追跡・分析します。
+- [CPE生成](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/cpe.md): VulnCheckは、NIST NVDによって残されたギャップを埋めるために、迅速かつ正確なCPEを生成します
+- [CVEへの早期アクセス](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/early-access.md): VulnCheck エクスプロイト＆脆弱性インテリジェンスには、NIST National Vulnerability Database (NVD) でまだ公開されていないCVEへの早期アクセスが含まれています。
+- [NVD移行](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/nvd-migration.md): VulnCheckは、NIST NVDからVulnCheck Exploit & Vulnerability Intelligenceへの移行を簡単にします。
+- [パッケージマネージャーのサポート](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/package-manager-support.md): VulnCheck Exploit & Vulnerability Intelligenceは、オープンソースソフトウェアライブラリのパッケージマネージャーとオペレーティングシステムのパッケージマネージャーの幅広いサポートを提供しています。
+- [パッケージURL検出](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/package-url-detections.md): VulnCheck エクスプロイト＆脆弱性インテリジェンスは、オープンソースソフトウェアライブラリパッケージとオペレーティングシステムパッケージの両方に対する幅広い懸念事項を検出する機能をサポートしています。
+- [サポート終了（EOL）ソフトウェア](https://docs.vulncheck.com/raw/jp/products/exploit-and-vulnerability-intelligence/end-of-life.md): VulnCheck エクスプロイト＆脆弱性インテリジェンスのサポート終了ソフトウェア追跡を活用して、ホストがもはやパッチ適用できないかどうかを確認します。
+- [イントロダクション](https://docs.vulncheck.com/raw/jp/products/initial-access-intelligence.md): Initial Access Intelligenceの検出アーティファクトを活用して、リモートコード実行（RCE）脆弱性を検出および対応します。
+- [カバレッジ戦略](https://docs.vulncheck.com/raw/jp/products/initial-access-intelligence/coverage-strategy.md): VulnCheck Initial Access Intelligence製品は、将来的に広く悪用される可能性のある既知の脆弱性の限られたサブセットを対象としています。
+- [検出アーティファクト](https://docs.vulncheck.com/raw/jp/products/initial-access-intelligence/detection-artifacts.md): VulnCheck Initial Access Intelligence製品は、幅広いフォーマットの検出アーティファクトを提供し、防御者が新たな脅威を迅速に検出および対応できるようにします。
+- [初期アクセスアーティファクトの例](https://docs.vulncheck.com/raw/jp/products/initial-access-intelligence/example-artifacts.md): VulnCheck Initial Access IntelligenceのPaperCut（CVE-2023-27350）に関する例
+- [検出アーティファクトの取得](https://docs.vulncheck.com/raw/jp/products/initial-access-intelligence/fetch-artifacts.md): 最新の検出アーティファクトをダウンロードするには、VulnCheck Initial Access Intelligenceの検出アーティファクトをgit、バックアップファイル、およびAPIで入手できます。
+- [エクスプロイトコードのコンパイル](https://docs.vulncheck.com/raw/jp/products/initial-access-intelligence/compile-exploits.md): Dockerを使用してVulnCheckが提供するgo-exploitスキャナーをコンパイルおよび実行します
+- [カバレッジのリクエスト](https://docs.vulncheck.com/raw/jp/products/initial-access-intelligence/request-coverage.md): 特定の初期アクセス脆弱性のカバレッジをリクエストするには、VulnCheckサポートにご連絡ください。
+- [Canary Intelligence](https://docs.vulncheck.com/raw/jp/products/canary-intelligence.md): VulnCheck Canary Intelligence は、世界中に展開されている脆弱なホストからのエクスプロイト データを提供し、脆弱性のエクスプロイトの最初の兆候を明らかにし、実際にどの CVE が誰によってターゲットにされているかを追跡します。
+- [「カナリアインテリジェンスアクセス」](https://docs.vulncheck.com/raw/jp/products/canary-intelligence/canary-access.md): VulnCheck Canary Intelligence は、世界中に展開されている脆弱なホストからのエクスプロイト データを提供し、脆弱性のエクスプロイトの最初の兆候を明らかにし、実際にどの CVE が誰によってターゲットにされているかを追跡します。
+- [Target Intelligence](https://docs.vulncheck.com/raw/jp/products/target-intelligence.md): CVE を 1 つ指定してください。現在インターネット上に存在するすべての脆弱なホストをお伝えします。
+- [V3 API 概要](https://docs.vulncheck.com/raw/jp/api/v3.md): 利用可能なすべてのv3 APIリソース
+- [/v3/index](https://docs.vulncheck.com/raw/jp/api/v3/indices.md): ライセンスされているエンドポイントリンクを含むインデックスのリストを返します。
+- [/v3/index/{index}](https://docs.vulncheck.com/raw/jp/api/v3/indice.md): 選択したインデックスからすべてのドキュメントのページネートされたリストを取得します。デフォルトでは、1ページに最大100件のドキュメントが表示されます。
+- [/v3/backup/{index}](https://docs.vulncheck.com/raw/jp/api/v3/backup.md): インデックスのバックアップリンクをリクエストする
+- [/v3/backup](https://docs.vulncheck.com/raw/jp/api/v3/backups.md): バックアップのリストとそのエンドポイントリンクを返します。
+- [/v3/purl](https://docs.vulncheck.com/raw/jp/api/v3/purl.md): PURLに関連する脆弱性をリクエストする
+- [/v3/purls](https://docs.vulncheck.com/raw/jp/api/v3/purls.md): PURLのリストに関連する脆弱性をリクエストする
+- [/v3/cpe](https://docs.vulncheck.com/raw/jp/api/v3/cpe.md): CPEに関連する脆弱性をリクエストする
+- [/v3/rules/initial-access/{rules}](https://docs.vulncheck.com/raw/jp/api/v3/rules.md): Initial Access IntelligenceのSuricataまたはSnortルールをリクエストする
+- [/v3/tags/{filter}](https://docs.vulncheck.com/raw/jp/api/v3/tags.md): IPタグに基づいて改行区切り（またはJSON）のIPアドレスリストを返します
+- [/v3/pdns/{filter}](https://docs.vulncheck.com/raw/jp/api/v3/pdns.md): Protective DNS向けのホスト名リストに基づいて、改行で区切られたホスト名リスト（またはJSON）を返す
+- [/v3/openapi](https://docs.vulncheck.com/raw/jp/api/v3/openapi.md): APIのOpenAPI仕様を返します
+- [/v3/search/cpe](https://docs.vulncheck.com/raw/jp/api/v3/search_cpe.md): CPEに関連する脆弱性(パート、ベンダー、プロダクト、バージョン)をリクエスト
+- [/v3/identify](https://docs.vulncheck.com/raw/jp/api/v3/identify.md): （ベンダー、製品、バージョン）クエリに関連するリクエスト識別子
+- [(POST) /v3/index/{index}](https://docs.vulncheck.com/raw/jp/api/v3/indice_post.md): 選択したインデックスのすべてのドキュメントのページ分割されたリストを取得するPOSTエンドポイント。BodyはGETエンドポイントと同じクエリパラメータを受け入れますが、CVEペイロードを使用して単一のリクエストで最大1000のCVE IDを検索することができます。
+- [/v3/search/cve](https://docs.vulncheck.com/raw/jp/api/v3/search_cve.md): アクセス可能なすべてのインデックスからCVEに関連するレコードを検索
+- [V4 API 概要](https://docs.vulncheck.com/raw/jp/api/v4.md): 利用可能なすべての v4 API リソース
+- [/v4/advisory](https://docs.vulncheck.com/raw/jp/api/v4/advisory.md): すべてのフィードにわたる VulnCheck v4 アドバイザリインデックスを照会します。
+- [/v4/advisory/list](https://docs.vulncheck.com/raw/jp/api/v4/advisory-list.md): 利用可能なアドバイザリフィード名の一覧を返します。
+- [/v4/backup](https://docs.vulncheck.com/raw/jp/api/v4/backup.md): 利用可能なバックアップフィードの一覧
+- [/v4/backup/{feed}](https://docs.vulncheck.com/raw/jp/api/v4/backup-feed.md): 指定フィードのバックアップダウンロード URL を取得
+- [/v4/openapi](https://docs.vulncheck.com/raw/jp/api/v4/openapi.md): V4 API の OpenAPI 仕様
+- [Introduction to Indices](https://docs.vulncheck.com/raw/jp/indices.md)
+- [VulnCheck Intelligence](https://docs.vulncheck.com/raw/jp/indices/vulncheck-intelligence.md): Unique vulnerability and exploit intelligence generated by VulnCheck's autonomous system, providing cutting-edge insights and analysis.
+- [Product Security Advisories](https://docs.vulncheck.com/raw/jp/indices/product-security-advisories.md): Comprehensive collection of security advisories from various product vendors, offering critical information on vulnerabilities and patches.
+- [OT Security Advisories](https://docs.vulncheck.com/raw/jp/indices/ot-security-advisories.md): Specialized advisories focusing on Operational Technology (OT) systems, crucial for industrial and infrastructure security.
+- [IoMT Security Advisories](https://docs.vulncheck.com/raw/jp/indices/iomt-security-advisories.md): Targeted advisories for Internet of Medical Things (IoMT) devices, addressing specific vulnerabilities in healthcare technology.
+- [Security Research Advisories](https://docs.vulncheck.com/raw/jp/indices/security-research-advisories.md): Curated advisories from security researchers and organizations, providing in-depth analysis and discoveries in cybersecurity.
+- [Government Security Advisories](https://docs.vulncheck.com/raw/jp/indices/government-security-advisories.md): Official security advisories from government entities, offering authoritative information on national and international cybersecurity concerns.
+- [Open Source Security Advisories](https://docs.vulncheck.com/raw/jp/indices/open-source-security-advisories.md): Comprehensive collection of advisories for open-source software, crucial for maintaining security in widely-used open technologies.
+- [Open Source Package Managers](https://docs.vulncheck.com/raw/jp/indices/open-source-package-managers.md): Integration with various open-source package managers to track and report vulnerabilities in software dependencies.
+- [Vulnerability Databases](https://docs.vulncheck.com/raw/jp/indices/vulnerability-databases.md): A collection of Vulnerability Databases from across the world.
+- [Vulnerability Intelligence](https://docs.vulncheck.com/raw/jp/indices/vulnerability-intelligence.md): Comprehensive vulnerability data aggregated from multiple sources, enriched with VulnCheck's analysis and metadata.
+- [End of Life](https://docs.vulncheck.com/raw/jp/indices/end-of-life.md): End-of-life (EOL) and support information for various products, providing critical insights into software lifecycles and security implications.
+- [ツールの概要](https://docs.vulncheck.com/raw/jp/tools.md): 新しいツール、機能強化、リアルタイム更新を継続的に拡張し、オープンソースのセキュリティ インテリジェンスを向上させます。
+- [概要](https://docs.vulncheck.com/raw/jp/tools/go-exploit.md): Go Exploitは、より迅速でポータブルかつ多機能なエクスプロイト開発を促進します。
+- [概要](https://docs.vulncheck.com/raw/jp/tools/go-sdk.md): Go アプリケーションに VulnCheck を導入する
+- [概要](https://docs.vulncheck.com/raw/jp/tools/python-sdk.md): VulnCheck を Python アプリケーションに導入
+- [VulnCheck Insights](https://docs.vulncheck.com/raw/jp/tools/insights.md): VulnCheck インテリジェンスへ簡単にアクセスできる Chrome ブラウザ用プラグイン
+- [概要](https://docs.vulncheck.com/raw/jp/tools/cli.md): VulnCheck CLI を使用してどこでも VulnCheck を利用
+- [IP Intel 用のオフライン CLI](https://docs.vulncheck.com/raw/jp/tools/cli/offline.md): IP Intel 用のオフライン CLI
+- [CLI コマンドの例](https://docs.vulncheck.com/raw/jp/tools/cli/examples.md): VulnCheck CLI で使用できるコマンド例のリスト。
+- [CLI JQ コマンド](https://docs.vulncheck.com/raw/jp/tools/cli/examples-jq.md): VulnCheck CLI で使用できる JQ コマンドの例一覧
+- [はじめに](https://docs.vulncheck.com/raw/jp/integrations.md): VulnCheckは、多くの人気のあるサイバーセキュリティ製品やツールと統合されています。
+- [Checkpoint Quantum Security Gateway](https://docs.vulncheck.com/raw/jp/integrations/checkpoint.md): VulnCheck IP Intelligenceは、Tags APIを介してリアルタイムのIPアドレスデータを提供することで、Checkpoint Quantum Security Gatewayの展開を改善します。
+- [Cisco ASA](https://docs.vulncheck.com/raw/jp/integrations/cisco.md): VulnCheck IP Intelligenceは、Tags APIを介してリアルタイムのIPアドレスデータを提供することで、Cisco ASAの展開を改善します。
+- [Fortinet FortiGate](https://docs.vulncheck.com/raw/jp/integrations/fortinet.md): VulnCheck IP Intelligenceは、Tags APIを介してリアルタイムのIPアドレスデータを提供することで、Fortinet FortiGateの展開を改善します。
+- [Palo Alto Networks NGFW](https://docs.vulncheck.com/raw/jp/integrations/panw.md): VulnCheck IP Intelligenceは、Tags APIを介してリアルタイムのIPアドレスデータを提供することで、Palo Alto Networks NGFWの展開を改善します。
+- [Microsoft Power BI](https://docs.vulncheck.com/raw/jp/integrations/powerbi.md): Microsoft Power BIは、VulnCheck KEV APIを既知の悪用された脆弱性に関するインテリジェンスソースとして活用できます。PowerBIアプリケーションに、CVEの悪用に関するタイムリーな証拠（ソフトウェアベンダー、製品、参考記事、VulnCheck XDBリンクなど）を含めることができます。
+- [IDSTower](https://docs.vulncheck.com/raw/jp/integrations/idstower.md): IDSTowerは、VulnCheck Initial Access Intelligence APIをSuricataルールのソースとして利用できます。
+- [Tines](https://docs.vulncheck.com/raw/jp/integrations/tines.md): VulnCheck と Tines を使用して、新たな脅威を監視し、脆弱性管理ワークフローに自動化を組み込みます。
+- [Jupyter Notebook](https://docs.vulncheck.com/raw/jp/integrations/jupyter.md): Python SDKを使用して、JupyterノートブックでVulnCheckデータを探索し、可視化します。
+- [Cyware 脅威インテリジェンス エクスチェンジ](https://docs.vulncheck.com/raw/jp/integrations/ctix.md): Cyware の CTIX で VulnCheck データを探索および視覚化します。
+- [Filigran OpenCTI](https://docs.vulncheck.com/raw/jp/integrations/opencti.md): FiligranのOpenCTIでVulnCheckデータを探索および可視化する。
+- [ServiceNow](https://docs.vulncheck.com/raw/jp/integrations/servicenow.md): VulnCheck for Vulnerability Response
+- [Splunk](https://docs.vulncheck.com/raw/jp/integrations/splunk.md): VulnCheck Exploit Intelligence App For Splunk
+- [アラート（メール / Slack）](https://docs.vulncheck.com/raw/jp/alerts.md): VulnCheck のユーザーは、メールと Slack を通じて VulnCheck KEV（既知の悪用が確認された脆弱性）アラートを簡単に設定できます。
+- [コミュニティ](https://docs.vulncheck.com/raw/jp/community.md): オープンな脆弱性とエクスプロイト インテリジェンスのプレミア ソースにアクセス
+- [概要](https://docs.vulncheck.com/raw/jp/community/vulncheck-kev.md): VulnCheck KEVは、野外で悪用された脆弱性を簡単に把握できるツールです。
+- [カバレッジ基準](https://docs.vulncheck.com/raw/jp/community/vulncheck-kev/coverage-criteria.md): VulnCheck KEVには、実際に悪用されていると報告された脆弱性のみが含まれます。
+- [API / スキーマ](https://docs.vulncheck.com/raw/jp/community/vulncheck-kev/schema.md): VulnCheck KEVを、使いやすいオープンAPI / JSONスキーマを使用して統合します。
+- [帰属に関する通知](https://docs.vulncheck.com/raw/jp/community/vulncheck-kev/attribution.md): VulnCheck KEVおよびそのデータを、製品、ソリューション、またはサービスで使用する際、追加費用なしで簡単に利用できますが、VulnCheckへの明示的な帰属が必要です。.
+- [FAQ](https://docs.vulncheck.com/raw/jp/community/vulncheck-kev/faq.md): VulnCheck KEVの利用および統合に関するよくある質問
+- [導入](https://docs.vulncheck.com/raw/jp/community/nist-nvd.md): VulnCheckは、NIST NVDからVulnCheckのNVD++への移行を簡単にします。
+- [NIST NVD 1.0](https://docs.vulncheck.com/raw/jp/community/nist-nvd/nvd-1-retired.md): VulnCheckがNIST NVD 1.0からNVD++への移行を簡単にします。
+- [NIST NVD 2.0](https://docs.vulncheck.com/raw/jp/community/nist-nvd/nvd-2.md): VulnCheckがNIST NVD 2.0からNVD++への移行を簡単にします。
+- [MITRE CVEリスト](https://docs.vulncheck.com/raw/jp/community/nist-nvd/mitre-cve.md): VulnCheckがMITRE CVEリストV5データへのアクセスを簡単にします。
+- [VulnCheck Community CPEスキーマ](https://docs.vulncheck.com/raw/jp/community/nist-nvd/schema.md): 長年にわたる既存のスキーマを使用し、VulnCheckによる追加フィールドでNVD 1.0およびNVD 2.0と統合
+- [帰属通知](https://docs.vulncheck.com/raw/jp/community/nist-nvd/attribution.md): VulnCheck NVD++およびそのデータを、自社の製品、ソリューション、またはサービスで利用する場合、追加費用は不要ですが、VulnCheckへの公然の帰属表示が必要です。
+- [FAQ](https://docs.vulncheck.com/raw/jp/community/nist-nvd/faq.md): VulnCheckのNVD++に関するよくある質問。
+- [イントロダクション](https://docs.vulncheck.com/raw/jp/community/report-a-vulnerability.md): VulnCheck Report A Vulnerability は、脆弱性を責任を持って開示するために VulnCheck へ報告することを容易にします
+- [オープンソース](https://docs.vulncheck.com/raw/jp/community/featured-products.md): VulnCheck KEVまたはNVD++を組み込んだオープンソースプロジェクト
+- [商用](https://docs.vulncheck.com/raw/jp/community/featured-products/commercial-products.md): VulnCheck KEVまたはNVD++を組み込んだ商用製品
+- [API レート制限](https://docs.vulncheck.com/raw/jp/community/rate-limits.md): コミュニティユーザー向けのVulnCheck APIレート制限について
+- [VulnCheck コミュニティ データを使用した CVE 優先順位付けの概要](https://docs.vulncheck.com/raw/jp/community/how-to-guides.md): VulnCheck コミュニティ データと Python スターター スクリプトを使用して CVE の優先順位を付ける方法
+- [インテリジェンスを活用する 101](https://docs.vulncheck.com/raw/jp/kb.md): VulnCheckの定義と、エクスプロイト＆脆弱性インテリジェンスや初期アクセスインテリジェンス製品で使用される業界用語の説明。
+
+## Kr
+
+- [개요](https://docs.vulncheck.com/raw/kr/getting-started.md): 익스플로잇 인텔리전스 플랫폼 소개
+- [액세스 등록](https://docs.vulncheck.com/raw/kr/getting-started/register.md): VulnCheck 플랫폼에 계정을 등록하는 것은 매우 간단합니다.
+- [API 토큰](https://docs.vulncheck.com/raw/kr/getting-started/api-tokens.md): VulnCheck 플랫폼의 모든 API 호출에는 VulnCheck에서 발급한 유효한 API 토큰이 필요합니다.
+- [SSH 키](https://docs.vulncheck.com/raw/kr/getting-started/ssh-keys.md): git.vulncheck.com에서 git 저장소를 클론하기 위해 VulnCheck 플랫폼에 SSH 공개 키를 업로드하세요.
+- [오프라인 백업](https://docs.vulncheck.com/raw/kr/getting-started/offline-backups.md): VulnCheck 플랫폼은 유료 고객에게 수백 개의 데이터 세트에 대한 오프라인 백업을 제공합니다.
+- [제품 개요](https://docs.vulncheck.com/raw/kr/products.md): 저희 제품에 대해 알아보세요
+- [소개](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence.md): VulnCheck Exploit & Vulnerability Intelligence 제품은 조직이 기존 취약점 보고를 강화하고 취약점 우선순위화 문제를 해결하도록 돕습니다.
+- [익스플로잇 인텔리전스](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/exploit-intelligence.md): VulnCheck의 최고 수준 익스플로잇 인텔리전스를 활용하여 특정 취약점의 익스플로잇 상태를 이해하세요.
+- [취약점 인텔리전스](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/vulnerability-intelligence.md): VulnCheck Exploit & Vulnerability Intelligence의 취약점 인텔리전스 기능을 활용하여 업계에서 가장 빠르고 포괄적인 취약점 정보를 얻고, 오늘 취약점 우선순위화 문제를 해결하세요.
+- [취약점 보강 (Vulnerability Enrichment)](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/vulnerability-enrichment.md): VulnCheck는 고유한 취약점 보강 정보를 생성하고 이를 Exploit 및 Vulnerability Intelligence 서비스에 통합합니다.
+- [위협 행위자 인텔리전스](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/threat-actors.md): VulnCheck의 최고 수준 익스플로잇 인텔리전스를 활용하여 위협 행위자를 추적하고 분석하십시오.
+- [CPE 생성](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/cpe.md): VulnCheck는 NIST NVD가 남긴 공백을 메우기 위해 빠르고 정확한 CPE를 생성합니다.
+- [CVE 조기 접근](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/early-access.md): VulnCheck Exploit & Vulnerability Intelligence는 아직 NIST National Vulnerability Database(NVD)에 게시되지 않은 CVE에 대한 조기 접근 정보를 포함합니다.
+- [NVD 마이그레이션](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/nvd-migration.md): VulnCheck는 NIST NVD에서 VulnCheck Exploit & Vulnerability Intelligence로 쉽게 이전할 수 있도록 지원합니다.
+- [패키지 관리자 지원](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/package-manager-support.md): VulnCheck Exploit & Vulnerability Intelligence는 다양한 오픈 소스 소프트웨어 라이브러리 패키지 관리자와 운영 체제 패키지 관리자를 지원합니다.
+- [패키지 URL 탐지](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/package-url-detections.md): VulnCheck Exploit & Vulnerability Intelligence는 오픈 소스 소프트웨어 라이브러리 패키지와 운영 체제 패키지에 대한 다양한 보안 속성 탐지를 지원합니다.
+- [지원 종료(End-of-Life) 소프트웨어](https://docs.vulncheck.com/raw/kr/products/exploit-and-vulnerability-intelligence/end-of-life.md): VulnCheck Exploit & Vulnerability Intelligence의 지원 종료 소프트웨어 추적을 활용하여 더 이상 패치할 수 없는 호스트를 식별하세요.
+- [초기 접근 인텔리전스](https://docs.vulncheck.com/raw/kr/products/initial-access-intelligence.md): 초기 접근 인텔리전스 탐지 아티팩트를 활용하여 원격 코드 실행(RCE) 취약점을 탐지하고 대응하세요.
+- [커버리지 전략](https://docs.vulncheck.com/raw/kr/products/initial-access-intelligence/coverage-strategy.md): VulnCheck 초기 접근 인텔리전스 제품은 알려진 취약점 중 미래에 광범위하게 악용될 가능성이 높은 일부 취약점에 대해서만 커버리지를 제공합니다.
+- [탐지 아티팩트](https://docs.vulncheck.com/raw/kr/products/initial-access-intelligence/detection-artifacts.md): VulnCheck 초기 접근 인텔리전스 제품은 방어자가 새로운 위협을 빠르게 탐지하고 대응할 수 있도록 다양한 형식의 탐지 아티팩트를 포함합니다.
+- [예시 초기 접근 아티팩트](https://docs.vulncheck.com/raw/kr/products/initial-access-intelligence/example-artifacts.md): PaperCut (CVE-2023-27350)에 대한 VulnCheck 초기 접근 인텔리전스 예시 레코드
+- [탐지 아티팩트 가져오기](https://docs.vulncheck.com/raw/kr/products/initial-access-intelligence/fetch-artifacts.md): 최신 탐지 아티팩트를 다운로드하려면 VulnCheck 초기 접근 인텔리전스 탐지 아티팩트는 git, 백업 파일, 그리고 API를 통해 이용할 수 있습니다.
+- [익스플로잇 코드 컴파일](https://docs.vulncheck.com/raw/kr/products/initial-access-intelligence/compile-exploits.md): Docker를 사용하여 VulnCheck에서 제공하는 go-exploit 스캐너를 컴파일하고 실행하세요.
+- [커버리지 요청](https://docs.vulncheck.com/raw/kr/products/initial-access-intelligence/request-coverage.md): 특정 초기 접근 취약점에 대한 커버리지를 요청하려면 VulnCheck 지원팀에 연락하세요.
+- [Canary Intelligence](https://docs.vulncheck.com/raw/kr/products/canary-intelligence.md): VulnCheck Canary Intelligence는 전 세계에 배포된 취약한 호스트의 악용 데이터를 제공하여 취약성 악용의 첫 징후를 보여주고 어떤 CVE가 실제로 누구에 의해 표적으로 삼아지고 있는지 추적합니다.
+- [카나리아 인텔리전스 액세스](https://docs.vulncheck.com/raw/kr/products/canary-intelligence/canary-access.md): VulnCheck Canary Intelligence는 전 세계에 배포된 취약한 호스트의 악용 데이터를 제공하여 취약성 악용의 첫 징후를 밝히고 실제로 어떤 CVE가 누구에 의해 표적으로 삼아지고 있는지 추적합니다.
+- [Target Intelligence](https://docs.vulncheck.com/raw/kr/products/target-intelligence.md): CVE를 제공해 주시면 현재 인터넷상에 존재하는 모든 취약한 호스트를 알려드립니다.
+- [V3 API 개요](https://docs.vulncheck.com/raw/kr/api/v3.md): 사용 가능한 모든 v3 API 리소스
+- [/v3/index](https://docs.vulncheck.com/raw/kr/api/v3/indices.md): 계정이 라이선스된 엔드포인트 링크와 함께 색인 목록을 반환합니다.
+- [/v3/index/{index}](https://docs.vulncheck.com/raw/kr/api/v3/indice.md): 선택한 색인에서 모든 문서의 페이지네이션된 목록을 가져옵니다. 기본적으로 한 페이지에는 최대 100개의 문서가 표시됩니다.
+- [/v3/backup/{index}](https://docs.vulncheck.com/raw/kr/api/v3/backup.md): 색인의 백업 링크를 요청합니다.
+- [/v3/backup](https://docs.vulncheck.com/raw/kr/api/v3/backups.md): 엔드포인트 링크와 함께 백업 목록을 반환합니다.
+- [/v3/purl](https://docs.vulncheck.com/raw/kr/api/v3/purl.md): PURL과 관련된 취약점을 요청합니다.
+- [/v3/purls](https://docs.vulncheck.com/raw/kr/api/v3/purls.md): PURL 목록에 관련된 취약점을 요청합니다.
+- [/v3/cpe](https://docs.vulncheck.com/raw/kr/api/v3/cpe.md): CPE와 관련된 취약점을 요청합니다.
+- [/v3/rules/initial-access/{rules}](https://docs.vulncheck.com/raw/kr/api/v3/rules.md): Initial Access Intelligence Suricata 또는 Snort 규칙을 요청합니다.
+- [/v3/tags/{filter}](https://docs.vulncheck.com/raw/kr/api/v3/tags.md): IP 태그를 기반으로 줄바꿈으로 구분된(또는 JSON) IP 주소 목록을 반환합니다.
+- [/v3/pdns/{filter}](https://docs.vulncheck.com/raw/kr/api/v3/pdns.md): Protective DNS를 위한 호스트 이름 목록을 기반으로 줄바꿈 구분(또는 JSON)된 호스트 이름 목록을 반환합니다.
+- [/v3/openapi](https://docs.vulncheck.com/raw/kr/api/v3/openapi.md): API에 대한 OpenAPI 사양을 반환합니다.
+- [/v3/search/cpe](https://docs.vulncheck.com/raw/kr/api/v3/search_cpe.md): 특정 CPE 속성과 관련된 취약점을 요청합니다.
+- [/v3/identify](https://docs.vulncheck.com/raw/kr/api/v3/identify.md): (공급업체, 제품, 버전) 쿼리와 관련된 요청 식별자
+- [(POST) /v3/index/{index}](https://docs.vulncheck.com/raw/kr/api/v3/indice_post.md): 선택한 인덱스의 모든 문서에 대한 페이지네이션된 목록을 검색하는 POST 엔드포인트입니다. Body는 GET 엔드포인트와 동일한 쿼리 매개변수를 허용하지만, CVE 페이로드를 사용하여 단일 요청에서 최대 1000개의 CVE ID를 검색할 수 있습니다.
+- [/v3/search/cve](https://docs.vulncheck.com/raw/kr/api/v3/search_cve.md): 접근 가능한 모든 인덱스에서 특정 CVE를 참조하는 레코드를 검색합니다.
+- [V4 API 개요](https://docs.vulncheck.com/raw/kr/api/v4.md): 사용 가능한 모든 v4 API 리소스
+- [/v4/advisory](https://docs.vulncheck.com/raw/kr/api/v4/advisory.md): 모든 피드에 걸쳐 VulnCheck v4 어드바이저리 인덱스를 조회합니다.
+- [/v4/advisory/list](https://docs.vulncheck.com/raw/kr/api/v4/advisory-list.md): 사용 가능한 어드바이저리 피드 이름 목록을 반환합니다.
+- [/v4/backup](https://docs.vulncheck.com/raw/kr/api/v4/backup.md): 사용 가능한 백업 피드 목록
+- [/v4/backup/{feed}](https://docs.vulncheck.com/raw/kr/api/v4/backup-feed.md): 특정 피드의 백업 다운로드 URL 조회
+- [/v4/openapi](https://docs.vulncheck.com/raw/kr/api/v4/openapi.md): V4 API의 OpenAPI 명세
+- [색인 소개](https://docs.vulncheck.com/raw/kr/indices.md): 위협 분석을 위해 OSINT, 익스플로잇 인텔리전스, 취약점 데이터를 API 색인으로 통합하는 자율 시스템.
+- [VulnCheck 인텔리전스](https://docs.vulncheck.com/raw/kr/indices/vulncheck-intelligence.md): VulnCheck 자율 시스템이 생성한 고유한 취약점 및 익스플로잇 인텔리전스로 최신 분석과 통찰을 제공합니다.
+- [Product Security Advisories](https://docs.vulncheck.com/raw/kr/indices/product-security-advisories.md): Comprehensive collection of security advisories from various product vendors, offering critical information on vulnerabilities and patches.
+- [OT Security Advisories](https://docs.vulncheck.com/raw/kr/indices/ot-security-advisories.md): Specialized advisories focusing on Operational Technology (OT) systems, crucial for industrial and infrastructure security.
+- [IoMT Security Advisories](https://docs.vulncheck.com/raw/kr/indices/iomt-security-advisories.md): Targeted advisories for Internet of Medical Things (IoMT) devices, addressing specific vulnerabilities in healthcare technology.
+- [Security Research Advisories](https://docs.vulncheck.com/raw/kr/indices/security-research-advisories.md): Curated advisories from security researchers and organizations, providing in-depth analysis and discoveries in cybersecurity.
+- [Government Security Advisories](https://docs.vulncheck.com/raw/kr/indices/government-security-advisories.md): Official security advisories from government entities, offering authoritative information on national and international cybersecurity concerns.
+- [Open Source Security Advisories](https://docs.vulncheck.com/raw/kr/indices/open-source-security-advisories.md): Comprehensive collection of advisories for open-source software, crucial for maintaining security in widely-used open technologies.
+- [오픈 소스 패키지 관리자](https://docs.vulncheck.com/raw/kr/indices/open-source-package-managers.md): 소프트웨어 종속성의 취약점을 추적하고 보고하기 위해 다양한 오픈 소스 패키지 관리자와 통합합니다.
+- [취약점 데이터베이스](https://docs.vulncheck.com/raw/kr/indices/vulnerability-databases.md): 전 세계의 취약점 데이터베이스 모음.
+- [취약점 인텔리전스](https://docs.vulncheck.com/raw/kr/indices/vulnerability-intelligence.md): 여러 출처에서 수집한 포괄적 취약점 데이터를 VulnCheck의 분석과 메타데이터로 보강했습니다.
+- [End of Life](https://docs.vulncheck.com/raw/kr/indices/end-of-life.md): End-of-life (EOL) and support information for various products, providing critical insights into software lifecycles and security implications.
+- [도구 개요](https://docs.vulncheck.com/raw/kr/tools.md): 새로운 도구, 개선 사항, 실시간 업데이트로 오픈소스 보안 인텔리전스를 지속적으로 확장합니다.
+- [Go Exploit](https://docs.vulncheck.com/raw/kr/tools/go-exploit.md): Go Exploit은 더 빠르고 휴대 가능하며 풍부한 기능의 익스플로잇 개발을 지원합니다.
+- [Go SDK](https://docs.vulncheck.com/raw/kr/tools/go-sdk.md): VulnCheck를 Go 애플리케이션에 통합하기
+- [Python SDK](https://docs.vulncheck.com/raw/kr/tools/python-sdk.md): VulnCheck를 Python 애플리케이션에 통합하기
+- [VulnCheck Insights](https://docs.vulncheck.com/raw/kr/tools/insights.md): VulnCheck 인텔리전스에 쉽게 접근할 수 있는 크롬 브라우저 플러그인
+- [VulnCheck CLI](https://docs.vulncheck.com/raw/kr/tools/cli.md): VulnCheck CLI로 어디서든 VulnCheck를 활용하세요
+- [VulnCheck 오프라인](https://docs.vulncheck.com/raw/kr/tools/cli/offline.md): 인터넷 연결 없이도 빠르게 VulnCheck CLI 명령을 실행하세요.
+- [CLI 명령어](https://docs.vulncheck.com/raw/kr/tools/cli/examples.md): VulnCheck CLI에서 사용할 수 있는 예시 명령어 목록입니다.
+- [CLI JQ 명령어](https://docs.vulncheck.com/raw/kr/tools/cli/examples-jq.md): VulnCheck CLI와 함께 사용할 수 있는 JQ 예시 명령어 목록입니다.
+- [VulnCheck 통합](https://docs.vulncheck.com/raw/kr/integrations.md): VulnCheck는 다양한 인기 있는 사이버 보안 제품 및 도구와 통합됩니다.
+- [Checkpoint Quantum Security Gateway](https://docs.vulncheck.com/raw/kr/integrations/checkpoint.md): VulnCheck IP 인텔리전스는 태그 API를 통해 실시간 IP 주소 데이터를 제공하여 Checkpoint Quantum Security Gateway 배포를 개선합니다.
+- [Cisco ASA](https://docs.vulncheck.com/raw/kr/integrations/cisco.md): VulnCheck IP 인텔리전스는 태그 API를 통해 실시간 IP 주소 데이터를 제공하여 Cisco ASA 배포를 개선합니다.
+- [Fortinet FortiGate](https://docs.vulncheck.com/raw/kr/integrations/fortinet.md): VulnCheck IP 인텔리전스는 태그 API를 통해 실시간 IP 주소 데이터를 제공하여 Fortinet FortiGate 배포를 개선합니다.
+- [Palo Alto Networks NGFW](https://docs.vulncheck.com/raw/kr/integrations/panw.md): VulnCheck IP 인텔리전스는 태그 API를 통해 실시간 IP 주소 데이터를 제공하여 Palo Alto Networks NGFW 배포를 개선합니다.
+- [Microsoft Power BI](https://docs.vulncheck.com/raw/kr/integrations/powerbi.md): Microsoft Power BI는 VulnCheck KEV API를 지능 소스로 활용하여 알려진 익스플로잇 취약점(KEV)에 대한 정보를 포함할 수 있습니다. 소프트웨어 벤더, 제품, 참고 문서, VulnCheck XDB 링크 등 CVE 익스플로잇에 대한 최신 증거를 PowerBI 애플리케이션에 포함시킬 수 있습니다.
+- [IDSTower](https://docs.vulncheck.com/raw/kr/integrations/idstower.md): IDSTower는 VulnCheck 초기 침투(Initial Access) 인텔리전스 API를 Suricata 규칙 소스로 사용할 수 있습니다.
+- [Tines](https://docs.vulncheck.com/raw/kr/integrations/tines.md): VulnCheck와 Tines를 사용하여 새로운 위협을 모니터링하고 취약점 관리 워크플로우에 자동화를 구축하세요.
+- [Jupyter Notebook](https://docs.vulncheck.com/raw/kr/integrations/jupyter.md): Python SDK를 사용하여 Jupyter Notebook에서 VulnCheck 데이터를 탐색하고 시각화합니다.
+- [Cyware Threat Intelligence Exchange](https://docs.vulncheck.com/raw/kr/integrations/ctix.md): CTIX(Cyware Threat Intelligence eXchange)에서 VulnCheck 데이터를 탐색하고 시각화합니다.
+- [Filigran OpenCTI](https://docs.vulncheck.com/raw/kr/integrations/opencti.md): Filigran의 OpenCTI 플랫폼에서 VulnCheck 데이터를 탐색하고 시각화합니다.
+- [ServiceNow](https://docs.vulncheck.com/raw/kr/integrations/servicenow.md): VulnCheck for Vulnerability Response
+- [Splunk](https://docs.vulncheck.com/raw/kr/integrations/splunk.md): VulnCheck Exploit Intelligence App For Splunk
+- [알림（이메일 / Slack）](https://docs.vulncheck.com/raw/kr/alerts.md): VulnCheck 사용자는 이메일 및 Slack을 통해 VulnCheck KEV(공격에 악용된 것으로 확인된 취약점) 알림을 손쉽게 설정할 수 있습니다.
+- [VulnCheck 커뮤니티](https://docs.vulncheck.com/raw/kr/community.md): 공개 취약점 및 익스플로잇 인텔리전스의 최고 정보원에 접근하세요
+- [소개](https://docs.vulncheck.com/raw/kr/community/vulncheck-kev.md): VulnCheck KEV는 실제로 악용된 취약점을 쉽게 확인할 수 있도록 합니다.
+- [포함 기준](https://docs.vulncheck.com/raw/kr/community/vulncheck-kev/coverage-criteria.md): 실제로 악용된 것으로 보고된 취약점만 VulnCheck KEV에 포함됩니다.
+- [API / 스키마](https://docs.vulncheck.com/raw/kr/community/vulncheck-kev/schema.md): 따라가기 쉬운 오픈 API / JSON 스키마를 사용하여 VulnCheck KEV와 통합하세요.
+- [출처 고지](https://docs.vulncheck.com/raw/kr/community/vulncheck-kev/attribution.md): 자신의 프로덕션, 솔루션 또는 서비스에서 VulnCheck KEV 및 그 데이터를 활용하는 것은 추가 비용 없이 가능하지만, VulnCheck에 대한 명확한 출처 표시가 필요합니다.
+- [FAQ](https://docs.vulncheck.com/raw/kr/community/vulncheck-kev/faq.md): VulnCheck KEV 사용 및 통합과 관련된 자주 묻는 질문
+- [소개](https://docs.vulncheck.com/raw/kr/community/nist-nvd.md): VulnCheck는 NIST NVD에서 VulnCheck NVD++로 마이그레이션을 쉽게 할 수 있도록 지원합니다.
+- [NIST NVD 1.0](https://docs.vulncheck.com/raw/kr/community/nist-nvd/nvd-1-retired.md): VulnCheck는 NIST NVD 1.0에서 VulnCheck NVD++로 마이그레이션을 쉽게 할 수 있도록 지원합니다.
+- [NIST NVD 2.0](https://docs.vulncheck.com/raw/kr/community/nist-nvd/nvd-2.md): VulnCheck는 NIST NVD 2.0에서 VulnCheck NVD++로 마이그레이션을 쉽게 할 수 있도록 지원합니다.
+- [MITRE CVE 목록](https://docs.vulncheck.com/raw/kr/community/nist-nvd/mitre-cve.md): VulnCheck는 MITRE CVE List V5 데이터에 쉽게 접근할 수 있도록 지원합니다.
+- [VulnCheck 커뮤니티 CPE 스키마](https://docs.vulncheck.com/raw/kr/community/nist-nvd/schema.md): NVD 1.0 및 NVD 2.0과 통합하기 위해 오랫동안 사용된 스키마에 VulnCheck 필드를 추가하여 제공합니다
+- [출처 고지](https://docs.vulncheck.com/raw/kr/community/nist-nvd/attribution.md): VulnCheck NVD++ 및 그 데이터를 귀하의 프로덕션, 솔루션, 또는 서비스에서 활용하는 것은 추가 비용 없이 가능합니다. 단, VulnCheck에 대한 명확한 출처 표시가 요구됩니다.
+- [FAQ](https://docs.vulncheck.com/raw/kr/community/nist-nvd/faq.md): VulnCheck의 NVD++에 대한 자주 묻는 질문
+- [소개](https://docs.vulncheck.com/raw/kr/community/report-a-vulnerability.md): VulnCheck의 '취약점 보고' 기능은 취약점을 책임감 있게 공개하기 위해 VulnCheck에 보고하는 작업을 쉽게 만듭니다
+- [오픈 소스](https://docs.vulncheck.com/raw/kr/community/featured-projects.md): VulnCheck KEV 또는 NVD++를 통합한 오픈 소스 프로젝트
+- [상용 제품](https://docs.vulncheck.com/raw/kr/community/featured-projects/commerical-products.md): VulnCheck KEV 또는 NVD++를 통합한 상용 제품
+- [API 속도 제한](https://docs.vulncheck.com/raw/kr/community/rate-limits.md): 커뮤니티 사용자를 위한 VulnCheck API 속도 제한 이해
+- [VulnCheck 커뮤니티 데이터를 활용한 CVE 우선순위 지정 시작하기](https://docs.vulncheck.com/raw/kr/community/how-to-guides.md): VulnCheck 커뮤니티 데이터와 Python 스타터 스크립트로 CVE 우선순위를 지정하는 방법
+- [익스플로잇 인텔리전스 101](https://docs.vulncheck.com/raw/kr/kb.md): 익스플로잇·취약점 인텔리전스와 초기 침투 인텔리전스 제품에서 사용되는 업계 용어를 VulnCheck의 정의로 정리한 설명.
+
+## Changelog
+
+- [The New Changelog, 2 New Indices](https://docs.vulncheck.com/raw/changelog/2023-02-28.md)
+- [2 New Endpoints, New/Updated Indices](https://docs.vulncheck.com/raw/changelog/2023-03-15.md)
+- [2 New Features and 5 Indices](https://docs.vulncheck.com/raw/changelog/2023-03-30.md)
+- [Postman Collection support, more PURL package managers, and our own CVEs](https://docs.vulncheck.com/raw/changelog/2023-04-20.md)
+- [Lots of new indices including Exploits V3](https://docs.vulncheck.com/raw/changelog/2023-05-18.md)
+- [OPAM, Wolfi and Swift support for PURL queries](https://docs.vulncheck.com/raw/changelog/2023-05-31.md)
+- [New Indexes, New package managers for PURL, and portal invites](https://docs.vulncheck.com/raw/changelog/2023-06-12.md)
+- [New Indexes, Multi-region support for backups](https://docs.vulncheck.com/raw/changelog/2023-07-19.md)
+- [Fix to github-exploits, and new indexes](https://docs.vulncheck.com/raw/changelog/2023-07-25.md)
+- [BlackHat USA 2023 and 6 new indexes](https://docs.vulncheck.com/raw/changelog/2023-08-03.md)
+- [12 new indexes including vulncheck-nvd2](https://docs.vulncheck.com/raw/changelog/2023-08-15.md)
+- [New Docs and 64 New Indices](https://docs.vulncheck.com/raw/changelog/2023-10-06.md)
+- [10 new indices including epss and vulnerability-aliases](https://docs.vulncheck.com/raw/changelog/2023-10-11.md)
+- [30 new indices and ability to search for aliases](https://docs.vulncheck.com/raw/changelog/2023-11-07.md)
+- [Introducing initial-access details and 20 new indices](https://docs.vulncheck.com/raw/changelog/2023-11-17.md)
+- [5 new indices including osv anc cbl-mariner](https://docs.vulncheck.com/raw/changelog/2023-11-21.md)
+- [20 new Indices including mitre-attack-cve, botnets, and ransomware](https://docs.vulncheck.com/raw/changelog/2023-12-05.md)
+- [17 Indices and the latest Initial Access](https://docs.vulncheck.com/raw/changelog/2023-12-13.md)
+- [Introducing IP intelligence, Initial Access, and 17 new indices](https://docs.vulncheck.com/raw/changelog/2023-12-21.md)
+- [New index parameters, 33 new indices, 4 new Initial Access advisories, and a CVE browser](https://docs.vulncheck.com/raw/changelog/2024-01-18.md)
+- [New features, 10 new indices, and 3 new advisories](https://docs.vulncheck.com/raw/changelog/2024-02-01.md)
+- [6 new indices, 5 new IA artifacts, an upgraded dashboard and CVE Browser](https://docs.vulncheck.com/raw/changelog/2024-02-16.md)
+- [3 new indices, New Features, and new IA activity](https://docs.vulncheck.com/raw/changelog/2024-03-25.md)
+- [13 new indices and 11 new initial access advisories](https://docs.vulncheck.com/raw/changelog/2024-04-26.md)
+- [4 new features, 13 new initial-access advisories, and 15 new indices](https://docs.vulncheck.com/raw/changelog/2024-05-22.md)
+- [29 new initial-access advisories, and 16 new indices](https://docs.vulncheck.com/raw/changelog/2024-07-18.md): Jump to 16 New Indices
+- [32 new initial-access advisories, and 6 new indices](https://docs.vulncheck.com/raw/changelog/2024-09-12.md): Jump to Recent Initial Access Activity
+- [18 new IA entries and 7 new indices](https://docs.vulncheck.com/raw/changelog/2024-10-15.md): Jump to Recent Initial Access Activity
+- [25 new IA entries and 3 new indices](https://docs.vulncheck.com/raw/changelog/2024-11-25.md)
+- [January 30, 2025](https://docs.vulncheck.com/raw/changelog/2025-01-30.md)
+- [March 3rd, 2025](https://docs.vulncheck.com/raw/changelog/2025-03-03.md)
+- [March 18th, 2025](https://docs.vulncheck.com/raw/changelog/2025-03-18.md)
+- [May 19th, 2025](https://docs.vulncheck.com/raw/changelog/2025-05-19.md)
+- [June 23rd, 2025](https://docs.vulncheck.com/raw/changelog/2025-06-23.md)
+- [July 17th, 2025](https://docs.vulncheck.com/raw/changelog/2025-07-17.md)
+- [August 7th, 2025](https://docs.vulncheck.com/raw/changelog/2025-08-07.md)
+- [August 15th, 2025](https://docs.vulncheck.com/raw/changelog/2025-08-15.md)
+- [October 21st, 2025](https://docs.vulncheck.com/raw/changelog/2025-10-21.md)
+- [December 2nd, 2025](https://docs.vulncheck.com/raw/changelog/2025-12-02.md)
+- [January 21, 2026 - Release Notes](https://docs.vulncheck.com/raw/changelog/2026-01-21.md)
+- [February 02, 2026 - Release Notes](https://docs.vulncheck.com/raw/changelog/2026-02-04.md)
+- [February 25, 2026 - Release Notes](https://docs.vulncheck.com/raw/changelog/2026-02-25.md)
+- [March 18th, 2026](https://docs.vulncheck.com/raw/changelog/2026-03-18.md)
+- [March 20th, 2026](https://docs.vulncheck.com/raw/changelog/2026-03-20.md)
+- [April 7th, 2026](https://docs.vulncheck.com/raw/changelog/2026-04-07.md)
+- [July 22nd, 2026 Release Notes](https://docs.vulncheck.com/raw/changelog/2026-07-22.md)
+- [August 12th, 2026 Release Notes](https://docs.vulncheck.com/raw/changelog/2026-08-12.md)
+- [September 2nd, 2026 Release Notes](https://docs.vulncheck.com/raw/changelog/2026-09-02.md)
+
+## InitialAccess
+
+- [July 27 - August 2, 2024](https://docs.vulncheck.com/raw/initial-access/2024-08-02.md): Released exploits for Bazarr secrets leak, AJ-Report auth bypass, and Ghostscript RCE. Added RunZero integration for go-exploit cache.
+- [August 3 - August 9, 2024](https://docs.vulncheck.com/raw/initial-access/2024-08-09.md): Major updates for Windows RCE, Apache OFBiz, Delta Electronics, and Calibre exploits. Released go-exploit v1.24.0 documentation features.
+- [August 10 - August 16, 2024](https://docs.vulncheck.com/raw/initial-access/2024-08-16.md): Released exploits for Ivanti vTM auth bypass, ReCrystallize Server RCE, and Cisco SSM account takeover. Enhanced detection capabilities.
+- [August 17 - August 23, 2024](https://docs.vulncheck.com/raw/initial-access/2024-08-23.md): Delivered SPIP plugin RCE, Fortra FileCatalyst SQLi, and Exim auth bypass exploits. Added RedGuard C2 redirector tracking.
+- [August 24 - August 30, 2024](https://docs.vulncheck.com/raw/initial-access/2024-08-30.md): Released exploits for Acronis products, SolarWinds Web Help Desk, and Anyscale Ray vulnerabilities. Enhanced API query capabilities.
+- [August 31 - September 6, 2024](https://docs.vulncheck.com/raw/initial-access/2024-09-06.md): Delivered Traccar exploit chain, analyzed D-Link vulnerabilities, and created GLIBC Tunables exploit. Updated IP Intel tracking.
+- [Sept 28 - Oct 4, 2024](https://docs.vulncheck.com/raw/initial-access/2024-10-04.md): Released exploits for AVideo RCE, XWiki RCE, Progress MOVEit Transfer bypass. Enhanced IP Intel with new C2 infrastructure tracking.
+- [Oct 5 - Oct 11, 2024](https://docs.vulncheck.com/raw/initial-access/2024-10-11.md): Developed Four Faith router exploits, WhatsUp Gold webshell, and discovered Zyxel CPE zero-days. Updated PCAP naming conventions.
+- [Oct 12 - Oct 18, 2024](https://docs.vulncheck.com/raw/initial-access/2024-10-18.md): Added ZoomEye/FOFA queries, delivered exploits for ABB ASPECT, Laravel credential leak, and Magento exploit chain.
+- [Oct 19 - Oct 25, 2024](https://docs.vulncheck.com/raw/initial-access/2024-10-25.md): Major updates focused on exploits for Palo Alto Expedition chain, LiteSpeed Cache WordPress vulnerabilities, and network detection enhancements.
+- [Oct 26 - Nov 1, 2024](https://docs.vulncheck.com/raw/initial-access/2024-11-01.md): Major updates for Spring WebFlux, CyberPanel RCE, Delta Electronics InfraSuite, and FortiOS vulnerabilities. Integration with OpenCTI platform.
+- [Nov 2 - Nov 8, 2024](https://docs.vulncheck.com/raw/initial-access/2024-11-08.md): Released exploits for Acronis products, Apache Solr auth bypass, and pgAdmin OAuth2 info disclosure. Enhanced API query capabilities.
+- [Nov 9 - Nov 17, 2024](https://docs.vulncheck.com/raw/initial-access/2024-11-17.md): Status update on Fortinet FortiManager auth bypass, delivered detections for Netgear WAX206. Added RedGuard C2 tracking capabilities.
+- [Nov 18 - Nov 22, 2024](https://docs.vulncheck.com/raw/initial-access/2024-11-22.md): Developed exploits for Citrix Session Recording, PAN-OS auth bypass chain, and D-Link ShareCenter DNS injection. Major API and tracking updates.
+- [Nov 23 - Nov 29, 2024](https://docs.vulncheck.com/raw/initial-access/2024-11-29.md): Delivered ProjectSend CVE-2024-11680 exploit chain, Alibaba Nacos RCE, and Draytek Vigor vulnerabilities. New fortigate exploit in development.
+- [Nov 30 - Dec 6, 2024](https://docs.vulncheck.com/raw/initial-access/2024-12-06.md): Delivered exploits for Mitel MiCollab file disclosure, OwnCloud Ghostscript RCE, WordPress plugin auth bypass. New syscall reflector tool developed.
+- [Dec 7 - Dec 13, 2024](https://docs.vulncheck.com/raw/initial-access/2024-12-13.md): Rapid response for Cleo products, delivered OwnCloud Ghostscript RCE chain, and Cobbler XML-RPC auth bypass. PAN Expedition SQLi covered.
+- [Dec 14 - Dec 20, 2024](https://docs.vulncheck.com/raw/initial-access/2024-12-20.md): Added tracking for new C2 infrastructure, delivered exploits for Four-Faith routers, Acronis products, and Apache Solr vulnerabilities.
+- [Dec 21 - Dec 27, 2024](https://docs.vulncheck.com/raw/initial-access/2024-12-27.md): Major security updates for Apache Tomcat TOCTOU, SoftEther VPN, Jorani leave management system, and CHAOS RAT exploits.
+- [Jan 11 - Jan 17, 2025](https://docs.vulncheck.com/raw/initial-access/2025-01-17.md): Focused on Ivanti Connect IF-T buffer overflow, ShowDoc RCE, VoIP Monitor SQLi, and mySCADA PRO info leak exploits. Artica Proxy auth bypass covered.
+- [Jan 18 - Jan 24, 2025](https://docs.vulncheck.com/raw/initial-access/2025-01-24.md): Focused on SimpleHelp path traversal, PAN Expedition Spark RCE, and FortiOS auth bypass exploits. Updated exploit catalog metadata.
+- [Jan 25 - Jan 31, 2025](https://docs.vulncheck.com/raw/initial-access/2025-01-31.md): Delivered WSO2 account creation exploit, Reposilite directory traversal, and Nexus Repository RCE exploits. Enhanced API capabilities.
+- [Feb 01 - Feb 07, 2025](https://docs.vulncheck.com/raw/initial-access/2025-02-07.md): Key developments include exploits for RudderStack, NetAlertX, OpenTSDB and Netatalk vulnerabilities. Major updates to go-exploit framework.
+- [Feb 08 - Feb 14, 2025](https://docs.vulncheck.com/raw/initial-access/2025-02-14.md): Integration of VulnCheck with OpenCTI platform completed. New exploits for Vinchin Backup, Chamilo file upload, and mySCADA PRO vulnerabilities.
+- [Feb 15 - Feb 21, 2025](https://docs.vulncheck.com/raw/initial-access/2025-02-21.md): Major security updates including PAN-OS auth bypass, SonicWall VPN auth bypass, and CyberPanel RCE exploits with comprehensive detection coverage.
+- [Feb 22 - Feb 28, 2025](https://docs.vulncheck.com/raw/initial-access/2025-02-28.md): New Initial Access Intelligence coverage developed for Xwiki, Cisco RV-Series, D-Tale, and BeyondTrust. New IP-Intel coverage for BeyondTrust Remote Support honeypots.
+- [Mar 3 - Mar 7, 2025](https://docs.vulncheck.com/raw/initial-access/2025-03-07.md): Delivered exploits and coverage for NAKIVO Backup & Replication information disclosure, MITRE Caldera RCE, Wazuh authenticated RCE, and updated D-Tale exploits to support variants.
+- [Mar 08 - Mar 14, 2025](https://docs.vulncheck.com/raw/initial-access/2025-03-14.md): Exploits for SiteCore, SolarView, and ThinVNC. New Scanners for Sophos UTM. A new go-exploit release and an IP-Intel update.
+- [Mar 17 - Mar 21, 2025](https://docs.vulncheck.com/raw/initial-access/2025-03-21.md): Buffer Overflow for Netatalk, VMware vCenter Server OVA Upload, Apache Tomcat Java Deserialization RCE, and continued development of Sitecore exploits.
+- [Mar 22 - Mar 28, 2025](https://docs.vulncheck.com/raw/initial-access/2025-03-28.md): Infosec hyped vulnerabilities: IngressNightmare and Next.js Authentication Bypass. An erroneous CISA ICS Advisory. ManageEngine and Netatalk exploits and more!
+- [Mar 29 - April 4, 2025](https://docs.vulncheck.com/raw/initial-access/2025-04-04.md): CrushFTP RCE, Vite & Splunk Information Leaks, and Additional Coverage for Wordpress Plugin Exploited In the Wild
+- [April 5 - April 11, 2025](https://docs.vulncheck.com/raw/initial-access/2025-04-11.md): RCE in Apache Camel, AppSmith, and MajorDoMo. Credential leaks in GLPI.
+- [April 12 - April 18, 2025](https://docs.vulncheck.com/raw/initial-access/2025-04-18.md): A content *bomb* including coverage for Fortinet, Ivanti, GLPI, and Netgear products. A new go-exploit release and SpiceRAT tracking
+- [April 19 - April 25, 2025](https://docs.vulncheck.com/raw/initial-access/2025-04-25.md): Content for Erlang SSH, Apache Parquet, Polkit, and a Windows Vulnerability Exploited in the Wild
+- [April 26 - May 2, 2025](https://docs.vulncheck.com/raw/initial-access/2025-05-02.md): New week, new exploits and detections: NetScaler, Commvault, FoxCMS, Craft CMS, and SAP.
+- [May 3 - May 9, 2025](https://docs.vulncheck.com/raw/initial-access/2025-05-09.md): SonicWall SonicBoom, Magnus Billing, Casbin Casdoor, WinZip Local with Sigma, and go-exploit 1.43 Oh My!
+- [May 10 - May 16, 2025](https://docs.vulncheck.com/raw/initial-access/2025-05-16.md): This Week’s Exploit and Detections Menu: GeoVision, SysAid, FUXA, and Arcserve
+- [May 17 - May 23, 2025](https://docs.vulncheck.com/raw/initial-access/2025-05-23.md): Carpe Diem: Seizing the XXEs, RCEs, and Fresh Signatures
+- [May 24 - May 30, 2025](https://docs.vulncheck.com/raw/initial-access/2025-05-30.md): Langflow RCEs, BioTime Raises Eyebrows, VMware Lingers, and Customer Requests Spanning More Than a Decade
+- [May 31 - June 6, 2025](https://docs.vulncheck.com/raw/initial-access/2025-06-06.md): Cisco Rooted, DrayTek Injected, Flowise Twisted, Samsung Popped, and Veeam Remoted
+- [June 7 - June 13, 2025](https://docs.vulncheck.com/raw/initial-access/2025-06-13.md): Invision, Infoblox, and vBulletin Walk Into a Changelog
+- [June 14 - June 20, 2025](https://docs.vulncheck.com/raw/initial-access/2025-06-20.md): Shells Across the Stack: Windows, vBulletin, and RoundCube
+- [June 21 - June 27, 2025](https://docs.vulncheck.com/raw/initial-access/2025-06-27.md): We’re Gonna Need Pagination for This Changelog
+- [June 28 - July 11, 2025](https://docs.vulncheck.com/raw/initial-access/2025-07-11.md): Citrix, Cisco, SonicWall, Sitecore, Wing FTP, Sante PACS, CWP: We Hit Them All
+- [July 12 - July 18, 2025](https://docs.vulncheck.com/raw/initial-access/2025-07-18.md): From FortiWeb to Exchange: New Exploits and Detections
+- [July 19 - July 25, 2025](https://docs.vulncheck.com/raw/initial-access/2025-07-25.md): Fresh SharePoint & Delta Coverage, Hikvision Gets a Twist, CrushFTP in Progress
+- [July 26 - August 1, 2025](https://docs.vulncheck.com/raw/initial-access/2025-08-01.md): ToolShell and Cisco ISE Updates, New Jenkins and WordPress Plugin Coverage, SQL Server Deserialization, Customer-Requested Signatures, and Expanded Attacker Infrastructure Tracking
+- [August 2 - August 8, 2025](https://docs.vulncheck.com/raw/initial-access/2025-08-08.md): NTLM PrivEsc, AI Framework RCE, ScriptCase Bug Chain Part 1, Lighthouse Studio RCE, and XWiki Leaves Us Disappointed
+- [August 9 - August 15, 2025](https://docs.vulncheck.com/raw/initial-access/2025-08-15.md): New exploits and detections for WinRAR, ScriptCase, ICTBroadcast, and GeoServer. New signature coverage for Pulse Secure.
+- [August 16 - August 22, 2025](https://docs.vulncheck.com/raw/initial-access/2025-08-22.md): New exploits and detections for FortiSIEM, SharePoint, SUSE Manager, Web-Check, and CHCNAV P5E GNSS. New support for legacy Censys queries.
+- [August 23 - August 29, 2025](https://docs.vulncheck.com/raw/initial-access/2025-08-29.md): Three auth bypasses walk into a bar: New exploits and signatures on tap for CrushFTP, Commvault, FortiWeb, Tenda AC20 routers, and WordPress.
+- [August 30 - September 5, 2025](https://docs.vulncheck.com/raw/initial-access/2025-09-05.md): New exploits and detections for N-able N-Central, LibreNMS, BentoML, and Shenzhen Aitemi M300 devices.
+- [September 6 - September 12, 2025](https://docs.vulncheck.com/raw/initial-access/2025-09-12.md): New exploits, queries, and detections for N-Central, Docker Desktop, the FOG Project, and XWiki
+- [September 13 - September 19, 2025](https://docs.vulncheck.com/raw/initial-access/2025-09-19.md): Exploit and detection coverage for FreePBX, FortiSIEM, ARC Solo, and Django
+- [September 20 - September 26, 2025](https://docs.vulncheck.com/raw/initial-access/2025-09-26.md): Queries for new Cisco ASA and Cisco IOS / IOS XE vulnerabilities. New exploits for Cisco Smart Licensing Utility, Flowise AI, and FortiSIEM.
+- [September 27 - October 3, 2025](https://docs.vulncheck.com/raw/initial-access/2025-10-03.md): Offline scanning support for Censys Platform data. GoAnywhere MFT signatures and queries. New exploits (and more) for Cisco ASDM, Kerio Control, FortiSIEM, and GL.iNet routers.
+- [October 4 - October 10, 2025](https://docs.vulncheck.com/raw/initial-access/2025-10-10.md): Signatures for Cisco ASA and FTD. New exploits and detections for Oracle E-Business Suite, Dell UnityVSA, and LG Simple Editor.
+- [October 11 - October 17, 2025](https://docs.vulncheck.com/raw/initial-access/2025-10-17.md): New exploits and detections for Tenda AC15 AC1900 devices, Flowise, and LG Simple Editor. New version scanner and queries for F5 BIG-IP. New Redis signatures.
+- [October 18 - October 24, 2025](https://docs.vulncheck.com/raw/initial-access/2025-10-24.md): New exploits and detections for Gladinet CentreStack, IBM Operational Decision Manager, VICIdial, China Mobile Intelligent Home Gateways, JeecgBoot, and NETGEAR routers. Signatures for Windows Server Update Services.
+- [October 25 - October 31, 2025](https://docs.vulncheck.com/raw/initial-access/2025-10-31.md): Exploits and detections for Microsoft WSUS, FOG Project, Xdebug, and Spring Cloud Netflix Hystrix Dashboard. Fresh signatures for CVEs detected in the wild by VulnCheck canaries, plus a scanner for WatchGuard Fireware OS RCE.
+- [November 1 - November 7, 2025](https://docs.vulncheck.com/raw/initial-access/2025-11-07.md): Exploits and detections for Redis, Linksys E1700, Belkin F9K1122, and SAP SCIMono. Signatures for 5 exploited CVEs observed by VulnCheck Canaries.
+- [November 8 - November 14, 2025](https://docs.vulncheck.com/raw/initial-access/2025-11-14.md): New exploits for Adobe Commerce and Magento, Monsta FTP, React Metro Dev Server, and D-Link devices. Signatures and updated queries for Fortinet FortiWeb.
+- [November 15 - November 21, 2025](https://docs.vulncheck.com/raw/initial-access/2025-11-21.md): Exploits, detections, and more for Fortinet FortiWeb, Gladinet Triofox, F5 BIG-IP, and Repetier-Server
+- [November 22 - November 28, 2025](https://docs.vulncheck.com/raw/initial-access/2025-11-28.md): New exploits for FortiWeb, Taiga, RaspberryMatic and OpenCCU, and F5 BIG-IP. Signatures and queries for Oracle Identity Manager. IP Intelligence updated to track compromised ASUS routers.
+- [November 29 - December 5, 2025](https://docs.vulncheck.com/raw/initial-access/2025-12-05.md): Exploits, detections, and (much) more for React and Next.js RCE. Exploits and related artifacts for GeoServer, Oracle Identity Manager, XWiki, HexStrike AI MCP Server, and Flowise.
+- [December 6 - December 12, 2025](https://docs.vulncheck.com/raw/initial-access/2025-12-12.md): New React2Shell exploits and targets for frameworks beyond Next.js. New exploits and more for FreePBX, NETGEAR routers, and D-Link DNS-320 devices.
+- [December 13 - December 19, 2025](https://docs.vulncheck.com/raw/initial-access/2025-12-19.md): New exploits, detections, and queries for HPE OneView, ASUS RT-AX55 routers, and FreePBX. ASM queries for FortiCloud SSO login pages.
+- [January 3 - January 9, 2026](https://docs.vulncheck.com/raw/initial-access/2026-01-09.md): New exploits and more for n8n, XSpeeder and ASUS RT-AX55 devices, RustFS, and WordPress King Addons for Elementor. Plus, a belated exploit release note for MongoDB "MongoBleed" and ASM queries for Cisco ISE.
+- [January 10 - January 16, 2026](https://docs.vulncheck.com/raw/initial-access/2026-01-16.md): New exploits for Gogs, n8n, FreePBX, and ASUS RT-AX55 devices. Signatures for Fortinet FortiSIEM.
+- [January 17 - January 23, 2026](https://docs.vulncheck.com/raw/initial-access/2026-01-23.md): New exploits for Cisco Identity Services Engine, Fortinet FortiSIEM, and 7-zip. ASM queries for Cisco Unified CM.
+- [January 24 - January 30, 2026](https://docs.vulncheck.com/raw/initial-access/2026-01-30.md): New exploits for SmarterMail, Gladinet CentreStack, Livewire, telnetd, Fortinet FortiOS, and MindsDB.
+- [January 31 - February 6, 2026](https://docs.vulncheck.com/raw/initial-access/2026-02-06.md): A new go-exploit release, plus new exploits for Sitecore XP, Cisco ISE, SolarWinds Web Help Desk, n8n, and Fortinet FortiWLM.
+- [February 7 - February 13, 2026](https://docs.vulncheck.com/raw/initial-access/2026-02-13.md): New detection types. Windows LPE support in go-exploit. New coverage for BeyondTrust RS and PRA, Microsoft Management Console, N-able N-central, and SolarWinds Web Help Desk.
+- [February 14 - February 20, 2026](https://docs.vulncheck.com/raw/initial-access/2026-02-20.md): New exploits for Cisco Unified Communications, Microsoft Windows Notepad, WinRAR, sudo, Git, and Apache Spark.
+- [February 21 - February 27, 2026](https://docs.vulncheck.com/raw/initial-access/2026-02-27.md): ASM queries and a version check for Cisco SD-WAN Controller. New exploits for Microsoft SharePoint, MLflow, WAVLINK, and npm.
+- [February 28 - March 6, 2026](https://docs.vulncheck.com/raw/initial-access/2026-03-06.md): Rules and queries for Cisco Firewall Management Center and Cisco Catalyst SD-WAN. New exploits for Juniper PTX Series routers, Windows Storage, LightLLM, Flowise, and MajorDoMo.
+- [March 7 - March 13, 2026](https://docs.vulncheck.com/raw/initial-access/2026-03-13.md): So so so much Cisco
+- [March 14 - March 20, 2026](https://docs.vulncheck.com/raw/initial-access/2026-03-20.md): New exploits for Cisco FMC, Cisco SD-WAN, Fortinet FortiOS, Microsoft SharePoint, and Linksys E-Series routers
+- [March 21 - March 27, 2026](https://docs.vulncheck.com/raw/initial-access/2026-03-27.md): New exploits for Cisco SD-WAN, n8n, Langflow, and D-Link routers. ASM queries for Citrix NetScaler. New rules and PCAPs for 19 CVEs on VulnCheck KEV.
+- [March 28 - April 3, 2026](https://docs.vulncheck.com/raw/initial-access/2026-04-03.md): New exploits for Citrix NetScaler, Fortinet FortiClient, MCP-Atlassian, and Zyxel NAS devices. Queries for F5 BIG-IP APM. Signatures for Progress ShareFile (and many other CVEs).
+- [April 4 - April 10, 2026](https://docs.vulncheck.com/raw/initial-access/2026-04-10.md): New exploits for Fortinet FortiClient and FortiOS, FUXA, FreeScout, and Eclipse Che. New signatures and PCAPs, plus PCAP normalization.
+- [April 11 - April 17, 2026](https://docs.vulncheck.com/raw/initial-access/2026-04-17.md): New exploits for Microsoft Windows, Apache ActiveMQ, MetInfo CMS, and Windmill. New signatures and PCAPs for VulnCheck KEVs.
+- [April 18 - April 24, 2026](https://docs.vulncheck.com/raw/initial-access/2026-04-24.md): New exploits, queries, and detections for openDCIM, Windmill, Samba, and Langflow
+- [April 25 - May 1, 2026](https://docs.vulncheck.com/raw/initial-access/2026-05-01.md): New exploits for MLflow, FUXA, LILIN DVR devices, VMware vCenter Server, and Fortinet FortiOS. Queries and signatures for cPanel.
+- [May 2 - May 8, 2026](https://docs.vulncheck.com/raw/initial-access/2026-05-08.md): New exploits and more for cPanel, the Linux kernel, Apache ActiveMQ, Fortinet FortiSandbox, DrayTek Vigor, OpenCATS, OpenAM, and TP-Link Archer AX21 routers. ASM queries for Palo Alto Networks PAN-OS.
+- [May 9 - May 15, 2026](https://docs.vulncheck.com/raw/initial-access/2026-05-15.md): New exploits, detections, and more for ProFTPD, Ollama, WordPress, and TP-Link TL-WR940N routers. Queries and signatures for NGINX. Queries for Cisco Catalyst SD-WAN Controller.
+- [May 16 - May 22, 2026](https://docs.vulncheck.com/raw/initial-access/2026-05-22.md): New exploits for Cisco Catalyst SD-WAN, OpenRemote, Control Web Panel, Langflow, the Linux kernel, Apache bRPC, Fortinet FortiOS, and Apache CXF. ASM queries for Drupal.
+- [May 23 - May 29, 2026](https://docs.vulncheck.com/raw/initial-access/2026-05-29.md): New exploits and more for Drupal, Ghost CMS, the Linux kernel, Budibase, and GLPI.
+- [May 30 - June 5, 2026](https://docs.vulncheck.com/raw/initial-access/2026-06-05.md): New exploits for PAN-OS, Nginx UI MCP, Gradio, rclone, Hestia Control Panel, KTransformers, and Oracle E-Business Suite. ASM queries for Microsoft Windows Netlogon.
+- [June 6 - June 12, 2026](https://docs.vulncheck.com/raw/initial-access/2026-06-12.md): The Target List Probably Isn't a Coincidence
+- [June 13 - June 19, 2026](https://docs.vulncheck.com/raw/initial-access/2026-06-19.md): A VPN, a CI Server, a NAS, and an LMS Walk Into a Release Note
+- [June 20 - June 26, 2026](https://docs.vulncheck.com/raw/initial-access/2026-06-26.md): New exploits for FOSSBilling, Apache Solr, Langflow, Pyquokka FlightServer, ThemeFusion Avada Builder, PaperclipAI, and Apache HugeGraph
+- [June 27 - July 3, 2026](https://docs.vulncheck.com/raw/initial-access/2026-07-03.md): New exploits for JoomShaper SP Page Builder, Splunk, Cisco UCM, JCE, and many more
+- [July 4 - July 10, 2026](https://docs.vulncheck.com/raw/initial-access/2026-07-10.md): New exploits for Citrix NetScaler, Cisco SD-WAN Manager, NVIDIA GEN3C, LiteLLM, and many, many more. Fresh signatures for Broadcom VMware vCenter Server.
+- [July 11 - July 17, 2026](https://docs.vulncheck.com/raw/initial-access/2026-07-17.md): New exploits for Microsoft Windows, Monsta FTP, Progress ShareFile, 9Router, FUXA, Apache Zeppelin, and a host of WordPress plugins. Signatures and queries for SonicWall SMA1000.
+- [July 18 - July 24, 2026](https://docs.vulncheck.com/raw/initial-access/2026-07-24.md): New exploits for WordPress, Rejetto HFS, Kestra, Hugging Face Smolagents, Oracle E-Business Suite, and more.
+- [July 25 - July 31, 2026](https://docs.vulncheck.com/raw/initial-access/2026-07-31.md): New exploits and detections for Check Point, Microsoft SharePoint, Alibaba Fastjson, Microsoft Windows, vBulletin, the Linux kernel, and much more.
+- [August 1 - August 7, 2026](https://docs.vulncheck.com/raw/initial-access/2026-08-07.md): New exploits and detections for backdoored Zbtlink routers, Ruby on Rails, vCenter Server x2, Microsoft Windows x2, and more.
+- [August 8 - August 14, 2026](https://docs.vulncheck.com/raw/initial-access/2026-08-14.md): New exploits for Gladinet CentreStack, JetBrains TeamCity, F5 BIG-IP, Metabase, Gitea, Langflow, MLflow, and more.
+- [August 15 - August 21, 2026](https://docs.vulncheck.com/raw/initial-access/2026-08-21.md): New exploits for Microsoft SharePoint, Metabase, ColdFusion, SPIP, LiteLLM, D-Link devices, and more. Signatures for Cisco IOS and IOS XE.
+- [August 22 - August 28, 2026](https://docs.vulncheck.com/raw/initial-access/2026-08-28.md): New exploits for DARKLANTERN, SPEAKINGSTONE, Windows Defender, Zimbra Collaboration, GeoServer, Flowise, Langflow, and more.

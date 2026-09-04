@@ -1,0 +1,165 @@
+generated: '2026-09-04'
+method: derived
+source: mcp/vulncheck-mcp.yml + openapi/vulncheck-api-openapi.json
+note: >-
+  The VulnCheck OpenAPI declares NO operationIds on any of its 521 operations, so `rest:` rows
+  below identify operations by METHOD + PATH rather than by operationId. This is a real gap in
+  the contract, not a shortcut here — see conformance/vulncheck-conformance.yml. The MCP server
+  is stdio-only, so tool inputSchemas could not be introspected live; bindings are mapped by
+  name and by the provider's own published tool descriptions, and confidence is set accordingly.
+surfaces:
+  openapi:
+    file: openapi/vulncheck-api-openapi.json
+    base: https://api.vulncheck.com/v3
+    operations: 521
+    gated: true
+    note: The spec itself is served anonymously at /v3/openapi; every other operation requires a Bearer token.
+  mcp:
+    url: null
+    mode: local-stdio
+    package: ghcr.io/vulncheck-oss/mcp
+    gated: true
+    note: No remote endpoint exists, so tools/list could not be run anonymously.
+  graphql:
+    url: null
+    note: VulnCheck publishes no GraphQL surface.
+crosswalk:
+- tool: list_indices
+  category: indices
+  rest: ['GET /index']
+  binding: direct
+  confidence: high
+- tool: search_index
+  category: indices
+  rest: ['GET /index/{name}']
+  binding: parameterized
+  confidence: high
+  note: >-
+    One tool fronts all 508 per-index operations. The REST surface spends 508 of its 521
+    operations on what MCP exposes as a single tool with an index-name argument.
+- tool: search_cve
+  category: cve
+  rest: ['GET /search/cve']
+  binding: direct
+  confidence: high
+- tool: get_cpe_cves
+  category: cpe-purl
+  rest: ['GET /cpe']
+  binding: direct
+  confidence: high
+- tool: search_cpe
+  category: cpe-purl
+  rest: ['GET /search/cpe']
+  binding: direct
+  confidence: high
+- tool: search_purls
+  category: cpe-purl
+  rest: ['POST /purls', 'GET /purl']
+  binding: direct
+  confidence: high
+  note: The tool accepts one or more PURLs; REST splits this across a single-PURL GET and a bulk POST.
+- tool: list_backups
+  category: backups
+  rest: ['GET /backup']
+  binding: direct
+  confidence: high
+- tool: get_backup
+  category: backups
+  rest: ['GET /backup/{index}']
+  binding: direct
+  confidence: high
+- tool: get_rules
+  category: threat-intel
+  rest: ['GET /rules/initial-access/{type}']
+  binding: direct
+  confidence: high
+- tool: list_c2_hostnames
+  category: threat-intel
+  rest: ['GET /pdns/vulncheck-c2']
+  binding: direct
+  confidence: high
+- tool: list_c2_tags
+  category: threat-intel
+  rest: ['GET /tags/vulncheck-c2']
+  binding: direct
+  confidence: high
+  note: >-
+    Named "tags" but returns C2 IP addresses, matching the REST /tags/vulncheck-c2 operation.
+- tool: search_target_intel
+  category: products
+  rest: ['GET /index/target-intel']
+  binding: specialized
+  confidence: medium
+  note: A product-specific wrapper over one index, exposing that index's filters directly.
+- tool: search_ip_intel
+  category: products
+  rest: ['GET /index/ipintel-3d', 'GET /index/ipintel-10d', 'GET /index/ipintel-30d', 'GET /index/ipintel-90d']
+  binding: specialized
+  confidence: medium
+  note: The tool's `window` argument selects among the four rolling-window REST indices.
+- tool: search_curated_exploits
+  category: products
+  rest: ['GET /index/exploits', 'GET /index/vulncheck-kev', 'GET /index/cisa-kev']
+  binding: specialized
+  confidence: medium
+  note: >-
+    Filters on exploit maturity, validation level and "either KEV catalogue"; mapped by
+    semantics to the exploits index and the two KEV indices. Not verified against a live
+    tools/list.
+- tool: search_canaries
+  category: products
+  rest: []
+  binding: none
+  confidence: low
+  note: >-
+    The published tool description names a `vulncheck-canaries` index, but no /index/canary*
+    path exists in the v3 OpenAPI. Either the index is entitlement-gated out of the public
+    spec or the tool reaches a surface the spec does not describe. Recorded as unresolved
+    rather than guessed — see mcp_only[].
+mcp_only:
+- tool: describe_index
+  reason: >-
+    Reports an index's accepted filters and size. No REST operation returns index metadata of
+    this shape; /index returns names and endpoint links only. Composite/introspective.
+- tool: search_docs
+  reason: Searches docs.vulncheck.com, not the v3 API. No REST equivalent.
+- tool: get_doc
+  reason: Fetches raw documentation markdown from docs.vulncheck.com. No REST equivalent.
+- tool: identify_component
+  reason: >-
+    Resolves vendor/product/version to best-match CPE and PURL with confidence levels. No REST
+    operation performs this reconciliation; /search/cpe returns matches without confidence.
+- tool: list_recent_advisories
+  reason: >-
+    A cross-feed digest over a time window, reporting which feeds a page came from and flagging
+    feed dominance. Composed across advisory indices; no single REST operation returns it.
+- tool: v4_list_advisories
+  reason: v4 advisory feeds are not described in the v3 OpenAPI.
+- tool: v4_search_advisory
+  reason: v4 advisory feeds are not described in the v3 OpenAPI.
+- tool: v4_list_advisory_backups
+  reason: v4 advisory backups are not described in the v3 OpenAPI.
+- tool: v4_get_advisory_backup
+  reason: v4 advisory backups are not described in the v3 OpenAPI.
+- tool: search_canaries
+  reason: No matching index path in the v3 OpenAPI (see crosswalk note).
+rest_only:
+- operation: 'GET /entitlements'
+  reason: Account entitlement inspection; no MCP tool exposes it.
+- operation: 'GET /openapi'
+  reason: Spec self-service; not an intelligence operation.
+- operation: 'GET /index/{name} (494 of 508 named indices)'
+  reason: >-
+    Reachable through search_index by name, but only the 14 indices named in the crosswalk rows
+    above have a dedicated tool. Not a capability gap — a granularity difference.
+coverage:
+  mcp_tools: 24
+  mapped_to_rest: 14
+  mcp_only: 10
+  rest_operations: 521
+  rest_operations_with_a_tool: 521
+  note: >-
+    Every REST operation is reachable from MCP (search_index covers all 508 index operations),
+    but 10 of 24 tools — the whole v4 advisory family, documentation search, component
+    identification and the advisory digest — have NO public REST equivalent. The MCP surface is
+    the larger of the two, which is the opposite of the usual shape and the main finding here.

@@ -64,5 +64,59 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-VulnCheck is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+VulnCheck is an exploit and vulnerability intelligence company. Its Exploit & Vulnerability
+Intelligence platform enriches CVE records ahead of NIST NVD, publishes the VulnCheck KEV
+catalog, and delivers exploit maturity, threat-actor, initial-access, IP and target
+intelligence as machine-readable data.
+
+- Website: https://www.vulncheck.com/
+- Documentation: https://docs.vulncheck.com/
+- API reference: https://docs.vulncheck.com/api
+- Status: https://status.vulncheck.com/
+- GitHub: https://github.com/vulncheck-oss
+
+## API surface
+
+| | |
+|---|---|
+| Base URL | `https://api.vulncheck.com/v3` |
+| Contract | OpenAPI 3.1.0, fetched verbatim from `https://api.vulncheck.com/v3/openapi` (served anonymously) |
+| Operations | 521 — 520 `GET` plus one bulk-lookup `POST /purls`. The API is read-only. |
+| Schemas | 1,409 |
+| Auth | VulnCheck API token as `Authorization: Bearer`, `?token=`, or a `token` cookie |
+| Rate limit | 1,000 requests/minute on Community accounts; HTTP 429, no rate-limit headers |
+| Events | None — no webhooks, no streaming, no AsyncAPI |
+
+508 of the 521 operations are `GET /index/{name}`, one per named VulnCheck data feed.
+
+## Agent surface
+
+VulnCheck ships an unusually complete agent surface for a company its size:
+
+- **MCP server** — `github.com/vulncheck-oss/mcp`, 24 tools. **Local stdio only**; there is no
+  hosted endpoint. See `mcp/vulncheck-mcp.yml`.
+- **Agent Skill** — VulnCheck publishes its own Claude Code skill at
+  `github.com/vulncheck-oss/agent-tools`. Saved verbatim as `skills/vulncheck-cli.md`.
+- **Agentic CLI contract** — from v1.0.0 the CLI documents a global `--json` flag, meaningful
+  exit codes, a structured error envelope and a `vulncheck commands` capability dump.
+- **llms.txt** — `https://docs.vulncheck.com/llms.txt`, 90KB, complete.
+
+10 of the 24 MCP tools have no public REST equivalent — the whole v4 advisory family,
+documentation search, component identification and the advisory digest. The MCP surface is
+larger than the REST one, which is the reverse of the usual shape. See
+`mcp/vulncheck-tool-crosswalk.yml`.
+
+## Notable gaps
+
+- **No `operationId` on any of the 521 operations.** Every generated SDK must synthesize method
+  names from paths, and no artifact here can bind to a stable operation identifier.
+- **No rate-limit response headers.** A client discovers the ceiling by hitting it.
+- **No deprecation or sunset policy**, and no published SLA, for a product built on 490+ named
+  indices that are added continuously.
+- **No trust center and no named certification** (SOC 2, ISO 27001, FedRAMP) published anywhere
+  on the estate.
+- **No public pricing.** Only the free Community tier's terms are published.
+- **Error bodies typed as bare `string`** on every operation, and 429 declared on none of them.
+
+Each is recorded with evidence in the artifact directories, and the fixable spec ones are
+captured as an OpenAPI Overlay in `overlays/`.

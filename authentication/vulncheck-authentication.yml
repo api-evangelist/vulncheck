@@ -1,0 +1,88 @@
+generated: '2026-09-04'
+method: searched
+source: https://docs.vulncheck.com/getting-started/api-tokens
+docs: https://docs.vulncheck.com/getting-started/api-tokens
+derived_from: openapi/vulncheck-api-openapi.json
+api: VulnCheck API v3
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+  - cookie
+  oauth2: false
+  openid_connect: false
+  mutual_tls: false
+  scopes: none
+schemes:
+- name: Bearer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  format: 'Authorization: Bearer <token>'
+  declared_in_spec: true
+  sources:
+  - openapi/vulncheck-api-openapi.json
+  - https://docs.vulncheck.com/getting-started/api-tokens
+- name: token (query parameter)
+  type: apiKey
+  in: query
+  parameter: token
+  format: '?token=<token>'
+  declared_in_spec: false
+  documented: true
+  sources:
+  - https://docs.vulncheck.com/getting-started/api-tokens
+  note: >-
+    Documented as a convenience for testing tokens and browsing endpoints in a browser. Real
+    and supported, but a credential in a URL is recorded in proxy logs, browser history and
+    Referer headers. Recorded because VulnCheck publishes it, not because it is advisable.
+- name: token (cookie)
+  type: apiKey
+  in: cookie
+  parameter: token
+  format: 'Cookie: token=<token>'
+  declared_in_spec: false
+  documented: true
+  sources:
+  - https://docs.vulncheck.com/getting-started/api-tokens
+  note: This is how VulnCheck's own web portal authenticates against the same API.
+token:
+  kind: long-lived API token
+  shared_with: The same token authenticates both the API and the web portal.
+  issue: https://console.vulncheck.com/settings/tokens
+  issue_flow: Tokens & SSH Keys page -> Create Token -> label + icon. The value is shown ONCE.
+  rotation: Self-service create and remove; no automated rotation endpoint.
+  expiry: A token unused for 30 days expires and must be recreated.
+  revocation: Remove the token from the Tokens & SSH Keys page, or via `vulncheck token remove`.
+  env_var: VC_TOKEN
+  cli: vulncheck auth login (browser or paste-token)
+failure:
+  status: 401
+  body: '{"error":true,"errors":["unauthorized"]}'
+  www_authenticate: false
+  method: probed
+  probe:
+    url: https://api.vulncheck.com/v3/index/a10
+    status: 401
+    note: >-
+      No WWW-Authenticate challenge is returned, so a client cannot discover the required
+      scheme from the response. The 401 body is also typed as a bare `string` in the spec.
+anonymous_surface:
+- url: https://api.vulncheck.com/v3/openapi
+  status: 200
+  note: The OpenAPI document itself is the only operation reachable without a token.
+gaps:
+- id: no-global-security-requirement
+  detail: >-
+    The OpenAPI declares no top-level `security` and applies the Bearer scheme to no operation,
+    so a generated client reads all 521 operations as anonymous when 520 of them return 401.
+    Captured as a correction in overlays/vulncheck-api-overlay.yaml.
+- id: undeclared-transports
+  detail: The query-parameter and cookie transports are documented but absent from the spec.
+- id: no-scopes
+  detail: >-
+    There is no scope or permission model. Access is all-or-nothing per token, differentiated
+    only by the account's entitlements (GET /entitlements returns a map of roles to
+    entitlements). An agent cannot be issued a narrowed credential.

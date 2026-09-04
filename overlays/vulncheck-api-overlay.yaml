@@ -1,0 +1,127 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements to the VulnCheck API v3 OpenAPI
+  version: 1.0.0
+extends: ../openapi/_original/vulncheck-api-openapi-original.json
+x-generated: '2026-09-04'
+x-method: generated
+x-source: >-
+  Derived from openapi/_original/vulncheck-api-openapi-original.json (fetched verbatim from
+  https://api.vulncheck.com/v3/openapi on 2026-09-04) plus
+  https://docs.vulncheck.com/getting-started/api-tokens,
+  https://docs.vulncheck.com/community/rate-limits, and live header probes.
+x-note: >-
+  Every action below adds information the provider publishes ELSEWHERE but did not put in the
+  spec. Nothing here invents behaviour. The original document is never mutated; the working
+  copy at openapi/vulncheck-api-openapi.json carries only action 1 (the absolute server URL)
+  so that generated clients resolve against the documented host.
+actions:
+- target: $.servers
+  description: >-
+    The published spec declares a RELATIVE server, "/v3", which cannot be resolved by any
+    client that did not fetch the document from the API host itself. Replace it with the
+    absolute base every VulnCheck code sample and SDK uses.
+  update:
+  - url: https://api.vulncheck.com/v3
+    description: VulnCheck API v3
+- target: $.components.securitySchemes.Bearer
+  description: >-
+    The scheme is declared as a bare apiKey in the Authorization header with no description.
+    Document the token's provenance, its three accepted transports and its expiry, all of which
+    are published at https://docs.vulncheck.com/getting-started/api-tokens.
+  update:
+    description: >-
+      VulnCheck API token, sent as "Authorization: Bearer <token>". The same token is also
+      accepted as a `token` query parameter and as a `token` cookie. Issue and revoke tokens at
+      https://console.vulncheck.com/settings/tokens. A token unused for 30 days expires. The
+      CLI and SDKs read it from the VC_TOKEN environment variable.
+- target: $.security
+  description: >-
+    The spec declares no top-level security requirement, so a generated client reads the API as
+    anonymous. In fact every operation except GET /v3/openapi returns 401 without a token
+    (probed 2026-09-04). Apply the Bearer scheme globally.
+  update:
+  - Bearer: []
+- target: $.info
+  description: Add contact and license context the provider publishes on its site.
+  update:
+    x-support-url: https://www.vulncheck.com/contact
+    x-status-page: https://status.vulncheck.com/
+    x-changelog: https://docs.vulncheck.com/changelog
+- target: $.info.description
+  description: >-
+    Expand the one-line description into what the API actually covers, so a catalog or agent
+    reading only the spec understands the surface.
+  update: >-
+    Version 3 of the VulnCheck API — read-only access to VulnCheck exploit and vulnerability
+    intelligence. 508 named indices are individually addressable at /index/{name}, alongside
+    CVE search, CPE and PURL lookup, initial-access detection rules (Suricata and Snort),
+    VulnCheck C2 hostname and IP feeds, account entitlements, and pre-signed offline backup
+    downloads. Authentication is a VulnCheck API token. Community accounts are limited to
+    1,000 requests per minute.
+- target: $.tags
+  description: >-
+    The document declares an EMPTY top-level tags array while tagging all 521 operations, so
+    no tag carries a description. Declare the tag groups the operations already use.
+  update:
+  - name: Indices
+    description: Browse and query VulnCheck's 508 named data feeds.
+  - name: Search
+    description: Cross-index CVE search and CPE component search.
+  - name: Component Identity
+    description: CPE and PURL lookups returning associated CVEs.
+  - name: Threat Intelligence
+    description: VulnCheck C2 hostname and IP feeds, and initial-access detection rules.
+  - name: Backups
+    description: Pre-signed download links for offline index archives.
+  - name: Account
+    description: Entitlement inspection and specification self-service.
+- target: $.paths.*.*.responses
+  description: >-
+    HTTP 429 is documented at https://docs.vulncheck.com/community/rate-limits with a concrete
+    body, but is declared on NONE of the 521 operations. Add it so generated clients handle
+    exhaustion rather than treating it as an unknown status.
+  update:
+    '429':
+      description: >-
+        Too Many Requests. Community accounts are limited to 1,000 requests per minute across
+        all endpoints. No Retry-After or RateLimit-* header is returned; back off exponentially.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+              errors:
+                type: array
+                items:
+                  type: string
+          example:
+            error: true
+            errors:
+            - Rate limit exceeded. Please try again later.
+x-unfixable-gaps:
+  note: >-
+    Recorded rather than patched — these need a change by VulnCheck, and an overlay that
+    invented values for them would be fabrication.
+  gaps:
+  - id: missing-operation-ids
+    detail: >-
+      None of the 521 operations declares an operationId. Every generated SDK must synthesize
+      method names from paths, and no artifact in this repo (including the MCP tool crosswalk)
+      can bind to a stable operation identifier. This is the single highest-value fix available
+      to VulnCheck on this contract.
+  - id: untyped-error-bodies
+    detail: >-
+      The 400/401/404/500 responses are typed as a bare `string` on every operation, though the
+      real body is the {"error":true,"errors":[...]} envelope. A shared components.schemas.Error
+      referenced from each would make failures machine-readable.
+  - id: untyped-search-source
+    detail: >-
+      index.CveSearchHit.source is typed `object` with the description "Structure varies by
+      index" — the payload a /search/cve caller most needs described is the one left undescribed.
+  - id: no-examples
+    detail: No operation carries a response example, so no example can be lifted into examples/.
+  - id: under-declared-401
+    detail: 401 is declared on 1 of 521 operations while applying to 520 of them.

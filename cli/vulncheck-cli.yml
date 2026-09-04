@@ -1,0 +1,91 @@
+generated: '2026-09-04'
+method: searched
+source: https://docs.vulncheck.com/tools/cli + https://github.com/vulncheck-oss/cli
+name: VulnCheck CLI
+binary: vulncheck
+official: true
+repository: https://github.com/vulncheck-oss/cli
+docs: https://docs.vulncheck.com/tools/cli
+examples: https://docs.vulncheck.com/tools/cli/examples
+version: v1.1.0
+released: '2026-07-24'
+platforms: [macos, linux, windows]
+install:
+- method: script
+  os: macos-linux
+  command: curl -sSL https://raw.githubusercontent.com/vulncheck-oss/cli/main/install.sh | bash
+- method: script
+  os: windows
+  command: iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/vulncheck-oss/cli/main/install.ps1'))
+auth:
+  command: vulncheck auth login
+  modes: [browser, paste-token]
+  env: VC_TOKEN
+commands:
+- group: auth
+  commands: [login, logout, status]
+  purpose: Authenticate the CLI against a VulnCheck account.
+- group: token
+  commands: [list, create, remove, browse]
+  purpose: Manage API tokens without leaving the terminal.
+- group: indices
+  commands: [list, browse]
+  purpose: Discover the 490+ named VulnCheck indices.
+- group: index
+  commands: [list, browse]
+  purpose: Query one index by name.
+- group: backup
+  commands: [url, download]
+  purpose: Retrieve pre-signed offline backup archives for an index.
+- group: cpe
+  commands: []
+  purpose: Return CVEs associated with a CPE 2.3 string. Accepts --from-file for batch input.
+- group: purl
+  commands: []
+  purpose: Return vulnerabilities for a Package URL. Accepts --from-file for batch input.
+- group: tag
+  commands: []
+  purpose: Look up VulnCheck C2 IP tags. Accepts --from-file.
+- group: pdns
+  commands: []
+  purpose: Look up VulnCheck C2 hostnames for protective DNS. Accepts --from-file.
+- group: rule
+  commands: []
+  purpose: Retrieve initial-access detection rules (Suricata, Snort).
+- group: scan
+  commands: []
+  purpose: Scan a local project directory or an SBOM (--sbom-input-file) for vulnerable dependencies.
+- group: offline
+  commands: [sync, status, cpe, purl, ipintel]
+  purpose: Run lookups against locally synced data with no network round trip.
+- group: version
+  commands: []
+  purpose: Print the CLI version. Supports --json.
+- group: upgrade
+  commands: [latest, status]
+  purpose: Self-update the binary.
+- group: commands
+  commands: []
+  purpose: >-
+    Dump the whole command tree as JSON for capability discovery — the machine-readable
+    alternative to parsing --help.
+agentic_contract:
+  since: 1.0.0
+  docs: https://github.com/vulncheck-oss/cli?tab=readme-ov-file#agentic--scripted-usage
+  note: >-
+    From v1.0.0 the CLI ships an explicit stable contract for scripts and AI agents, which is
+    unusual enough to be worth recording as its own agent surface.
+  json_flag: --json is global on every command; stdout carries only the JSON payload, all
+    progress/spinner/warning output goes to stderr.
+  no_interactive: --no-interactive refuses prompts; implied by --json, a non-TTY stdout, or CI=1.
+    Interactive commands then fail fast with exit 2.
+  error_envelope: '{"schema_version":1,"error":{"code":"...","message":"...","http_status":...}}'
+  exit_codes:
+    0: success
+    1: internal
+    2: validation
+    3: auth
+    4: not_found
+    5: rate_limited
+    6: network
+    130: cancelled

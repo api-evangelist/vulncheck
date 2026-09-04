@@ -1,0 +1,55 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  https://www.vulncheck.com/community (200), https://docs.vulncheck.com/community (200),
+  https://docs.vulncheck.com/community/rate-limits (200),
+  https://www.vulncheck.com/pricing (404), https://www.vulncheck.com/plans (404)
+plan_count: 1
+note: >-
+  VulnCheck publishes NO pricing page. https://www.vulncheck.com/pricing and
+  https://www.vulncheck.com/plans both return 404, and the homepage carries no pricing, plan or
+  "start free" language — the commercial path is a demo request at
+  https://www.vulncheck.com/contact. The one tier whose terms are actually published is the
+  free Community tier, recorded below. Paid tiers exist and are referenced in the rate-limit
+  docs ("consider upgrading to a paid VulnCheck plan"), but no name, price, quota or overage is
+  published for any of them, so none is listed here rather than invented.
+plans:
+- name: Community
+  price: 0
+  currency: USD
+  billing_period: none
+  public: true
+  signup: https://console.vulncheck.com/register
+  docs: https://docs.vulncheck.com/community
+  included:
+  - VulnCheck KEV — known exploited vulnerabilities catalog backed by hundreds of sources
+  - NVD++ — NIST NVD from a single source, enriched with VulnCheck CPE
+  - VulnCheck XDB — index of exploit proof-of-concept code in Git repositories
+  limits:
+  - scope: per-account
+    limit: 1000
+    window: 1 minute
+    unit: requests
+    applies_to: all API endpoints
+    source: https://docs.vulncheck.com/community/rate-limits
+  overage: none — requests over the limit are rejected with HTTP 429, not billed
+  cross_ref: rate-limits/vulncheck-rate-limits.yml
+unpublished_tiers:
+  exists: true
+  evidence:
+  - url: https://docs.vulncheck.com/community/rate-limits
+    quote: >-
+      "If you need higher rate limits for your use case, consider upgrading to a paid VulnCheck
+      plan. Paid plans offer: Increased rate limits, Access to additional datasets, Premium
+      support, Enhanced features."
+  - url: https://api.vulncheck.com/v3/entitlements
+    note: >-
+      The API exposes a GET /entitlements operation, confirming that datasets are gated by a
+      per-account entitlement model. The entitlement tiers themselves are not published.
+  named_benefits:
+  - Increased rate limits
+  - Access to additional datasets
+  - Premium support
+  - Enhanced features
+  price: not published
+  contact: https://www.vulncheck.com/contact

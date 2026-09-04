@@ -1,0 +1,148 @@
+generated: '2026-09-04'
+method: derived
+source: >-
+  openapi/vulncheck-api-openapi.json, https://docs.vulncheck.com/getting-started/api-tokens,
+  well-known/vulncheck-security.txt, https://www.vulncheck.com/vulnerability-disclosure-policy,
+  https://github.com/vulncheck-oss/mcp/blob/main/docs/tools.md
+api: VulnCheck API v3
+conformance:
+- id: openapi-3.1
+  conforms: true
+  evidence: 'openapi/vulncheck-api-openapi.json — "openapi": "3.1.0", 521 paths, 1409 component schemas, served anonymously at https://api.vulncheck.com/v3/openapi'
+- id: oauth2
+  conforms: false
+  evidence: 'The only securityScheme is an apiKey named "Bearer" carried in the Authorization header. No OAuth flows, no scopes, no /.well-known/oauth-authorization-server (404 on all four hosts).'
+- id: oidc
+  conforms: false
+  evidence: '/.well-known/openid-configuration returns 404 on vulncheck.com, www.vulncheck.com, api.vulncheck.com and docs.vulncheck.com.'
+- id: rfc6750-bearer
+  conforms: partial
+  evidence: >-
+    Uses the RFC 6750 Authorization: Bearer transport form, but the credential is a
+    long-lived API token rather than an OAuth access token, and the 401 carries no
+    WWW-Authenticate challenge (probed 2026-09-04 against https://api.vulncheck.com/v3/index/a10).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Errors are returned as {"error":true,"errors":[...]} with content-type application/json, not application/problem+json. See errors/vulncheck-problem-types.yml.'
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: 'https://www.vulncheck.com/.well-known/security.txt (HTTP 200) with Canonical, Contact, Policy, Preferred-Languages and Expires fields.'
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: 'No Sunset or Deprecation header documented or observed; no deprecation policy published. See lifecycle/vulncheck-lifecycle.yml.'
+- id: rfc8615-well-known
+  conforms: partial
+  evidence: 'security.txt is served on www.vulncheck.com. /.well-known/api-catalog returns 404 on every host. See well-known/vulncheck-well-known.yml.'
+- id: w3c-trace-context
+  conforms: true
+  evidence: 'Every live response from api.vulncheck.com carries a W3C `traceparent` header (probed 2026-09-04 on both a 200 and a 401).'
+- id: cursor-pagination
+  conforms: true
+  evidence: 'paginate.Pagination declares cursor, first_item, last_item, limit, matches, max_pages; index operations accept start_cursor and cursor. See conventions/vulncheck-conventions.yml.'
+- id: idempotency
+  conforms: na
+  evidence: 'Read-only API — all 521 operations are reads (520 GET plus one bulk-lookup POST). No mutating surface to protect.'
+- id: mcp
+  conforms: true
+  evidence: 'First-party MCP server at https://github.com/vulncheck-oss/mcp, 24 published tools, distributed as release binaries and ghcr.io/vulncheck-oss/mcp. Local stdio only — no remote endpoint. See mcp/vulncheck-mcp.yml.'
+- id: agent-skills
+  conforms: true
+  evidence: 'VulnCheck publishes a Claude Code Agent Skill at https://github.com/vulncheck-oss/agent-tools (skills/vulncheck-cli/SKILL.md), declared in .claude-plugin/marketplace.json under owner VulnCheck / support@vulncheck.com.'
+- id: llms-txt
+  conforms: true
+  evidence: 'https://docs.vulncheck.com/llms.txt (HTTP 200, 90,748 bytes) enumerating every documentation page in En, Jp and Kr plus the full changelog and initial-access archives.'
+- id: a2a-agent-card
+  conforms: false
+  evidence: 'No agent card. /.well-known/agent-card.json and /.well-known/agent.json return 404 on www.vulncheck.com, api.vulncheck.com and docs.vulncheck.com; the vulncheck.com apex answers 200 with the SPA HTML shell for every path, which is not a card.'
+- id: asyncapi
+  conforms: na
+  evidence: 'No event, streaming or webhook surface exists. The word "webhook" appears nowhere in the 90KB docs llms.txt; data is delivered by polling the REST indices or by downloading offline backup archives.'
+domain_standards:
+  note: >-
+    VulnCheck's market is vulnerability intelligence, and the contract declares the sector's
+    identifier and exchange standards directly in its parameters and schemas rather than only
+    claiming them in marketing prose. These are the standards a buyer already speaks, and
+    conformance means no bespoke connector is needed.
+  standards:
+  - id: cve
+    name: CVE (Common Vulnerabilities and Exposures)
+    conforms: true
+    evidence: >-
+      `cve` is a declared query parameter on the index operations and the sole parameter of
+      GET /search/cve (openapi/vulncheck-api-openapi.json, paths./search/cve.get.parameters).
+  - id: cpe-2.3
+    name: CPE 2.3 (Common Platform Enumeration, NIST IR 7695)
+    conforms: true
+    evidence: >-
+      GET /cpe takes a `cpe` parameter documented as "a specific NIST CPE"; GET /search/cpe
+      decomposes it into the CPE 2.3 attribute set part/vendor/product/version. Schemas
+      advisory.CPEMatch, advisory.CPENode, advisory.CustomCPE and the vc-cpe-dictionary and
+      nvd-cpe-dictionary indices carry the dictionary itself.
+  - id: purl
+    name: Package URL (PURL) specification
+    conforms: true
+    evidence: >-
+      GET /purl and POST /purls are PURL-native; purl.PackageURLJSON models the spec's
+      type/namespace/name/version/qualifiers/subpath fields exactly, and
+      purl.QualifierJSON models its key/value qualifiers.
+  - id: nvd-cve-json
+    name: NVD CVE JSON 2.0 / NVD++
+    conforms: true
+    evidence: >-
+      The nist-nvd, nist-nvd2, vulncheck-nvd and vulncheck-nvd2 indices are addressable
+      operations in the spec, and the community docs state NVD++ provides
+      "access from a single source to NIST NVD (enriched w/ VulnCheck CPE)"
+      (https://docs.vulncheck.com/community/nist-nvd).
+  - id: kev
+    name: Known Exploited Vulnerabilities catalog (CISA KEV / VulnCheck KEV)
+    conforms: true
+    evidence: >-
+      GET /index/cisa-kev and GET /index/vulncheck-kev are both declared operations; the
+      published KEV schema is documented at
+      https://docs.vulncheck.com/community/vulncheck-kev/schema.
+  - id: iava
+    name: IAVA (US DoD Information Assurance Vulnerability Alert)
+    conforms: true
+    evidence: '`iava` is a declared query parameter on the index operations.'
+  - id: suricata-snort
+    name: Suricata and Snort detection rule formats
+    conforms: true
+    evidence: >-
+      GET /rules/initial-access/{type} serves detection rules with `type` restricted to
+      suricata and snort; the emerging-threats-snort index is a declared operation.
+  - id: ghsa-osv
+    name: GHSA / OSV advisory identifiers
+    conforms: true
+    evidence: >-
+      github-security-advisories, osv, pypa-advisories, rustsec-advisories and
+      gitlab-advisories-community are declared index operations; the MCP v4_search_advisory
+      tool is documented as the path to GHSA records for npm, PyPI and Go.
+  - id: epss
+    name: EPSS (Exploit Prediction Scoring System)
+    conforms: true
+    evidence: 'The epss index was added in the 2023-10-11 release notes and is a declared index operation.'
+  - id: mitre-attack
+    name: MITRE ATT&CK
+    conforms: true
+    evidence: 'The mitre-attack-cve index was added in the 2023-12-05 release notes and is a declared index operation.'
+compliance:
+  certifications_published: false
+  trust_center: false
+  note: >-
+    No trust center and no named certification. https://www.vulncheck.com/trust,
+    /compliance and /legal all return 404, trust.vulncheck.com and security.vulncheck.com do
+    not resolve, and the homepage carries no SOC 2, ISO 27001, FedRAMP, HIPAA or GDPR mark.
+    For a security-intelligence vendor selling into enterprise and government, this is the
+    most conspicuous absence on the estate. Recorded as a measured gap, not an inference about
+    the company's actual security posture.
+  probed:
+  - url: https://www.vulncheck.com/trust
+    status: 404
+  - url: https://www.vulncheck.com/compliance
+    status: 404
+  - url: https://www.vulncheck.com/legal
+    status: 404
+  - url: https://trust.vulncheck.com/
+    status: 000
+  - url: https://security.vulncheck.com/
+    status: 000

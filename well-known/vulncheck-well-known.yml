@@ -1,0 +1,87 @@
+generated: '2026-09-04'
+method: probed
+source: live GET probes of the RFC 8615 named path list on every host in this record
+note: >-
+  vulncheck.com (apex, no www) is a single-page-app catch-all that answers HTTP 200 with the
+  marketing HTML shell for every /.well-known/* path, including agent-card.json and
+  ai-plugin.json. Those are recorded as html-shell, not as documents. The only real document
+  served anywhere on the estate is the RFC 9116 security.txt on www.vulncheck.com.
+hosts:
+- host: www.vulncheck.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: vulncheck-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: vulncheck.com
+  note: SPA catch-all — every 200 below returned the marketing HTML shell, not a document.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: html-shell
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent.json
+    status: 200
+    result: html-shell
+- host: api.vulncheck.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: docs.vulncheck.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404

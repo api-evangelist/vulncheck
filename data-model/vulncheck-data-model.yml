@@ -1,0 +1,144 @@
+generated: '2026-09-04'
+method: derived
+source: openapi/vulncheck-api-openapi.json
+api: VulnCheck API v3
+note: >-
+  Derived from the spec's components.schemas ($ref links and id-reference fields). The graph is
+  unusual and the shape is the finding: 786 of 1,409 schemas sit under the `advisory.*`
+  namespace, one per upstream data source (advisory.A10, advisory.GitHubExploit,
+  advisory.CNVDFlaw, ...), and 484 more are `render.ResponseWithMetadata-<payload>-<meta>`
+  envelope permutations generated from Go generics. There is no small core object model with
+  relationships between entities; there is one wrapper, one pagination block, and several
+  hundred source-shaped record types keyed on shared IDENTIFIERS rather than on foreign keys.
+schema_namespaces:
+- prefix: advisory
+  count: 786
+  role: One record type per upstream advisory, exploit or intelligence source.
+- prefix: render
+  count: 484
+  role: Generic response envelopes — render.Response and render.ResponseWithMetadata specialised per payload and metadata type.
+- prefix: api
+  count: 117
+  role: Shared sub-objects referenced from advisory records.
+- prefix: v3controllers
+  count: 5
+  role: Per-controller response data and metadata types (Purl, Purls, Backup).
+- prefix: index
+  count: 3
+  role: Cross-index CVE search hits and their metadata.
+- prefix: paginate
+  count: 3
+  role: Pagination, Match and related metadata.
+- prefix: params
+  count: 3
+  role: Index and backup catalog list items.
+- prefix: purl
+  count: 3
+  role: PURL parsing and batch vulnerability findings.
+- prefix: purls
+  count: 3
+  role: Bulk PURL response payloads.
+- prefix: models
+  count: 1
+  role: Account entitlements.
+- prefix: search
+  count: 1
+  role: CPE search responses.
+entities:
+- name: Index
+  schema: params.IndexList
+  description: A named VulnCheck data feed. 508 of them are individually addressable in the contract.
+  key: name
+  fields: [name, description, href]
+  operations: ['GET /index', 'GET /index/{name}']
+- name: IndexBackup
+  schema: params.IndexBackupList
+  description: An offline snapshot archive of an index, retrieved as pre-signed download links.
+  key: name
+  fields: [name, description, href]
+  operations: ['GET /backup', 'GET /backup/{index}']
+- name: AdvisoryRecord
+  schema: 'advisory.* (786 variants)'
+  description: >-
+    One document inside an index. The schema differs per source; the SHARED keys across
+    variants are the vulnerability identifiers, not a common parent type.
+  key: id
+  operations: ['GET /index/{name}']
+- name: CveSearchHit
+  schema: index.CveSearchHit
+  description: A document matched by a cross-index CVE search.
+  fields: [id, index, score, source]
+  note: >-
+    `source` is typed as a bare `object` — "Structure varies by index". This is the one place
+    the contract explicitly declines to describe its own payload, and it is the payload a
+    caller most needs typed.
+  operations: ['GET /search/cve']
+- name: Cpe
+  schema: search.Responses
+  description: A CPE 2.3 identifier and the CVEs associated with it.
+  operations: ['GET /cpe', 'GET /search/cpe']
+- name: PackageURL
+  schema: purl.PackageURLJSON
+  fields: [type, namespace, name, version, qualifiers, subpath]
+  operations: ['GET /purl', 'POST /purls']
+- name: PurlVulnFinding
+  schema: purl.BatchVulnFinding
+  fields: [purl, purl_struct, cves]
+  operations: ['POST /purls']
+- name: Entitlements
+  schema: models.Entitlements
+  description: A map of account roles to the list of entitlements each grants.
+  operations: ['GET /entitlements']
+- name: Pagination
+  schema: paginate.Pagination
+  fields: [cursor, first_item, last_item, limit, index, matches, max_pages, total_documents]
+  description: Response metadata carried on every paginated index response.
+relationships:
+- from: Index
+  to: AdvisoryRecord
+  type: has_many
+  via: index name in the path
+- from: Index
+  to: IndexBackup
+  type: has_one
+  via: name
+- from: CveSearchHit
+  to: Index
+  type: belongs_to
+  via: index
+- from: CveSearchHit
+  to: AdvisoryRecord
+  type: has_one
+  via: id
+- from: PurlVulnFinding
+  to: PackageURL
+  type: has_one
+  via: purl_struct
+- from: PurlVulnFinding
+  to: Cve
+  type: has_many
+  via: cves (array of CVE ID strings)
+- from: Cpe
+  to: Cve
+  type: has_many
+  via: cve id array
+- from: 'render.ResponseWithMetadata<T,M>'
+  to: Pagination
+  type: has_one
+  via: metadata type parameter
+identifier_schemes:
+  note: >-
+    The data model is held together by external identifier standards rather than by internal
+    primary keys. This is what makes VulnCheck's data interoperable, and it is the strongest
+    domain-standard signal in the contract.
+  schemes:
+  - id: CVE
+    role: Primary cross-index join key. Present as a `cve` filter on index operations and as the sole parameter of /search/cve.
+  - id: CPE 2.3
+    role: Product identity. /cpe and /search/cpe are built on it; part/vendor/product/version are the search fields.
+  - id: PURL (Package URL)
+    role: Package identity for ecosystem lookups. Parsed into type/namespace/name/version/qualifiers/subpath.
+  - id: IAVA
+    role: US DoD Information Assurance Vulnerability Alert id; available as an `iava` filter on index operations.
+  - id: alias
+    role: Cross-database vulnerability aliases (GHSA, JVNDB, EUVD and others), filterable via `alias`.

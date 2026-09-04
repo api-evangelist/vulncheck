@@ -1,0 +1,76 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  https://github.com/vulncheck-oss/agent-tools (provider-published) +
+  openapi/vulncheck-api-openapi.json (generated)
+note: >-
+  VulnCheck publishes its own Agent Skill. skills/vulncheck-cli.md is that file saved VERBATIM
+  from the provider's repository, not authored here. The other three are API Evangelist
+  generations grounded in real operations from the VulnCheck OpenAPI — bound by method + path,
+  because the spec declares no operationId on any of its 521 operations.
+provider_published:
+  marketplace: https://github.com/vulncheck-oss/agent-tools
+  marketplace_manifest: .claude-plugin/marketplace.json
+  owner: VulnCheck <support@vulncheck.com>
+  install: |
+    /plugin marketplace add vulncheck-oss/agent-tools
+    /plugin install vulncheck-cli@vulncheck-oss
+  requires: The vulncheck CLI v1.0.0+ installed and authenticated (vulncheck auth login)
+skills:
+- name: vulncheck-cli
+  file: vulncheck-cli.md
+  method: searched
+  source: https://github.com/vulncheck-oss/agent-tools/blob/main/skills/vulncheck-cli/SKILL.md
+  author: VulnCheck
+  surface: cli
+  description: >-
+    VulnCheck's own Claude Code skill. Drives the vulncheck CLI to query indices, advisories,
+    CVEs, KEV, PURL/CPE lookups, project scans, exploits, initial-access intelligence,
+    detection rules, IP intelligence and C2 data.
+- name: vulncheck-cve-triage
+  file: vulncheck-cve-triage.md
+  method: generated
+  source: openapi/vulncheck-api-openapi.json
+  surface: rest
+  operations:
+  - GET /search/cve
+  - GET /index/vulncheck-kev
+  - GET /index/cisa-kev
+  - GET /index/exploits
+  - GET /index/initial-access
+  - GET /index/epss
+  - GET /index/threat-actors
+  description: >-
+    Establish whether a CVE is known-exploited, whether working exploit code exists, and
+    whether it is being used for initial access, before deciding how urgently to patch.
+- name: vulncheck-dependency-vulnerabilities
+  file: vulncheck-dependency-vulnerabilities.md
+  method: generated
+  source: openapi/vulncheck-api-openapi.json
+  surface: rest
+  operations:
+  - GET /purl
+  - POST /purls
+  - GET /cpe
+  - GET /search/cpe
+  - GET /index/cpe-vulnerable
+  description: >-
+    Check dependencies and installed products for known vulnerabilities by PURL or CPE 2.3,
+    including bulk SBOM-shaped lookups.
+- name: vulncheck-c2-blocklist
+  file: vulncheck-c2-blocklist.md
+  method: generated
+  source: openapi/vulncheck-api-openapi.json
+  surface: rest
+  operations:
+  - GET /pdns/vulncheck-c2
+  - GET /tags/vulncheck-c2
+  - GET /rules/initial-access/{type}
+  - GET /index/ipintel-3d
+  - GET /index/ipintel-10d
+  - GET /index/ipintel-30d
+  - GET /index/ipintel-90d
+  - GET /index/botnets
+  description: >-
+    Pull C2 hostname and IP feeds plus Suricata/Snort initial-access detection rules to feed a
+    firewall, protective DNS resolver, or IDS.

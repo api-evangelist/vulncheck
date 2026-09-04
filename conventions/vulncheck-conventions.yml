@@ -1,0 +1,139 @@
+generated: '2026-09-04'
+method: searched
+source: >-
+  https://docs.vulncheck.com/getting-started/api-tokens,
+  https://docs.vulncheck.com/community/rate-limits,
+  openapi/vulncheck-api-openapi.json, and live header probes of api.vulncheck.com
+api: VulnCheck API v3
+base_url: https://api.vulncheck.com/v3
+surface_shape:
+  read_only: true
+  note: >-
+    All 521 operations are reads. 520 are GET; the single POST (/purls) is a bulk PURL LOOKUP
+    that accepts a list in the body because the list is too long for a query string — it
+    creates and changes nothing. There is no write, create, update or delete operation
+    anywhere in the contract. This single fact governs the idempotency, dry_run and
+    reversibility blocks below.
+authentication:
+  style: bearer-token
+  scheme_name: Bearer
+  transport:
+  - header: 'Authorization: Bearer <token>'
+  - query: '?token=<token>'
+  - cookie: 'token=<token>'
+  env: VC_TOKEN
+  issued_at: https://console.vulncheck.com/settings/tokens
+  expiry: A token unused for 30 days expires and must be recreated.
+  oauth: false
+  scopes: none
+  docs: https://docs.vulncheck.com/getting-started/api-tokens
+  cross_ref: authentication/vulncheck-authentication.yml
+  note: >-
+    Accepting the token as a URL query parameter is documented as a convenience for browser
+    testing. It is a real ergonomic aid and a real hazard — a token in a query string lands in
+    proxy logs, browser history and Referer headers. Recorded as published, not endorsed.
+idempotency:
+  coverage: na
+  mechanism: none
+  header: null
+  scope: []
+  note: >-
+    na, not none. There is no mutating surface to protect: every operation is a read, and a
+    repeated read is idempotent by HTTP semantics. An Idempotency-Key header would have nothing
+    to key. Marking this `none` would score the API for a failure it cannot commit.
+reversibility:
+  grade: na
+  note: >-
+    No write surface, therefore nothing to reverse. No cancel, refund, void, undo, rollback or
+    restore operation exists or is needed. The one apparent exception — GET /backup/{index},
+    which returns pre-signed archive download links — is a read of a snapshot, not an action
+    that can be taken back.
+dry_run_mode:
+  supported: na
+  note: Read-only API; every call is already a rehearsal.
+pagination:
+  styles: [page-offset, cursor]
+  note: >-
+    The index operations support BOTH a page/limit scheme and a server-side cursor, and the
+    docs are explicit that the cursor is the one to use for large datasets.
+  parameters:
+  - name: page
+    in: query
+    type: integer
+    description: Page number of the response.
+  - name: limit
+    in: query
+    type: integer
+    description: Number of findings per page. Default 100 documents per page on index endpoints.
+  - name: start_cursor
+    in: query
+    type: string
+    enum: ['true']
+    description: Request server-side cursor paging on the first call.
+  - name: cursor
+    in: query
+    type: string
+    description: Continue cursor paging with the id returned by the previous response.
+  response_fields:
+  - next_cursor
+  flow: >-
+    GET /index/{name}?start_cursor=true, then pass the response's next_cursor as
+    GET /index/{name}?cursor=<next_cursor>.
+sorting:
+  parameters:
+  - name: sort
+    description: Field by which to sort results.
+  - name: order
+    description: Direction — asc or desc.
+filtering:
+  note: >-
+    Filters differ per index. The common identifier filters on index operations are cve, alias
+    and iava; describe_index (MCP) is the documented way to learn which filters a given index
+    accepts. An unsupported filter has NO EFFECT rather than raising an error, which is a
+    silent-wrong-answer hazard an agent must know about.
+  source: https://github.com/vulncheck-oss/mcp/blob/main/docs/tools.md
+response_envelope:
+  shape: '{"_benchmark": ..., "_meta": ..., "data": [...]}'
+  note: >-
+    Successful index responses are wrapped by the render.ResponseWithMetadata generic, which
+    pairs a `data` payload with a pagination/metadata block. Schema names in the spec are
+    Go-generic-flavoured (e.g. render.ResponseWithMetadata-array_advisory_A10-paginate_Pagination).
+  cross_ref: data-model/vulncheck-data-model.yml
+error_envelope:
+  shape: '{"error": true, "errors": ["<message>"]}'
+  rfc9457: false
+  cross_ref: errors/vulncheck-problem-types.yml
+rate_limit_signaling:
+  headers: none
+  status: 429
+  cross_ref: rate-limits/vulncheck-rate-limits.yml
+  note: No X-RateLimit-*, RateLimit-* or Retry-After header observed on live responses.
+request_tracing:
+  header: traceparent
+  standard: W3C Trace Context
+  method: probed
+  note: >-
+    Every response carries a W3C `traceparent` header emitted by the Istio/Envoy edge, plus
+    x-envoy-upstream-service-time. There is no documented X-Request-Id, and support does not
+    document a correlation id to quote, but traceparent is a usable correlation handle.
+versioning:
+  style: uri-path
+  current: v3
+  base: https://api.vulncheck.com/v3
+  parallel: >-
+    A v4 advisory surface exists and is exposed through the MCP server (v4_* tools), but is not
+    described in the v3 OpenAPI and has no documented public REST base URL.
+  cross_ref: lifecycle/vulncheck-lifecycle.yml
+content_negotiation:
+  request: 'Accept: application/json'
+  formats: [json]
+  note: >-
+    The C2 feed operations (/pdns/vulncheck-c2, /tags/vulncheck-c2) take a `format` parameter
+    for consumption by protective-DNS and firewall tooling; everything else is JSON only.
+sparse_fields_and_expansion:
+  supported: false
+  note: >-
+    No field-selection or expansion parameter exists. Combined with record sizes that reach
+    2.16 MB for a single record (the Log4Shell record on vulncheck-nvd2, per the MCP docs),
+    this means a caller cannot ask for less. The MCP server compensates with a response byte
+    budget; REST callers have no equivalent.

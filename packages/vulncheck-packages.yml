@@ -1,0 +1,96 @@
+generated: '2026-09-04'
+method: searched
+source: https://docs.vulncheck.com/tools + registry metadata endpoints (pypi.org, proxy.golang.org)
+note: >-
+  Every package below is published by the vulncheck-oss GitHub organization and linked from
+  VulnCheck's own Tools page, so all are first-party. The MCP server and CLI are distributed as
+  release binaries and container images rather than through a language registry; their versions
+  are read from the Go module proxy and the release archive names in the repo README.
+packages:
+- name: vulncheck-sdk
+  registry: pypi
+  language: python
+  official: true
+  url: https://pypi.org/project/vulncheck-sdk/
+  repository: https://github.com/vulncheck-oss/sdk-python
+  docs: https://docs.vulncheck.com/tools/python-sdk
+  install: pip install vulncheck-sdk
+  version: 0.1.0
+  published: '2026-09-02'
+  note: >-
+    OpenAPI-generated client for the v3 API. Released the same day as the 2026-09-02 platform
+    release; actively maintained (six releases between 2026-06-17 and 2026-09-02).
+- name: github.com/vulncheck-oss/sdk-go-v2/v2
+  registry: go
+  language: go
+  official: true
+  url: https://pkg.go.dev/github.com/vulncheck-oss/sdk-go-v2/v2
+  repository: https://github.com/vulncheck-oss/sdk-go-v2
+  docs: https://docs.vulncheck.com/tools/go-sdk
+  install: go get github.com/vulncheck-oss/sdk-go-v2/v2
+  version: v2.1.27
+  published: '2026-08-25'
+- name: github.com/vulncheck-oss/cli
+  registry: go
+  language: go
+  official: true
+  kind: cli
+  url: https://pkg.go.dev/github.com/vulncheck-oss/cli
+  repository: https://github.com/vulncheck-oss/cli
+  docs: https://docs.vulncheck.com/tools/cli
+  install: curl -sSL https://raw.githubusercontent.com/vulncheck-oss/cli/main/install.sh | bash
+  version: v1.1.0
+  published: '2026-07-24'
+  note: The `vulncheck` binary. See cli/vulncheck-cli.yml for the command surface.
+- name: github.com/vulncheck-oss/go-exploit
+  registry: go
+  language: go
+  official: true
+  kind: library
+  url: https://pkg.go.dev/github.com/vulncheck-oss/go-exploit
+  repository: https://github.com/vulncheck-oss/go-exploit
+  docs: https://docs.vulncheck.com/tools/go-exploit
+  version: v1.61.1
+  published: '2026-08-18'
+  note: Exploit-development framework, not an API client. Included as a first-party tool.
+- name: ghcr.io/vulncheck-oss/mcp
+  registry: cdn
+  language: go
+  official: true
+  kind: mcp-server
+  url: https://github.com/vulncheck-oss/mcp/releases/latest
+  repository: https://github.com/vulncheck-oss/mcp
+  install: docker run -i ghcr.io/vulncheck-oss/mcp
+  version: 1.2.3
+  published: null
+  note: >-
+    No language-registry metadata endpoint — distributed as GoReleaser archives and a GHCR
+    container image. Version 1.2.3 is read verbatim from the archive names in the repository
+    README (vulncheck-mcp_1.2.3_darwin_arm64.tar.gz); the release date is not stated there, so
+    published is null rather than guessed.
+- name: vulncheck-oss/action
+  registry: github-actions
+  language: yaml
+  official: true
+  kind: github-action
+  url: https://github.com/vulncheck-oss/action
+  repository: https://github.com/vulncheck-oss/action
+  version: null
+  published: null
+  note: >-
+    GitHub Action linked from VulnCheck's Tools page. GitHub Actions have no registry metadata
+    endpoint that answers unauthenticated with a version; not checked against the Marketplace.
+negative_findings:
+- registry: npm
+  query: vulncheck
+  finding: >-
+    An npm package named "vulncheck" exists but carries no repository, description, homepage,
+    author or dist-tags and is not linked from any VulnCheck property. NOT treated as
+    first-party and NOT listed above.
+- registry: npm
+  query: "@vulncheck/sdk"
+  finding: 404 — no scoped VulnCheck npm org.
+- registry: [maven, nuget, rubygems, packagist, crates.io]
+  finding: >-
+    No first-party VulnCheck client published. VulnCheck consumes these ecosystems as PURL data
+    sources; it does not ship clients for them.

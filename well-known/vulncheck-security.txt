@@ -1,0 +1,12 @@
+# VulnCheck security.txt
+
+Canonical: https://www.vulncheck.com/.well-known/security.txt
+
+Contact: https://www.vulncheck.com/advisories/report
+Contact: mailto:disclosure@vulncheck.com
+
+Policy: https://www.vulncheck.com/vulnerability-disclosure-policy
+
+Preferred-Languages: en
+
+Expires: 2030-04-01T00:00:00z

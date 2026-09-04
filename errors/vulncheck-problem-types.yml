@@ -1,0 +1,74 @@
+generated: '2026-09-04'
+method: derived
+source: openapi/vulncheck-api-openapi.json + https://docs.vulncheck.com/community/rate-limits
+format: vendor-json
+rfc9457: false
+note: >-
+  VulnCheck does NOT use RFC 9457 problem+json. Every error is returned as application/json in
+  a fixed vendor envelope. The OpenAPI declares the 4xx/5xx status codes but types their bodies
+  as a bare `string`, so the envelope shape below is taken from live probe responses and from
+  the published rate-limit documentation rather than from the spec.
+envelope:
+  content_type: application/json
+  shape: '{"error": true, "errors": ["<message>", ...]}'
+  fields:
+  - name: error
+    type: boolean
+    description: Always true on a failure.
+  - name: errors
+    type: array of string
+    description: One or more human-readable messages. There is no machine-readable error code field.
+  observed:
+  - status: 401
+    url: https://api.vulncheck.com/v3/index/a10
+    body: '{"error":true,"errors":["unauthorized"]}'
+  - status: 404
+    url: https://api.vulncheck.com/v3/openapi.json
+    body: '{"error":true,"errors":["Not Found, please check our documentation at https://docs.vulncheck.com/api"]}'
+problem_types:
+- status: 400
+  title: Bad Request
+  declared_on: 1 operation (GET /search/cve)
+  remediation: Check query parameter names and values; /search/cve requires a `cve` parameter.
+- status: 401
+  title: Unauthorized
+  declared_on: 1 operation (GET /search/cve)
+  observed_on: every authenticated operation
+  body: '{"error":true,"errors":["unauthorized"]}'
+  remediation: >-
+    Supply a valid VulnCheck API token as `Authorization: Bearer <token>`, as a `token` query
+    parameter, or as a `token` cookie. Tokens unused for 30 days expire and must be recreated
+    at https://console.vulncheck.com/settings/tokens.
+  gap: >-
+    Declared on only 1 of 521 operations even though it applies to 520 of them. The spec
+    under-declares the auth failure it universally enforces.
+- status: 404
+  title: Not Found
+  declared_on: 519 operations
+  body: '{"error":true,"errors":["Not Found, please check our documentation at https://docs.vulncheck.com/api"]}'
+  remediation: Check the index name against GET /index, or the path against the API reference.
+- status: 429
+  title: Too Many Requests
+  declared_on: 0 operations
+  documented_at: https://docs.vulncheck.com/community/rate-limits
+  body: '{"error":true,"errors":["Rate limit exceeded. Please try again later."]}'
+  remediation: >-
+    Back off exponentially and retry. Community accounts are limited to 1,000 requests per
+    minute. No Retry-After or X-RateLimit-* header is returned, so the client must supply its
+    own backoff schedule.
+  gap: >-
+    Documented in prose but declared on NONE of the 521 operations. A generated client reading
+    only the spec will not know 429 is reachable.
+- status: 500
+  title: Internal Server Error
+  declared_on: 521 operations (all)
+  remediation: Retry with backoff; check https://status.vulncheck.com/ for an incident.
+coverage:
+  operations: 521
+  with_4xx: 520
+  with_5xx: 521
+  typed_error_schema: 0
+  note: >-
+    Error responses are present on nearly every operation but none carries a $ref to a shared
+    error schema — each is typed as `string`. Adding a components.schemas Error object and
+    referencing it would make the envelope machine-readable without changing runtime behaviour.

@@ -1,0 +1,84 @@
+generated: '2026-09-04'
+method: searched
+source: https://docs.vulncheck.com/changelog
+url: https://docs.vulncheck.com/changelog
+scheme: dated-release-notes
+format: markdown, one page per release, also enumerated in the docs llms.txt
+first_entry: '2023-02-28'
+latest_entry: '2026-09-02'
+entry_count_observed: 40
+note: >-
+  A genuinely continuous changelog running from February 2023 to September 2026. Entries are
+  product release notes rather than API-contract diffs: they name new indices, new product
+  capabilities and new advisory feeds, and each links to the console. Breaking changes are not
+  called out as a category, and no entry maps a change to a specific API operation or schema.
+entries:
+- version: '2026-09-02'
+  date: '2026-09-02'
+  title: September 2nd, 2026 Release Notes
+  url: https://docs.vulncheck.com/changelog/2026-09-02
+  breaking: false
+  highlights:
+  - Improved /v3/search/cpe endpoint responsiveness.
+  - >-
+    MCP server expanded — added canary, target, curated-exploits and recent-advisories tools;
+    improved list_indices, search_docs and search_index.
+  - v4 advisory support declared complete.
+  - Added nist-nvd2-cvehist and redhat-purls indices; improved CPE support.
+  - Package Intelligence — Maven coverage, Atlassian and Jenkins Maven repos, OCaml/opam, npm CVE matching.
+  - Canary Intelligence — new C2Extractor service; improved canary reset pipeline.
+  - Target Intelligence — version detection for RabbitMQ, LavinMQ, Apache Qpid, Erlang; multi-service fingerprinting.
+- version: '2026-08-12'
+  date: '2026-08-12'
+  title: August 12th, 2026 Release Notes
+  url: https://docs.vulncheck.com/changelog/2026-08-12
+  breaking: false
+  highlights:
+  - Maven coverage expansion; npm, Go, Composer and Cargo ecosystem improvements.
+  - C2 detection fields (C2 location, C2 frequency, source-IP frequency) added to the vulncheck-canaries index.
+  - SharePoint canary support; canaries deployed to South Korea, Japan and Malaysia.
+  - Added a `confirmed` parameter to the Target Intelligence endpoint.
+  - Improved MCP output handling for Claude Code; expanded v4 advisory coverage.
+- version: '2026-07-22'
+  date: '2026-07-22'
+  title: July 22nd, 2026 Release Notes
+  url: https://docs.vulncheck.com/changelog/2026-07-22
+  breaking: false
+  additions:
+  - microsoft-eol
+  - alibabacloud-eol
+  - maven-cs
+  - cves_identity_mappings
+  highlights:
+  - >-
+    Agent-ready CLI shipped — natural-language querying of VulnCheck data via Claude or any
+    LLM, with a documented agentic/scripted usage contract.
+  - v4 advisory support added for Debian, Node.js, Siemens, Citrix, Dell, Zoom, NCSC-CVEs and 7-Zip.
+  - exploits index exploit_type field coverage grown from 10% to 90%.
+  - Maven package pipeline overhauled.
+  - Published a CVE-prioritization technical guide for Community data.
+  - Production API SLOs being refined.
+- version: '2026-04-07'
+  date: '2026-04-07'
+  title: April 7th, 2026
+  url: https://docs.vulncheck.com/changelog/2026-04-07
+- version: '2026-03-20'
+  date: '2026-03-20'
+  title: March 20th, 2026
+  url: https://docs.vulncheck.com/changelog/2026-03-20
+- version: '2026-03-18'
+  date: '2026-03-18'
+  title: March 18th, 2026
+  url: https://docs.vulncheck.com/changelog/2026-03-18
+- version: '2026-02-25'
+  date: '2026-02-25'
+  title: February 25, 2026 - Release Notes
+  url: https://docs.vulncheck.com/changelog/2026-02-25
+- version: '2026-02-04'
+  date: '2026-02-04'
+  title: February 02, 2026 - Release Notes
+  url: https://docs.vulncheck.com/changelog/2026-02-04
+- version: '2026-01-21'
+  date: '2026-01-21'
+  title: January 21, 2026 - Release Notes
+  url: https://docs.vulncheck.com/changelog/2026-01-21
