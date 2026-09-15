@@ -1,13 +1,12 @@
 aid: vulncheck
 name: VulnCheck
-description: 'VulnCheck is an exploit and vulnerability intelligence company that supplies
-  machine-readable data on known exploited vulnerabilities, exploit maturity, threat-actor
-  activity, initial-access exploitation, IP and target intelligence, CPE/PURL identity and
-  vendor advisories. Its Exploit & Vulnerability Intelligence platform enriches CVE records
-  ahead of NIST NVD, publishes the VulnCheck KEV catalog, and exposes everything through a
-  521-operation REST API at api.vulncheck.com/v3 covering 490+ named indices, alongside a
-  Go SDK, Python SDK, a scripting/agent-oriented CLI, an MCP server and a published Claude
-  Code agent skill. A free Community tier provides VulnCheck KEV and NVD++ data.'
+description: VulnCheck is an exploit and vulnerability intelligence company that supplies machine-readable
+  data on known exploited vulnerabilities, exploit maturity, threat-actor activity, initial-access exploitation,
+  IP and target intelligence, CPE/PURL identity and vendor advisories. Its Exploit & Vulnerability Intelligence
+  platform enriches CVE records ahead of NIST NVD, publishes the VulnCheck KEV catalog, and exposes everything
+  through a 521-operation REST API at api.vulncheck.com/v3 covering 490+ named indices, alongside a Go
+  SDK, Python SDK, a scripting/agent-oriented CLI, an MCP server and a published Claude Code agent skill.
+  A free Community tier provides VulnCheck KEV and NVD++ data.
 image: https://www.vulncheck.com/logo.png
 url: https://raw.githubusercontent.com/api-evangelist/vulncheck/refs/heads/main/apis.yml
 x-type: company
@@ -26,13 +25,13 @@ tags:
 - Vulnerability Management
 - Data
 apis:
-- aid: vulncheck-api
+- aid: vulncheck:vulncheck-api
   name: VulnCheck API
-  description: 'Version 3 of the VulnCheck API. A read-only REST API exposing VulnCheck''s
-    exploit and vulnerability intelligence: 490+ named indices browsable at /index/{name},
-    CVE and CPE search, PURL vulnerability lookup, initial-access detection rules (Suricata
-    and Snort), VulnCheck C2 hostname and tag feeds, entitlements, and pre-signed offline
-    backup downloads. Bearer token authentication; all 521 operations are GET.'
+  description: 'Version 3 of the VulnCheck API. A read-only REST API exposing VulnCheck''s exploit and
+    vulnerability intelligence: 490+ named indices browsable at /index/{name}, CVE and CPE search, PURL
+    vulnerability lookup, initial-access detection rules (Suricata and Snort), VulnCheck C2 hostname and
+    tag feeds, entitlements, and pre-signed offline backup downloads. Bearer token authentication; all
+    521 operations are GET.'
   humanURL: https://docs.vulncheck.com/api
   baseURL: https://api.vulncheck.com/v3
   image: https://www.vulncheck.com/logo.png
