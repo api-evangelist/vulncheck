@@ -25,24 +25,16 @@ tags:
 - Vulnerability Management
 - Data
 apis:
-- aid: vulncheck:vulncheck-api
-  name: VulnCheck API
-  description: 'Version 3 of the VulnCheck API. A read-only REST API exposing VulnCheck''s exploit and
-    vulnerability intelligence: 490+ named indices browsable at /index/{name}, CVE and CPE search, PURL
-    vulnerability lookup, initial-access detection rules (Suricata and Snort), VulnCheck C2 hostname and
-    tag feeds, entitlements, and pre-signed offline backup downloads. Bearer token authentication; all
-    521 operations are GET.'
+- aid: vulncheck:vulncheck-endpoints-api
+  name: VulnCheck Endpoints API
+  description: The endpoints API from VulnCheck — 13 operation(s) for endpoints.
   humanURL: https://docs.vulncheck.com/api
   baseURL: https://api.vulncheck.com/v3
-  image: https://www.vulncheck.com/logo.png
   tags:
-  - Vulnerability Intelligence
-  - Exploit Intelligence
-  - CVE
-  - Security
+  - endpoints
   properties:
   - type: OpenAPI
-    url: openapi/vulncheck-api-openapi.json
+    url: openapi/vulncheck-endpoints-api-openapi.yml
   - type: Documentation
     url: https://docs.vulncheck.com/api
   - type: Authentication
@@ -55,8 +47,30 @@ apis:
     url: conventions/vulncheck-conventions.yml
   - type: DataModel
     url: data-model/vulncheck-data-model.yml
-  - type: Overlay
-    url: overlays/vulncheck-api-overlay.yaml
+  - type: ToolCrosswalk
+    url: mcp/vulncheck-tool-crosswalk.yml
+- aid: vulncheck:vulncheck-indices-api
+  name: VulnCheck Indices API
+  description: The indices API from VulnCheck — 508 operation(s) for indices.
+  humanURL: https://docs.vulncheck.com/api
+  baseURL: https://api.vulncheck.com/v3
+  tags:
+  - indices
+  properties:
+  - type: OpenAPI
+    url: openapi/vulncheck-indices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.vulncheck.com/api
+  - type: Authentication
+    url: authentication/vulncheck-authentication.yml
+  - type: RateLimits
+    url: rate-limits/vulncheck-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/vulncheck-problem-types.yml
+  - type: Conventions
+    url: conventions/vulncheck-conventions.yml
+  - type: DataModel
+    url: data-model/vulncheck-data-model.yml
   - type: ToolCrosswalk
     url: mcp/vulncheck-tool-crosswalk.yml
 maintainers:
@@ -65,6 +79,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/vulncheck-api-overlay.yaml
 - type: Website
   url: https://www.vulncheck.com/
 - type: DeveloperPortal
