@@ -30,7 +30,8 @@ apis:
   description: The endpoints API from VulnCheck — 13 operation(s) for endpoints.
   humanURL: https://docs.vulncheck.com/api
   baseURL: https://api.vulncheck.com/v3
-  tags:
+  tags: []
+  tags_raw:
   - endpoints
   properties:
   - type: OpenAPI
@@ -55,6 +56,8 @@ apis:
   humanURL: https://docs.vulncheck.com/api
   baseURL: https://api.vulncheck.com/v3
   tags:
+  - Indices
+  tags_raw:
   - indices
   properties:
   - type: OpenAPI
