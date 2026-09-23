@@ -1,0 +1,1619 @@
+openapi: 3.2.0
+info:
+  contact:
+    email: support@vulncheck.com
+    name: VulnCheck API Support
+  description: Version 3 of the VulnCheck API
+  termsOfService: https://vulncheck.com/terms
+  title: VulnCheck Endpoints API
+  version: '3.0'
+servers:
+- description: VulnCheck API v3
+  url: /v3
+tags:
+- name: Endpoints
+paths:
+  /backup:
+    get:
+      description: Return a list of indexes with backup and endpoint links that the user has access to
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render.Response-array_params_IndexBackupList'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: string
+                - type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Return a list of indexes with backup and endpoint links
+      tags:
+      - Endpoints
+      operationId: getBackup
+      x-operation-id-source: derived
+  /backup/{index}:
+    get:
+      description: Retrieve a list of VulnCheck backups by index
+      parameters:
+      - description: Name of an exploit, vulnerability, or advisory index
+        in: path
+        name: index
+        required: true
+        schema:
+          enum:
+          - 7zip
+          - a10
+          - abb
+          - abbott
+          - absolute
+          - acronis
+          - adobe
+          - advantech
+          - advisories
+          - aix
+          - aleph-research
+          - alibaba-advs
+          - alibabacloud-eol
+          - alma
+          - alpine
+          - alpine-purls
+          - amazon
+          - amazon-cve
+          - amd
+          - ami
+          - anchore-nvd-override
+          - android
+          - anthropic-cvd
+          - apache-activemq
+          - apache-archiva
+          - apache-arrow
+          - apache-camel
+          - apache-commons
+          - apache-couchdb
+          - apache-flink
+          - apache-guacamole
+          - apache-hadoop
+          - apache-http
+          - apache-jspwiki
+          - apache-kafka
+          - apache-loggingservices
+          - apache-nifi
+          - apache-ofbiz
+          - apache-openmeetings
+          - apache-openoffice
+          - apache-pulsar
+          - apache-shiro
+          - apache-spark
+          - apache-struts
+          - apache-subversion
+          - apache-superset
+          - apache-tomcat
+          - apache-zookeeper
+          - appcheck
+          - appgate
+          - apple
+          - arch
+          - arista
+          - aruba
+          - asrg
+          - assetnote
+          - asterisk
+          - astra
+          - asus
+          - atlassian
+          - atlassian-vulns
+          - atredis
+          - audiocodes
+          - auscert
+          - austin-hackers
+          - autodesk
+          - avaya
+          - aveva
+          - avidml-advs
+          - avigilon
+          - aws
+          - aws-rds
+          - axis
+          - azul
+          - bandr
+          - baxter
+          - bbraun
+          - bd
+          - bdu
+          - beckhoff
+          - beckman-coulter
+          - belden
+          - beyond-trust
+          - binarly
+          - bitdefender
+          - blackberry
+          - bls
+          - bosch
+          - boston-scientific
+          - botnets
+          - ca-cyber-centre
+          - canvas
+          - carestream
+          - cargo
+          - carrier
+          - cbl-mariner
+          - centos
+          - cert-be
+          - cert-in
+          - cert-ir-security-alerts
+          - cert-se
+          - cert-ua
+          - certeu
+          - certfr
+          - chainguard
+          - checkpoint
+          - chrome
+          - ciena
+          - circl
+          - cisa-alerts
+          - cisa-csaf
+          - cisa-kev
+          - cisco
+          - cisco-csaf
+          - cisco-known-good-values
+          - cisco-talos
+          - citrix
+          - claroty
+          - cloudbees
+          - cloudvulndb
+          - cnnvd
+          - cnvd-bulletins
+          - cnvd-flaws
+          - cocoapods
+          - codesys
+          - commvault
+          - compass-security
+          - composer
+          - conan
+          - coreimpact
+          - cpe-vulnerable
+          - crestron
+          - crowdsec
+          - curl
+          - cves_identity_mappings
+          - cwe
+          - dahua
+          - danfoss
+          - dassault
+          - debian
+          - debian-dsa
+          - debian-packages
+          - debian-purls
+          - dell
+          - delta
+          - dfn-cert
+          - django
+          - dlink
+          - dnn
+          - dotcms
+          - draeger
+          - dragos
+          - draytek
+          - drupal
+          - eaton
+          - elastic
+          - elspec
+          - emerging-threats-snort
+          - emerson
+          - endoflife
+          - endress
+          - eol
+          - eol-alibaba
+          - eol-microsoft
+          - epss
+          - euvd
+          - exodus-intel
+          - exploit-chains
+          - exploitdb
+          - exploits
+          - exploits-changelog
+          - f-secure
+          - f5
+          - fanuc
+          - fastly
+          - fedora
+          - festo
+          - filecloud
+          - filezilla
+          - flatt-security
+          - forgerock
+          - fortinet
+          - fortinet-ips
+          - foxit
+          - freebsd
+          - fresenius
+          - gallagher
+          - gcp
+          - ge-gas
+          - ge-healthcare
+          - gem
+          - gen
+          - genetec
+          - ghsa
+          - gigabyte
+          - gitee-exploits
+          - github-exploits
+          - github-security-advisories
+          - gitlab-advisories-community
+          - gitlab-exploits
+          - glibc
+          - gmo-cybersecurity
+          - gnutls
+          - go-vulndb
+          - golang
+          - google-0day-itw
+          - google-container-optimized-os
+          - grafana
+          - greynoise-metadata
+          - hackage
+          - hacktivity
+          - harmonyos
+          - hashicorp
+          - haskell-sadb
+          - hcl
+          - hex
+          - hikvision
+          - hillrom
+          - hitachi
+          - hitachi-energy
+          - hkcert
+          - hms
+          - honeywell
+          - hp
+          - hp-eol
+          - hpe
+          - hpe-eol
+          - huawei-euleros
+          - huawei-ips
+          - huawei-psirt
+          - iava
+          - ibm
+          - idemia
+          - igel
+          - il-alerts
+          - il-vulnerabilities
+          - incibe
+          - initial-access
+          - initial-access-git
+          - intel
+          - ioc-botnets
+          - ioc-ransomware
+          - ioc-threat-actors
+          - ipintel-10d
+          - ipintel-30d
+          - ipintel-3d
+          - ipintel-90d
+          - istio
+          - ivanti
+          - ivanti-rss
+          - jenkins
+          - jetbrains
+          - jfrog
+          - jnj
+          - johnson-controls
+          - juniper
+          - jvn
+          - jvndb
+          - kaspersky-ics-cert
+          - korelogic
+          - krcert-security-notices
+          - krcert-vulnerabilities
+          - kubernetes
+          - kunbus
+          - lantronix
+          - lenovo
+          - lexmark
+          - lg
+          - libre-office
+          - linux
+          - lol-advs
+          - m-files
+          - macert
+          - malicious-packages
+          - malicious-vscode-exts
+          - manageengine
+          - maven
+          - mbed-tls
+          - mcafee
+          - mediatek
+          - medtronic
+          - mendix
+          - meta-advisories
+          - metasploit
+          - microsoft-csaf
+          - microsoft-cvrf
+          - microsoft-driver-block-list
+          - microsoft-eol
+          - microsoft-kb
+          - mikrotik
+          - mindray
+          - misp-threat-actors
+          - mitel
+          - mitre-attack-cve
+          - mitre-cvelist-v5
+          - mitsubishi-electric
+          - mogwai-labs
+          - moksha
+          - mongodb
+          - moxa
+          - mozilla
+          - naver
+          - ncsc
+          - ncsc-cves
+          - nec
+          - nessus
+          - netapp
+          - netatalk
+          - netgate
+          - netgear
+          - netskope
+          - nexpose
+          - nginx
+          - nhs
+          - ni
+          - nist-nvd
+          - nist-nvd2
+          - nist-nvd2-cpematch
+          - nist-nvd2-cvehist
+          - nist-nvd2-sources
+          - node-security
+          - nodejs
+          - nokia
+          - notepadplusplus
+          - nozomi
+          - npm
+          - ntp
+          - nuclei
+          - nuget
+          - nvd-cpe-dictionary
+          - nvidia
+          - nz-advisories
+          - octopus-deploy
+          - okta
+          - omron
+          - omron-eol
+          - one-e
+          - opam
+          - opc-foundation
+          - open-cvdb
+          - openbsd
+          - opengear
+          - openjdk
+          - openssh
+          - openssl-secadv
+          - openstack
+          - openwrt
+          - oracle
+          - oracle-cpu
+          - oracle-cpu-csaf
+          - osv
+          - otrs
+          - owncloud
+          - packetstorm
+          - palantir
+          - palo-alto
+          - panasonic
+          - papercut
+          - pega
+          - philips
+          - phoenix-contact
+          - php-my-admin
+          - pkcert
+          - postgressql
+          - powerdns
+          - progress
+          - proofpoint
+          - ptc
+          - pub
+          - pure-storage
+          - pypa-advisories
+          - pypi
+          - qnap
+          - qqids
+          - qualcomm
+          - qualys
+          - qualys-qids
+          - qubes-qsb
+          - ransomware
+          - red-lion
+          - redhat
+          - redhat-cves
+          - renesas
+          - revive
+          - roche
+          - rockwell
+          - rocky
+          - rocky-errata
+          - rocky-purls
+          - rsync
+          - ruckus
+          - rustsec-advisories
+          - sacert
+          - safran
+          - saint
+          - salesforce
+          - samba
+          - sandisk
+          - sans-dshield
+          - sap
+          - schneider-electric
+          - schutzwerk
+          - sec-consult
+          - securitylab
+          - seebug
+          - sel
+          - sentinelone
+          - servicenow
+          - shadowserver-exploited
+          - shielder
+          - sick
+          - siemens
+          - sierra-wireless
+          - sigmahq-sigma-rules
+          - singcert
+          - sitecore
+          - slackware
+          - solarwinds
+          - solr
+          - sonatype
+          - sonicwall
+          - spacelabs-healthcare
+          - splunk
+          - spring
+          - ssd
+          - stormshield
+          - stryker
+          - sudo
+          - suse
+          - suse-security
+          - swift
+          - swisslog-healthcare
+          - symfony
+          - synacktiv
+          - syncrosoft
+          - synology
+          - syss
+          - tailscale
+          - target-intel
+          - teamviewer
+          - tenable-research-advisories
+          - tencent
+          - thales
+          - themissinglink
+          - thermo-fisher
+          - threat-actors
+          - ti
+          - tibco
+          - tp-link
+          - trane-technology
+          - trendmicro
+          - trustwave
+          - twcert
+          - ubiquiti
+          - ubuntu
+          - ubuntu-purls
+          - unify
+          - unisoc
+          - usd
+          - usom
+          - vandyke
+          - vapidlabs
+          - vc-cpe-dictionary
+          - vde
+          - veeam
+          - veritas
+          - virtuozzo
+          - vlc
+          - vmware
+          - voidsec
+          - vulncheck
+          - vulncheck-canaries
+          - vulncheck-canaries-10d
+          - vulncheck-canaries-30d
+          - vulncheck-canaries-3d
+          - vulncheck-canaries-90d
+          - vulncheck-config
+          - vulncheck-cvelist-v5
+          - vulncheck-kev
+          - vulncheck-nvd
+          - vulncheck-nvd2
+          - vulnerability-aliases
+          - vulnrichment
+          - vyaire
+          - watchguard
+          - whatsapp
+          - wibu
+          - wireshark
+          - with-secure
+          - wolfi
+          - wolfssl
+          - wordfence
+          - xen
+          - xerox
+          - xiaomi
+          - xylem
+          - yamaha
+          - yokogawa
+          - yubico
+          - zdi
+          - zebra
+          - zebra-eol
+          - zeroscience
+          - zimbra
+          - zoom
+          - zscaler
+          - zuso
+          - zyxel
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render.ResponseWithMetadata-v3controllers_BackupResponseData-v3controllers_BackupResponseMetadata'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Retrieve a list of backups by index
+      tags:
+      - Endpoints
+      operationId: getBackupByIndex
+      x-operation-id-source: derived
+  /cpe:
+    get:
+      description: Based on the specified CPE (Common Platform Enumeration) URI string, this endpoint will return a list of vulnerabilities that are related to the package. We support v2.2 and v2.3
+      parameters:
+      - description: CPE designation to lookup
+        in: query
+        name: cpe
+        required: true
+        schema:
+          type: string
+      - description: Filter by vulnerability status (true/false). Defaults to false if not provided.
+        in: query
+        name: isVulnerable
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render.ResponseWithMetadata-array_string-v3controllers_ResponseMetadata'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Return CVE 's associated with a specific NIST CPE
+      tags:
+      - Endpoints
+      operationId: getCpe
+      x-operation-id-source: derived
+  /entitlements:
+    get:
+      description: Retrieve entitlements for the current user
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/models.Entitlements'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Retrieve user entitlements
+      tags:
+      - Endpoints
+      operationId: getEntitlements
+      x-operation-id-source: derived
+  /index:
+    get:
+      description: Return a list of available indexes with endpoint links that the user has access to
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render.Response-array_params_IndexList'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: string
+                - type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Return a list of available indexes with endpoint links
+      tags:
+      - Endpoints
+      operationId: getIndex
+      x-operation-id-source: derived
+  /openapi:
+    get:
+      description: Return the VulnCheck API (v3) OpenAPI specification
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: {}
+                type: object
+          description: OK
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Return OpenAPI specification
+      tags:
+      - Endpoints
+      operationId: getOpenapi
+      x-operation-id-source: derived
+  /pdns/vulncheck-c2:
+    get:
+      description: Retrieve a list of hostnames, identified as running Command & Control infrastructure.
+      parameters:
+      - description: 'Format of the Hostnames in the response (Defaults To: text)'
+        in: query
+        name: format
+        schema:
+          enum:
+          - txt
+          - json
+          - text
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Retrieve a list of C2 Hostnames
+      tags:
+      - Endpoints
+      operationId: getPdnsVulncheckC2
+      x-operation-id-source: derived
+  /purl:
+    get:
+      description: Based on the specified PURL, this endpoint will return a list of vulnerabilities that are related to the package. We currently support hex, golang, hackage, npm, and pypi
+      parameters:
+      - description: URL string used to identify and locate a software package
+        in: query
+        name: purl
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render.ResponseWithMetadata-v3controllers_PurlResponseData-v3controllers_PurlResponseMetadata'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Request vulnerabilities related to a PURL
+      tags:
+      - Endpoints
+      operationId: getPurl
+      x-operation-id-source: derived
+  /purls:
+    post:
+      description: Accepts a JSON array of PURLs in the request body and returns a list of vulnerabilities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              title: purls
+              type: array
+        description: PURL strings used to identify and locate software packages
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render.ResponseWithMetadata-v3controllers_PurlsResponseData-v3controllers_PurlsResponseMetadata'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Request vulnerabilities related to a list of PURLs
+      tags:
+      - Endpoints
+      operationId: postPurls
+      x-operation-id-source: derived
+  /rules/initial-access/{type}:
+    get:
+      description: Retrieve set of initial-access detection rules by type
+      parameters:
+      - description: Type of ruleset to retrieve
+        in: path
+        name: type
+        required: true
+        schema:
+          enum:
+          - snort
+          - suricata
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Retrieve set of initial-access detection rules
+      tags:
+      - Endpoints
+      operationId: getRulesInitialAccessByType
+      x-operation-id-source: derived
+  /search/cpe:
+    get:
+      description: Based on the specified CPE (Common Platform Enumeration) fields, this endpoint will return a list of matching CPEs and the related CVE vulnerabilities.
+      parameters:
+      - description: CPE part to lookup
+        example: '[a]pplication, [o]perating system, [h]ardware'
+        in: query
+        name: part
+        schema:
+          type: string
+      - description: CPE vendor to lookup
+        in: query
+        name: vendor
+        schema:
+          type: string
+      - description: CPE product to lookup
+        in: query
+        name: product
+        schema:
+          type: string
+      - description: CPE version to lookup
+        in: query
+        name: version
+        schema:
+          type: string
+      - description: Filter by vulnerability status (true/false). Defaults to false if not provided.
+        in: query
+        name: isVulnerable
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render.ResponseWithMetadata-search_Responses-paginate_Pagination'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Return CPEs and associated CPEs by searching CPE fields
+      tags:
+      - Endpoints
+      operationId: getSearchCpe
+      x-operation-id-source: derived
+  /search/cve:
+    get:
+      description: 'Returns all records referencing the specified CVE across all accessible indices. Results are aggregated
+
+        from multiple data sources including advisories, exploits, threat intelligence, and vulnerability databases.
+
+        Metadata is returned in the _meta field.'
+      parameters:
+      - description: CVE ID to search for (e.g. CVE-2024-1234)
+        in: query
+        name: cve
+        required: true
+        schema:
+          type: string
+      - description: 'Page number (default: 1, page mode only)'
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: 'Maximum number of results per page (default: 500, max: 1000)'
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: Continue cursor paging, or use an empty value to start cursor paging
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Start cursor paging
+        in: query
+        name: start_cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render.ResponseWithMetadata-array_index_CveSearchHit-index_CveSearchMeta'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Unauthorized
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Search all indices for a CVE
+      tags:
+      - Endpoints
+      operationId: getSearchCve
+      x-operation-id-source: derived
+  /tags/vulncheck-c2:
+    get:
+      description: Retrieve a list of IP addresses, identified as running Command & Control infrastructure
+      parameters:
+      - description: 'Format of the IP Addresses in the response (Defaults To: text)'
+        in: query
+        name: format
+        schema:
+          enum:
+          - txt
+          - json
+          - text
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Retrieve a list of C2 IP addresses
+      tags:
+      - Endpoints
+      operationId: getTagsVulncheckC2
+      x-operation-id-source: derived
+components:
+  schemas:
+    api.OSSPackageVulnerability:
+      properties:
+        detection:
+          type: string
+        fixed_version:
+          type: string
+      type: object
+    v3controllers.ResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        cpe:
+          type: string
+        cpe_struct:
+          $ref: '#/components/schemas/api.CPE'
+        timestamp:
+          type: string
+        total_documents:
+          type: integer
+      type: object
+    api.OSSPackageResearchAttributes:
+      properties:
+        abandoned:
+          type: boolean
+        eol:
+          type: boolean
+        is_malicious:
+          type: boolean
+        malicious_source:
+          type: string
+        repo_hijackable:
+          type: boolean
+        squatted_package:
+          type: string
+      type: object
+    v3controllers.PurlResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        purl_struct:
+          $ref: '#/components/schemas/purl.PackageURLJSON'
+        timestamp:
+          description: time of the transaction
+          type: string
+        total_documents:
+          description: number of results found
+          type: integer
+      type: object
+    paginate.Pagination:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        cursor:
+          description: 'Cursor is an opaque string representing the current page position for cursor-based pagination.
+
+            Contains encoded information about sort values and position markers.
+
+            Use this value with the ''cursor'' query parameter to resume pagination from this point.'
+          type: string
+        first_item:
+          description: "FirstItem is the 1-indexed position of the first item on the current page.\nExample: Page 1 with limit 100 → FirstItem = 1\n         Page 2 with limit 100 → FirstItem = 101"
+          type: integer
+        index:
+          description: 'Index name being queried, corresponding to the VulnCheck data feed.
+
+            Examples: "exploits", "vulncheck-nvd2", "ipintel-3d", "malicious-vscode-exts"'
+          type: string
+        last_item:
+          description: 'LastItem is the 1-indexed position of the last item on the current page.
+
+            Accounts for partial pages. Example: Page with 50 items → LastItem = FirstItem + 49
+
+            On the final page, LastItem equals TotalRows.'
+          type: integer
+        limit:
+          description: 'Limit is the maximum number of items returned in this response.
+
+            Range: 1-100 for standard indices, 1-10 for large indices.
+
+            Default: 100 (or 10 for indices marked as "large" in metadata)'
+          type: integer
+        matches:
+          description: 'Matches shows the active filter values applied to the current query.
+
+            Each match includes the field name and the value being filtered on.
+
+            Helps users understand which filters are currently active.'
+          items:
+            $ref: '#/components/schemas/paginate.Match'
+          type: array
+          uniqueItems: false
+        max_pages:
+          description: 'MaxPages is the maximum number of pages allowed for offset-based pagination.
+
+            Performance limit to prevent expensive deep pagination. Default: 6 pages.
+
+            When TotalPages > MaxPages, cursor-based pagination should be used instead.'
+          type: integer
+        next_cursor:
+          description: 'NextCursor is an opaque string for fetching the next page in cursor-based pagination.
+
+            When empty or null, indicates no more pages are available.
+
+            More efficient than offset pagination for large datasets and real-time data.'
+          type: string
+        opensearch_query:
+          description: 'OSQuery contains the raw OpenSearch query JSON used internally.
+
+            Only included when show_query=true parameter is set.
+
+            Useful for debugging complex queries and understanding performance.'
+          type: object
+        order:
+          description: 'Order specifies the sort direction: "asc" (ascending) or "desc" (descending).
+
+            Default: "desc" for most time-based indices to show newest items first.'
+          type: string
+        page:
+          description: 'Page is the current page number for offset-based pagination (1-indexed).
+
+            First page = 1, second page = 2, etc. Used with Limit to calculate database offset.
+
+            For cursor-based pagination, this field may be omitted or estimated.'
+          type: integer
+        pages:
+          description: 'Pages contains page numbers to display in pagination UI (e.g., [1, 2, "...", 45]).
+
+            Only populated when ShowPages=true. Includes ellipsis ("...") for gaps.
+
+            Limited by MaxPages to prevent overwhelming UI with too many page links.'
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+        parameters:
+          description: 'Params describes available query parameters for this index.
+
+            Each parameter includes name, format constraints, and filtering capabilities.
+
+            Used for building dynamic query UIs and input validation.'
+          items:
+            $ref: '#/components/schemas/paginate.Param'
+          type: array
+          uniqueItems: false
+        show_pages:
+          description: 'ShowPages controls whether the Pages array should be calculated and included.
+
+            Set to true for UI pagination controls, false for API-only usage to save processing.'
+          type: boolean
+        show_query:
+          description: 'ShowQuery indicates whether the raw OpenSearch query should be included.
+
+            When true, OSQuery field will be populated with the internal query structure.'
+          type: boolean
+        sort:
+          description: 'Sort field used for ordering results. Available fields vary by index.
+
+            Common values: "_timestamp", "date_added", "_id", "lastSeen"
+
+            Affects cursor generation and ensures pagination consistency.'
+          type: string
+        timestamp:
+          description: 'Timestamp when the query was executed in UTC (ISO 8601 format).
+
+            Used for debugging, cache management, and determining data freshness.
+
+            Example: "2024-02-23T20:35:43.732591251Z"'
+          type: string
+        total_documents:
+          description: 'TotalRows is the total number of documents matching the query across all pages.
+
+            Used for calculating total_pages and building pagination UI elements.
+
+            Note: May be capped for performance on very large result sets.'
+          type: integer
+        total_pages:
+          description: 'TotalPages is the total number of pages based on TotalRows and Limit.
+
+            Calculated as: ceil(TotalRows / Limit). Used for pagination UI and validation.
+
+            Example: 1000 items with limit 100 = 10 total pages.'
+          type: integer
+        warnings:
+          description: 'Warnings contains any non-fatal issues encountered during query processing.
+
+            Examples: deprecated parameters, performance concerns, or data quality notes.'
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+      type: object
+    render.ResponseWithMetadata-v3controllers_PurlsResponseData-v3controllers_PurlsResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.PurlsResponseMetadata'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/purl.BatchVulnFinding'
+          type: array
+          uniqueItems: false
+      type: object
+    render.Response-array_params_IndexList:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/params.IndexList'
+          type: array
+          uniqueItems: false
+      type: object
+    render.Response-array_params_IndexBackupList:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/params.IndexBackupList'
+          type: array
+          uniqueItems: false
+      type: object
+    paginate.Match:
+      properties:
+        field:
+          description: Field is the name of the field being filtered on.
+          type: string
+        value:
+          description: Value is the filter value being applied to the field.
+          type: string
+      type: object
+    params.IndexList:
+      properties:
+        description:
+          type: string
+        href:
+          description: Href API endpoint URI to detailed index information
+          type: string
+        name:
+          type: string
+      type: object
+    render.ResponseWithMetadata-v3controllers_BackupResponseData-v3controllers_BackupResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.BackupResponseMetadata'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/params.IndexBackup'
+          type: array
+          uniqueItems: false
+      type: object
+    index.CveSearchMeta:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        current_count:
+          description: CurrentCount is the number of documents returned in this response.
+          type: integer
+        cve:
+          description: CVE is the CVE identifier that was searched for.
+          type: string
+        indices_with_hits:
+          description: IndicesWithHits is the number of indices that contained at least one match.
+          type: integer
+        limit:
+          description: Limit is the maximum number of results requested per page.
+          type: integer
+        next_cursor:
+          description: 'NextCursor is the cursor for fetching the next page of results.
+
+            Empty if there are no more results (current_count < limit).'
+          type: string
+        page:
+          description: Page is the current page number (only set in page-based pagination mode).
+          type: integer
+        queried_index_count:
+          description: QueriedIndexCount is the number of indices that were searched.
+          type: integer
+        timestamp:
+          description: Timestamp is the UTC time when the search was executed.
+          type: string
+        top_index_counts:
+          description: TopIndexCounts contains the top indices by document count (up to 10).
+          items:
+            $ref: '#/components/schemas/index.IndexCountEntry'
+          type: array
+          uniqueItems: false
+        total_count:
+          description: TotalCount is the total number of matching documents across all queried indices.
+          type: integer
+        total_pages:
+          description: TotalPages is the total number of pages (only set in page-based pagination mode).
+          type: integer
+      type: object
+    search.ResponseDataOut:
+      properties:
+        cpe:
+          type: string
+        cpe_struct:
+          $ref: '#/components/schemas/api.CPE'
+        cves:
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+      type: object
+    purl.QualifierJSON:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    render.ResponseWithMetadata-v3controllers_PurlResponseData-v3controllers_PurlResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.PurlResponseMetadata'
+        data:
+          $ref: '#/components/schemas/v3controllers.PurlResponseData'
+      type: object
+    api.CPE:
+      properties:
+        edition:
+          type: string
+        language:
+          type: string
+        other:
+          type: string
+        part:
+          type: string
+        product:
+          type: string
+        sw_edition:
+          type: string
+        target_hw:
+          type: string
+        target_sw:
+          type: string
+        update:
+          type: string
+        vendor:
+          type: string
+        version:
+          type: string
+      type: object
+    render.ResponseWithMetadata-array_index_CveSearchHit-index_CveSearchMeta:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/index.CveSearchMeta'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/index.CveSearchHit'
+          type: array
+          uniqueItems: false
+      type: object
+    paginate.Param:
+      properties:
+        filtering:
+          description: 'Filtering indicates the type of filtering this parameter supports.
+
+            Examples: "exact", "range", "wildcard", "boolean"'
+          type: string
+        format:
+          description: 'Format describes the expected parameter format or pattern.
+
+            Examples: "CVE-YYYY-N{4-7}", "YYYY-MM-DD", "numeric"'
+          type: string
+        name:
+          description: Name is the query parameter name (e.g., "cve", "date", "limit").
+          type: string
+      type: object
+    purl.BatchVulnFinding:
+      properties:
+        cves:
+          description: list of associated CVE 's
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+        purl:
+          description: the purl, ex. hex/coherence@0.1.2
+          type: string
+        purl_struct:
+          $ref: '#/components/schemas/purl.PackageURLJSON'
+        research_attributes:
+          $ref: '#/components/schemas/api.OSSPackageResearchAttributes'
+        vulnerabilities:
+          description: list of associated vulnerabilities
+          items:
+            $ref: '#/components/schemas/api.OSSPackageVulnerability'
+          type: array
+          uniqueItems: false
+      type: object
+    params.IndexBackup:
+      properties:
+        date_added:
+          type: string
+        filename:
+          type: string
+        sha256:
+          type: string
+        url:
+          type: string
+        url_ap-southeast-2:
+          type: string
+        url_eu-west-2:
+          type: string
+        url_expires:
+          type: string
+        url_il-central-1:
+          type: string
+        url_me-central-1:
+          type: string
+        url_mrap:
+          type: string
+        url_ttl_minutes:
+          type: integer
+        url_us-east-1:
+          type: string
+        url_us-west-2:
+          type: string
+      type: object
+    render.ResponseWithMetadata-search_Responses-paginate_Pagination:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/paginate.Pagination'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/search.ResponseDataOut'
+          type: array
+          uniqueItems: false
+      type: object
+    v3controllers.BackupResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        index:
+          description: Index name being queried, corresponding to the VulnCheck data feed.
+          type: string
+        timestamp:
+          description: Timestamp when the query was executed in UTC (ISO 8601 format).
+          type: string
+      type: object
+    v3controllers.PurlsResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        timestamp:
+          description: time of the transaction
+          type: string
+        total_documents:
+          description: number of results found
+          type: integer
+      type: object
+    index.IndexCountEntry:
+      properties:
+        doc_count:
+          description: DocCount is the number of matching documents in this index.
+          type: integer
+        index:
+          description: Index is the name of the index.
+          type: string
+      type: object
+    models.Entitlements:
+      properties:
+        entitlements:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: Entitlements provides a map of roles to a list of entitlements
+          type: object
+      type: object
+    purl.PackageURLJSON:
+      description: meta-data about the purl
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        qualifiers:
+          items:
+            $ref: '#/components/schemas/purl.QualifierJSON'
+          type: array
+          uniqueItems: false
+        subpath:
+          type: string
+        type:
+          type: string
+        version:
+          type: string
+      type: object
+    v3controllers.PurlResponseData:
+      description: Data is the data returned by the endpoint
+      properties:
+        cves:
+          description: list of associated CVE 's
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+        vulnerabilities:
+          description: list of associated vulnerabilities
+          items:
+            $ref: '#/components/schemas/api.OSSPackageVulnerability'
+          type: array
+          uniqueItems: false
+      type: object
+    index.CveSearchHit:
+      properties:
+        id:
+          description: ID is the unique document identifier within the index.
+          type: string
+        index:
+          description: Index is the name of the index where this document was found.
+          type: string
+        score:
+          description: Score is the relevance score from OpenSearch (higher = more relevant).
+          type: number
+        source:
+          description: Source is the full document content. Structure varies by index.
+          type: object
+      type: object
+    params.IndexBackupList:
+      properties:
+        description:
+          type: string
+        href:
+          description: Href API endpoint URI to detailed backup information
+          type: string
+        name:
+          type: string
+      type: object
+    render.ResponseWithMetadata-array_string-v3controllers_ResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.ResponseMetadata'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+      type: object
+  securitySchemes:
+    Bearer:
+      in: header
+      name: Authorization
+      type: apiKey
+externalDocs:
+  description: ''
+  url: ''

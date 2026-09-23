@@ -1,0 +1,24 @@
+{
+  "provider": "vulncheck",
+  "sources": [
+    "_original/vulncheck-api-openapi-original.json"
+  ],
+  "outputs": [
+    "vulncheck-endpoints-api-openapi.yml",
+    "vulncheck-indices-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "vulncheck-api-openapi-original.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vulncheck-api-openapi-original.json: declared missing tag: endpoints",
+    "vulncheck-api-openapi-original.json: declared missing tag: indices",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "vulncheck-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vulncheck-indices-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
