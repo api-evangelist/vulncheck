@@ -1030,6 +1030,79 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    v3controllers.BackupResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        index:
+          description: Index name being queried, corresponding to the VulnCheck data feed.
+          type: string
+        timestamp:
+          description: Timestamp when the query was executed in UTC (ISO 8601 format).
+          type: string
+      type: object
+    render.ResponseWithMetadata-array_string-v3controllers_ResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.ResponseMetadata'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+      type: object
+    params.IndexBackupList:
+      properties:
+        description:
+          type: string
+        href:
+          description: Href API endpoint URI to detailed backup information
+          type: string
+        name:
+          type: string
+      type: object
+    search.ResponseDataOut:
+      properties:
+        cpe:
+          type: string
+        cpe_struct:
+          $ref: '#/components/schemas/api.CPE'
+        cves:
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+      type: object
+    render.ResponseWithMetadata-v3controllers_PurlsResponseData-v3controllers_PurlsResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.PurlsResponseMetadata'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/purl.BatchVulnFinding'
+          type: array
+          uniqueItems: false
+      type: object
+    paginate.Match:
+      properties:
+        field:
+          description: Field is the name of the field being filtered on.
+          type: string
+        value:
+          description: Value is the filter value being applied to the field.
+          type: string
+      type: object
     api.OSSPackageVulnerability:
       properties:
         detection:
@@ -1037,44 +1110,59 @@ components:
         fixed_version:
           type: string
       type: object
-    v3controllers.ResponseMetadata:
-      description: Meta is the metadata related to the endpoint response
+    paginate.Param:
       properties:
-        cpe:
+        filtering:
+          description: 'Filtering indicates the type of filtering this parameter supports.
+
+            Examples: "exact", "range", "wildcard", "boolean"'
           type: string
-        cpe_struct:
-          $ref: '#/components/schemas/api.CPE'
-        timestamp:
+        format:
+          description: 'Format describes the expected parameter format or pattern.
+
+            Examples: "CVE-YYYY-N{4-7}", "YYYY-MM-DD", "numeric"'
           type: string
-        total_documents:
-          type: integer
-      type: object
-    api.OSSPackageResearchAttributes:
-      properties:
-        abandoned:
-          type: boolean
-        eol:
-          type: boolean
-        is_malicious:
-          type: boolean
-        malicious_source:
-          type: string
-        repo_hijackable:
-          type: boolean
-        squatted_package:
+        name:
+          description: Name is the query parameter name (e.g., "cve", "date", "limit").
           type: string
       type: object
-    v3controllers.PurlResponseMetadata:
-      description: Meta is the metadata related to the endpoint response
+    v3controllers.PurlResponseData:
+      description: Data is the data returned by the endpoint
       properties:
+        cves:
+          description: list of associated CVE 's
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+        vulnerabilities:
+          description: list of associated vulnerabilities
+          items:
+            $ref: '#/components/schemas/api.OSSPackageVulnerability'
+          type: array
+          uniqueItems: false
+      type: object
+    purl.BatchVulnFinding:
+      properties:
+        cves:
+          description: list of associated CVE 's
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+        purl:
+          description: the purl, ex. hex/coherence@0.1.2
+          type: string
         purl_struct:
           $ref: '#/components/schemas/purl.PackageURLJSON'
-        timestamp:
-          description: time of the transaction
-          type: string
-        total_documents:
-          description: number of results found
-          type: integer
+        research_attributes:
+          $ref: '#/components/schemas/api.OSSPackageResearchAttributes'
+        vulnerabilities:
+          description: list of associated vulnerabilities
+          items:
+            $ref: '#/components/schemas/api.OSSPackageVulnerability'
+          type: array
+          uniqueItems: false
       type: object
     paginate.Pagination:
       description: Meta is the metadata related to the endpoint response
@@ -1218,21 +1306,17 @@ components:
           type: array
           uniqueItems: false
       type: object
-    render.ResponseWithMetadata-v3controllers_PurlsResponseData-v3controllers_PurlsResponseMetadata:
+    v3controllers.ResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
       properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/v3controllers.PurlsResponseMetadata'
-        data:
-          description: Data is the data returned by the endpoint
-          items:
-            $ref: '#/components/schemas/purl.BatchVulnFinding'
-          type: array
-          uniqueItems: false
+        cpe:
+          type: string
+        cpe_struct:
+          $ref: '#/components/schemas/api.CPE'
+        timestamp:
+          type: string
+        total_documents:
+          type: integer
       type: object
     render.Response-array_params_IndexList:
       properties:
@@ -1248,6 +1332,101 @@ components:
           type: array
           uniqueItems: false
       type: object
+    models.Entitlements:
+      properties:
+        entitlements:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: Entitlements provides a map of roles to a list of entitlements
+          type: object
+      type: object
+    index.CveSearchHit:
+      properties:
+        id:
+          description: ID is the unique document identifier within the index.
+          type: string
+        index:
+          description: Index is the name of the index where this document was found.
+          type: string
+        score:
+          description: Score is the relevance score from OpenSearch (higher = more relevant).
+          type: number
+        source:
+          description: Source is the full document content. Structure varies by index.
+          type: object
+      type: object
+    v3controllers.PurlsResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        timestamp:
+          description: time of the transaction
+          type: string
+        total_documents:
+          description: number of results found
+          type: integer
+      type: object
+    render.ResponseWithMetadata-search_Responses-paginate_Pagination:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/paginate.Pagination'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/search.ResponseDataOut'
+          type: array
+          uniqueItems: false
+      type: object
+    params.IndexBackup:
+      properties:
+        date_added:
+          type: string
+        filename:
+          type: string
+        sha256:
+          type: string
+        url:
+          type: string
+        url_ap-southeast-2:
+          type: string
+        url_eu-west-2:
+          type: string
+        url_expires:
+          type: string
+        url_il-central-1:
+          type: string
+        url_me-central-1:
+          type: string
+        url_mrap:
+          type: string
+        url_ttl_minutes:
+          type: integer
+        url_us-east-1:
+          type: string
+        url_us-west-2:
+          type: string
+      type: object
+    api.OSSPackageResearchAttributes:
+      properties:
+        abandoned:
+          type: boolean
+        eol:
+          type: boolean
+        is_malicious:
+          type: boolean
+        malicious_source:
+          type: string
+        repo_hijackable:
+          type: boolean
+        squatted_package:
+          type: string
+      type: object
     render.Response-array_params_IndexBackupList:
       properties:
         _benchmark:
@@ -1259,41 +1438,6 @@ components:
           description: Data is the data returned by the endpoint
           items:
             $ref: '#/components/schemas/params.IndexBackupList'
-          type: array
-          uniqueItems: false
-      type: object
-    paginate.Match:
-      properties:
-        field:
-          description: Field is the name of the field being filtered on.
-          type: string
-        value:
-          description: Value is the filter value being applied to the field.
-          type: string
-      type: object
-    params.IndexList:
-      properties:
-        description:
-          type: string
-        href:
-          description: Href API endpoint URI to detailed index information
-          type: string
-        name:
-          type: string
-      type: object
-    render.ResponseWithMetadata-v3controllers_BackupResponseData-v3controllers_BackupResponseMetadata:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/v3controllers.BackupResponseMetadata'
-        data:
-          description: Data is the data returned by the endpoint
-          items:
-            $ref: '#/components/schemas/params.IndexBackup'
           type: array
           uniqueItems: false
       type: object
@@ -1339,36 +1483,34 @@ components:
           description: TotalPages is the total number of pages (only set in page-based pagination mode).
           type: integer
       type: object
-    search.ResponseDataOut:
+    params.IndexList:
       properties:
-        cpe:
+        description:
           type: string
-        cpe_struct:
-          $ref: '#/components/schemas/api.CPE'
-        cves:
+        href:
+          description: Href API endpoint URI to detailed index information
+          type: string
+        name:
+          type: string
+      type: object
+    purl.PackageURLJSON:
+      description: meta-data about the purl
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        qualifiers:
           items:
-            type: string
+            $ref: '#/components/schemas/purl.QualifierJSON'
           type: array
           uniqueItems: false
-      type: object
-    purl.QualifierJSON:
-      properties:
-        key:
+        subpath:
           type: string
-        value:
+        type:
           type: string
-      type: object
-    render.ResponseWithMetadata-v3controllers_PurlResponseData-v3controllers_PurlResponseMetadata:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/v3controllers.PurlResponseMetadata'
-        data:
-          $ref: '#/components/schemas/v3controllers.PurlResponseData'
+        version:
+          type: string
       type: object
     api.CPE:
       properties:
@@ -1395,6 +1537,53 @@ components:
         version:
           type: string
       type: object
+    purl.QualifierJSON:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    render.ResponseWithMetadata-v3controllers_PurlResponseData-v3controllers_PurlResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.PurlResponseMetadata'
+        data:
+          $ref: '#/components/schemas/v3controllers.PurlResponseData'
+      type: object
+    render.ResponseWithMetadata-v3controllers_BackupResponseData-v3controllers_BackupResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.BackupResponseMetadata'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/params.IndexBackup'
+          type: array
+          uniqueItems: false
+      type: object
+    v3controllers.PurlResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        purl_struct:
+          $ref: '#/components/schemas/purl.PackageURLJSON'
+        timestamp:
+          description: time of the transaction
+          type: string
+        total_documents:
+          description: number of results found
+          type: integer
+      type: object
     render.ResponseWithMetadata-array_index_CveSearchHit-index_CveSearchMeta:
       properties:
         _benchmark:
@@ -1411,109 +1600,6 @@ components:
           type: array
           uniqueItems: false
       type: object
-    paginate.Param:
-      properties:
-        filtering:
-          description: 'Filtering indicates the type of filtering this parameter supports.
-
-            Examples: "exact", "range", "wildcard", "boolean"'
-          type: string
-        format:
-          description: 'Format describes the expected parameter format or pattern.
-
-            Examples: "CVE-YYYY-N{4-7}", "YYYY-MM-DD", "numeric"'
-          type: string
-        name:
-          description: Name is the query parameter name (e.g., "cve", "date", "limit").
-          type: string
-      type: object
-    purl.BatchVulnFinding:
-      properties:
-        cves:
-          description: list of associated CVE 's
-          items:
-            type: string
-          type: array
-          uniqueItems: false
-        purl:
-          description: the purl, ex. hex/coherence@0.1.2
-          type: string
-        purl_struct:
-          $ref: '#/components/schemas/purl.PackageURLJSON'
-        research_attributes:
-          $ref: '#/components/schemas/api.OSSPackageResearchAttributes'
-        vulnerabilities:
-          description: list of associated vulnerabilities
-          items:
-            $ref: '#/components/schemas/api.OSSPackageVulnerability'
-          type: array
-          uniqueItems: false
-      type: object
-    params.IndexBackup:
-      properties:
-        date_added:
-          type: string
-        filename:
-          type: string
-        sha256:
-          type: string
-        url:
-          type: string
-        url_ap-southeast-2:
-          type: string
-        url_eu-west-2:
-          type: string
-        url_expires:
-          type: string
-        url_il-central-1:
-          type: string
-        url_me-central-1:
-          type: string
-        url_mrap:
-          type: string
-        url_ttl_minutes:
-          type: integer
-        url_us-east-1:
-          type: string
-        url_us-west-2:
-          type: string
-      type: object
-    render.ResponseWithMetadata-search_Responses-paginate_Pagination:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/paginate.Pagination'
-        data:
-          description: Data is the data returned by the endpoint
-          items:
-            $ref: '#/components/schemas/search.ResponseDataOut'
-          type: array
-          uniqueItems: false
-      type: object
-    v3controllers.BackupResponseMetadata:
-      description: Meta is the metadata related to the endpoint response
-      properties:
-        index:
-          description: Index name being queried, corresponding to the VulnCheck data feed.
-          type: string
-        timestamp:
-          description: Timestamp when the query was executed in UTC (ISO 8601 format).
-          type: string
-      type: object
-    v3controllers.PurlsResponseMetadata:
-      description: Meta is the metadata related to the endpoint response
-      properties:
-        timestamp:
-          description: time of the transaction
-          type: string
-        total_documents:
-          description: number of results found
-          type: integer
-      type: object
     index.IndexCountEntry:
       properties:
         doc_count:
@@ -1522,92 +1608,6 @@ components:
         index:
           description: Index is the name of the index.
           type: string
-      type: object
-    models.Entitlements:
-      properties:
-        entitlements:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          description: Entitlements provides a map of roles to a list of entitlements
-          type: object
-      type: object
-    purl.PackageURLJSON:
-      description: meta-data about the purl
-      properties:
-        name:
-          type: string
-        namespace:
-          type: string
-        qualifiers:
-          items:
-            $ref: '#/components/schemas/purl.QualifierJSON'
-          type: array
-          uniqueItems: false
-        subpath:
-          type: string
-        type:
-          type: string
-        version:
-          type: string
-      type: object
-    v3controllers.PurlResponseData:
-      description: Data is the data returned by the endpoint
-      properties:
-        cves:
-          description: list of associated CVE 's
-          items:
-            type: string
-          type: array
-          uniqueItems: false
-        vulnerabilities:
-          description: list of associated vulnerabilities
-          items:
-            $ref: '#/components/schemas/api.OSSPackageVulnerability'
-          type: array
-          uniqueItems: false
-      type: object
-    index.CveSearchHit:
-      properties:
-        id:
-          description: ID is the unique document identifier within the index.
-          type: string
-        index:
-          description: Index is the name of the index where this document was found.
-          type: string
-        score:
-          description: Score is the relevance score from OpenSearch (higher = more relevant).
-          type: number
-        source:
-          description: Source is the full document content. Structure varies by index.
-          type: object
-      type: object
-    params.IndexBackupList:
-      properties:
-        description:
-          type: string
-        href:
-          description: Href API endpoint URI to detailed backup information
-          type: string
-        name:
-          type: string
-      type: object
-    render.ResponseWithMetadata-array_string-v3controllers_ResponseMetadata:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/v3controllers.ResponseMetadata'
-        data:
-          description: Data is the data returned by the endpoint
-          items:
-            type: string
-          type: array
-          uniqueItems: false
       type: object
   securitySchemes:
     Bearer:
