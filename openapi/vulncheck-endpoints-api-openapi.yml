@@ -1040,22 +1040,6 @@ components:
           description: Timestamp when the query was executed in UTC (ISO 8601 format).
           type: string
       type: object
-    render.ResponseWithMetadata-array_string-v3controllers_ResponseMetadata:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/v3controllers.ResponseMetadata'
-        data:
-          description: Data is the data returned by the endpoint
-          items:
-            type: string
-          type: array
-          uniqueItems: false
-      type: object
     params.IndexBackupList:
       properties:
         description:
@@ -1066,81 +1050,22 @@ components:
         name:
           type: string
       type: object
-    search.ResponseDataOut:
+    v3controllers.PurlsResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
       properties:
-        cpe:
+        timestamp:
+          description: time of the transaction
           type: string
-        cpe_struct:
-          $ref: '#/components/schemas/api.CPE'
-        cves:
-          items:
-            type: string
-          type: array
-          uniqueItems: false
+        total_documents:
+          description: number of results found
+          type: integer
       type: object
-    render.ResponseWithMetadata-v3controllers_PurlsResponseData-v3controllers_PurlsResponseMetadata:
+    purl.QualifierJSON:
       properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/v3controllers.PurlsResponseMetadata'
-        data:
-          description: Data is the data returned by the endpoint
-          items:
-            $ref: '#/components/schemas/purl.BatchVulnFinding'
-          type: array
-          uniqueItems: false
-      type: object
-    paginate.Match:
-      properties:
-        field:
-          description: Field is the name of the field being filtered on.
+        key:
           type: string
         value:
-          description: Value is the filter value being applied to the field.
           type: string
-      type: object
-    api.OSSPackageVulnerability:
-      properties:
-        detection:
-          type: string
-        fixed_version:
-          type: string
-      type: object
-    paginate.Param:
-      properties:
-        filtering:
-          description: 'Filtering indicates the type of filtering this parameter supports.
-
-            Examples: "exact", "range", "wildcard", "boolean"'
-          type: string
-        format:
-          description: 'Format describes the expected parameter format or pattern.
-
-            Examples: "CVE-YYYY-N{4-7}", "YYYY-MM-DD", "numeric"'
-          type: string
-        name:
-          description: Name is the query parameter name (e.g., "cve", "date", "limit").
-          type: string
-      type: object
-    v3controllers.PurlResponseData:
-      description: Data is the data returned by the endpoint
-      properties:
-        cves:
-          description: list of associated CVE 's
-          items:
-            type: string
-          type: array
-          uniqueItems: false
-        vulnerabilities:
-          description: list of associated vulnerabilities
-          items:
-            $ref: '#/components/schemas/api.OSSPackageVulnerability'
-          type: array
-          uniqueItems: false
       type: object
     purl.BatchVulnFinding:
       properties:
@@ -1163,6 +1088,248 @@ components:
             $ref: '#/components/schemas/api.OSSPackageVulnerability'
           type: array
           uniqueItems: false
+      type: object
+    v3controllers.ResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        cpe:
+          type: string
+        cpe_struct:
+          $ref: '#/components/schemas/api.CPE'
+        timestamp:
+          type: string
+        total_documents:
+          type: integer
+      type: object
+    paginate.Match:
+      properties:
+        field:
+          description: Field is the name of the field being filtered on.
+          type: string
+        value:
+          description: Value is the filter value being applied to the field.
+          type: string
+      type: object
+    params.IndexList:
+      properties:
+        description:
+          type: string
+        href:
+          description: Href API endpoint URI to detailed index information
+          type: string
+        name:
+          type: string
+      type: object
+    index.CveSearchHit:
+      properties:
+        id:
+          description: ID is the unique document identifier within the index.
+          type: string
+        index:
+          description: Index is the name of the index where this document was found.
+          type: string
+        score:
+          description: Score is the relevance score from OpenSearch (higher = more relevant).
+          type: number
+        source:
+          description: Source is the full document content. Structure varies by index.
+          type: object
+      type: object
+    v3controllers.PurlResponseMetadata:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        purl_struct:
+          $ref: '#/components/schemas/purl.PackageURLJSON'
+        timestamp:
+          description: time of the transaction
+          type: string
+        total_documents:
+          description: number of results found
+          type: integer
+      type: object
+    render.Response-array_params_IndexBackupList:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/params.IndexBackupList'
+          type: array
+          uniqueItems: false
+      type: object
+    v3controllers.PurlResponseData:
+      description: Data is the data returned by the endpoint
+      properties:
+        cves:
+          description: list of associated CVE 's
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+        vulnerabilities:
+          description: list of associated vulnerabilities
+          items:
+            $ref: '#/components/schemas/api.OSSPackageVulnerability'
+          type: array
+          uniqueItems: false
+      type: object
+    models.Entitlements:
+      properties:
+        entitlements:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: Entitlements provides a map of roles to a list of entitlements
+          type: object
+      type: object
+    render.ResponseWithMetadata-array_string-v3controllers_ResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.ResponseMetadata'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+      type: object
+    index.IndexCountEntry:
+      properties:
+        doc_count:
+          description: DocCount is the number of matching documents in this index.
+          type: integer
+        index:
+          description: Index is the name of the index.
+          type: string
+      type: object
+    index.CveSearchMeta:
+      description: Meta is the metadata related to the endpoint response
+      properties:
+        current_count:
+          description: CurrentCount is the number of documents returned in this response.
+          type: integer
+        cve:
+          description: CVE is the CVE identifier that was searched for.
+          type: string
+        indices_with_hits:
+          description: IndicesWithHits is the number of indices that contained at least one match.
+          type: integer
+        limit:
+          description: Limit is the maximum number of results requested per page.
+          type: integer
+        next_cursor:
+          description: 'NextCursor is the cursor for fetching the next page of results.
+
+            Empty if there are no more results (current_count < limit).'
+          type: string
+        page:
+          description: Page is the current page number (only set in page-based pagination mode).
+          type: integer
+        queried_index_count:
+          description: QueriedIndexCount is the number of indices that were searched.
+          type: integer
+        timestamp:
+          description: Timestamp is the UTC time when the search was executed.
+          type: string
+        top_index_counts:
+          description: TopIndexCounts contains the top indices by document count (up to 10).
+          items:
+            $ref: '#/components/schemas/index.IndexCountEntry'
+          type: array
+          uniqueItems: false
+        total_count:
+          description: TotalCount is the total number of matching documents across all queried indices.
+          type: integer
+        total_pages:
+          description: TotalPages is the total number of pages (only set in page-based pagination mode).
+          type: integer
+      type: object
+    render.ResponseWithMetadata-search_Responses-paginate_Pagination:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/paginate.Pagination'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/search.ResponseDataOut'
+          type: array
+          uniqueItems: false
+      type: object
+    render.ResponseWithMetadata-v3controllers_PurlsResponseData-v3controllers_PurlsResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.PurlsResponseMetadata'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/purl.BatchVulnFinding'
+          type: array
+          uniqueItems: false
+      type: object
+    render.ResponseWithMetadata-array_index_CveSearchHit-index_CveSearchMeta:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/index.CveSearchMeta'
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/index.CveSearchHit'
+          type: array
+          uniqueItems: false
+      type: object
+    render.Response-array_params_IndexList:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        data:
+          description: Data is the data returned by the endpoint
+          items:
+            $ref: '#/components/schemas/params.IndexList'
+          type: array
+          uniqueItems: false
+      type: object
+    api.OSSPackageResearchAttributes:
+      properties:
+        abandoned:
+          type: boolean
+        eol:
+          type: boolean
+        is_malicious:
+          type: boolean
+        malicious_source:
+          type: string
+        repo_hijackable:
+          type: boolean
+        squatted_package:
+          type: string
       type: object
     paginate.Pagination:
       description: Meta is the metadata related to the endpoint response
@@ -1306,68 +1473,26 @@ components:
           type: array
           uniqueItems: false
       type: object
-    v3controllers.ResponseMetadata:
-      description: Meta is the metadata related to the endpoint response
+    purl.PackageURLJSON:
+      description: meta-data about the purl
       properties:
-        cpe:
+        name:
           type: string
-        cpe_struct:
-          $ref: '#/components/schemas/api.CPE'
-        timestamp:
+        namespace:
           type: string
-        total_documents:
-          type: integer
-      type: object
-    render.Response-array_params_IndexList:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        data:
-          description: Data is the data returned by the endpoint
+        qualifiers:
           items:
-            $ref: '#/components/schemas/params.IndexList'
+            $ref: '#/components/schemas/purl.QualifierJSON'
           type: array
           uniqueItems: false
-      type: object
-    models.Entitlements:
-      properties:
-        entitlements:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          description: Entitlements provides a map of roles to a list of entitlements
-          type: object
-      type: object
-    index.CveSearchHit:
-      properties:
-        id:
-          description: ID is the unique document identifier within the index.
+        subpath:
           type: string
-        index:
-          description: Index is the name of the index where this document was found.
+        type:
           type: string
-        score:
-          description: Score is the relevance score from OpenSearch (higher = more relevant).
-          type: number
-        source:
-          description: Source is the full document content. Structure varies by index.
-          type: object
-      type: object
-    v3controllers.PurlsResponseMetadata:
-      description: Meta is the metadata related to the endpoint response
-      properties:
-        timestamp:
-          description: time of the transaction
+        version:
           type: string
-        total_documents:
-          description: number of results found
-          type: integer
       type: object
-    render.ResponseWithMetadata-search_Responses-paginate_Pagination:
+    render.ResponseWithMetadata-v3controllers_BackupResponseData-v3controllers_BackupResponseMetadata:
       properties:
         _benchmark:
           description: 'Benchmark is the server-side processing time for the request in seconds.
@@ -1375,13 +1500,85 @@ components:
             Example: 0.122322 = approximately 122 milliseconds'
           type: number
         _meta:
-          $ref: '#/components/schemas/paginate.Pagination'
+          $ref: '#/components/schemas/v3controllers.BackupResponseMetadata'
         data:
           description: Data is the data returned by the endpoint
           items:
-            $ref: '#/components/schemas/search.ResponseDataOut'
+            $ref: '#/components/schemas/params.IndexBackup'
           type: array
           uniqueItems: false
+      type: object
+    paginate.Param:
+      properties:
+        filtering:
+          description: 'Filtering indicates the type of filtering this parameter supports.
+
+            Examples: "exact", "range", "wildcard", "boolean"'
+          type: string
+        format:
+          description: 'Format describes the expected parameter format or pattern.
+
+            Examples: "CVE-YYYY-N{4-7}", "YYYY-MM-DD", "numeric"'
+          type: string
+        name:
+          description: Name is the query parameter name (e.g., "cve", "date", "limit").
+          type: string
+      type: object
+    search.ResponseDataOut:
+      properties:
+        cpe:
+          type: string
+        cpe_struct:
+          $ref: '#/components/schemas/api.CPE'
+        cves:
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+      type: object
+    api.OSSPackageVulnerability:
+      properties:
+        detection:
+          type: string
+        fixed_version:
+          type: string
+      type: object
+    render.ResponseWithMetadata-v3controllers_PurlResponseData-v3controllers_PurlResponseMetadata:
+      properties:
+        _benchmark:
+          description: 'Benchmark is the server-side processing time for the request in seconds.
+
+            Example: 0.122322 = approximately 122 milliseconds'
+          type: number
+        _meta:
+          $ref: '#/components/schemas/v3controllers.PurlResponseMetadata'
+        data:
+          $ref: '#/components/schemas/v3controllers.PurlResponseData'
+      type: object
+    api.CPE:
+      properties:
+        edition:
+          type: string
+        language:
+          type: string
+        other:
+          type: string
+        part:
+          type: string
+        product:
+          type: string
+        sw_edition:
+          type: string
+        target_hw:
+          type: string
+        target_sw:
+          type: string
+        update:
+          type: string
+        vendor:
+          type: string
+        version:
+          type: string
       type: object
     params.IndexBackup:
       properties:
@@ -1410,203 +1607,6 @@ components:
         url_us-east-1:
           type: string
         url_us-west-2:
-          type: string
-      type: object
-    api.OSSPackageResearchAttributes:
-      properties:
-        abandoned:
-          type: boolean
-        eol:
-          type: boolean
-        is_malicious:
-          type: boolean
-        malicious_source:
-          type: string
-        repo_hijackable:
-          type: boolean
-        squatted_package:
-          type: string
-      type: object
-    render.Response-array_params_IndexBackupList:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        data:
-          description: Data is the data returned by the endpoint
-          items:
-            $ref: '#/components/schemas/params.IndexBackupList'
-          type: array
-          uniqueItems: false
-      type: object
-    index.CveSearchMeta:
-      description: Meta is the metadata related to the endpoint response
-      properties:
-        current_count:
-          description: CurrentCount is the number of documents returned in this response.
-          type: integer
-        cve:
-          description: CVE is the CVE identifier that was searched for.
-          type: string
-        indices_with_hits:
-          description: IndicesWithHits is the number of indices that contained at least one match.
-          type: integer
-        limit:
-          description: Limit is the maximum number of results requested per page.
-          type: integer
-        next_cursor:
-          description: 'NextCursor is the cursor for fetching the next page of results.
-
-            Empty if there are no more results (current_count < limit).'
-          type: string
-        page:
-          description: Page is the current page number (only set in page-based pagination mode).
-          type: integer
-        queried_index_count:
-          description: QueriedIndexCount is the number of indices that were searched.
-          type: integer
-        timestamp:
-          description: Timestamp is the UTC time when the search was executed.
-          type: string
-        top_index_counts:
-          description: TopIndexCounts contains the top indices by document count (up to 10).
-          items:
-            $ref: '#/components/schemas/index.IndexCountEntry'
-          type: array
-          uniqueItems: false
-        total_count:
-          description: TotalCount is the total number of matching documents across all queried indices.
-          type: integer
-        total_pages:
-          description: TotalPages is the total number of pages (only set in page-based pagination mode).
-          type: integer
-      type: object
-    params.IndexList:
-      properties:
-        description:
-          type: string
-        href:
-          description: Href API endpoint URI to detailed index information
-          type: string
-        name:
-          type: string
-      type: object
-    purl.PackageURLJSON:
-      description: meta-data about the purl
-      properties:
-        name:
-          type: string
-        namespace:
-          type: string
-        qualifiers:
-          items:
-            $ref: '#/components/schemas/purl.QualifierJSON'
-          type: array
-          uniqueItems: false
-        subpath:
-          type: string
-        type:
-          type: string
-        version:
-          type: string
-      type: object
-    api.CPE:
-      properties:
-        edition:
-          type: string
-        language:
-          type: string
-        other:
-          type: string
-        part:
-          type: string
-        product:
-          type: string
-        sw_edition:
-          type: string
-        target_hw:
-          type: string
-        target_sw:
-          type: string
-        update:
-          type: string
-        vendor:
-          type: string
-        version:
-          type: string
-      type: object
-    purl.QualifierJSON:
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      type: object
-    render.ResponseWithMetadata-v3controllers_PurlResponseData-v3controllers_PurlResponseMetadata:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/v3controllers.PurlResponseMetadata'
-        data:
-          $ref: '#/components/schemas/v3controllers.PurlResponseData'
-      type: object
-    render.ResponseWithMetadata-v3controllers_BackupResponseData-v3controllers_BackupResponseMetadata:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/v3controllers.BackupResponseMetadata'
-        data:
-          description: Data is the data returned by the endpoint
-          items:
-            $ref: '#/components/schemas/params.IndexBackup'
-          type: array
-          uniqueItems: false
-      type: object
-    v3controllers.PurlResponseMetadata:
-      description: Meta is the metadata related to the endpoint response
-      properties:
-        purl_struct:
-          $ref: '#/components/schemas/purl.PackageURLJSON'
-        timestamp:
-          description: time of the transaction
-          type: string
-        total_documents:
-          description: number of results found
-          type: integer
-      type: object
-    render.ResponseWithMetadata-array_index_CveSearchHit-index_CveSearchMeta:
-      properties:
-        _benchmark:
-          description: 'Benchmark is the server-side processing time for the request in seconds.
-
-            Example: 0.122322 = approximately 122 milliseconds'
-          type: number
-        _meta:
-          $ref: '#/components/schemas/index.CveSearchMeta'
-        data:
-          description: Data is the data returned by the endpoint
-          items:
-            $ref: '#/components/schemas/index.CveSearchHit'
-          type: array
-          uniqueItems: false
-      type: object
-    index.IndexCountEntry:
-      properties:
-        doc_count:
-          description: DocCount is the number of matching documents in this index.
-          type: integer
-        index:
-          description: Index is the name of the index.
           type: string
       type: object
   securitySchemes:
