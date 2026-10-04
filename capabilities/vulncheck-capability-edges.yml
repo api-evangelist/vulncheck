@@ -1,0 +1,36 @@
+slug: vulncheck
+provider: VulnCheck
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Indices
+  spec_file: vulncheck-indices-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.85
+  evidence: GET /index/adobe  "Return vulnerability data stored in index \"adobe\""; schemas advisory.AdobeAdvisory,
+    advisory.SchneiderCVE
+  reason: Hundreds of per-vendor indices returning vulnerability advisories and CVE records — vendor advisory
+    and vulnerability intelligence consumption, squarely Vulnerability Management.
+- tag: Endpoints
+  spec_file: vulncheck-endpoints-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.8
+  evidence: GET /cpe  "Return CVE 's associated with a specific NIST CPE"; GET /purl  "Request vulnerabilities
+    related to a PURL"; GET /search/cve  "Search all indices for a CVE"
+  reason: The surface returns CVE/vulnerability data keyed by CPE and PURL plus initial-access detection
+    rules — vulnerability intelligence feeding scanning and remediation. Some endpoints (backup, entitlements,
+    openapi) are plumbing, hence not 0.95.

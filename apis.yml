@@ -82,6 +82,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/vulncheck-capability-edges.yml
+  name: VulnCheck Business Capability Map
 - type: Overlay
   url: overlays/vulncheck-api-overlay.yaml
 - type: Website
