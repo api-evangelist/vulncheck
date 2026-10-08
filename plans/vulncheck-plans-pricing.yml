@@ -53,3 +53,16 @@ unpublished_tiers:
   - Enhanced features
   price: not published
   contact: https://www.vulncheck.com/contact
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  units: []
+  plans:
+  - name: Community
+    access: other
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
